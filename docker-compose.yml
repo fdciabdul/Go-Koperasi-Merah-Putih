@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: koperasi_postgres
+    environment:
+      POSTGRES_DB: koperasi_merah_putih
+      POSTGRES_USER: koperasi_user
+      POSTGRES_PASSWORD: koperasi_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-postgres.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - koperasi_network
+
+  cassandra:
+    image: cassandra:4.1
+    container_name: koperasi_cassandra
+    environment:
+      CASSANDRA_CLUSTER_NAME: koperasi_cluster
+      CASSANDRA_DC: datacenter1
+      CASSANDRA_RACK: rack1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      CASSANDRA_NUM_TOKENS: 128
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+      - ./internal/models/cassandra/schemas.cql:/docker-entrypoint-initdb.d/schemas.cql
+    networks:
+      - koperasi_network
+    healthcheck:
+      test: ["CMD-SHELL", "cqlsh -e 'describe cluster'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: koperasi_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - koperasi_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: koperasi_app
+    ports:
+      - "8080:8080"
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: koperasi_user
+      POSTGRES_PASSWORD: koperasi_password
+      POSTGRES_DB: koperasi_merah_putih
+      CASSANDRA_HOSTS: cassandra
+      CASSANDRA_KEYSPACE: koperasi_analytics
+      APP_ENV: development
+      APP_PORT: 8080
+    depends_on:
+      postgres:
+        condition: service_started
+      cassandra:
+        condition: service_healthy
+    networks:
+      - koperasi_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  cassandra_data:
+  redis_data:
+
+networks:
+  koperasi_network:
+    driver: bridge
