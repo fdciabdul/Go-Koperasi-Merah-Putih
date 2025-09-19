@@ -295,8 +295,8 @@ cmd/
 
 1. Clone repository
 ```bash
-git clone https://github.com/your-org/koperasi-merah-putih.git
-cd koperasi-merah-putih
+git clone https://github.com/fdciabdul/Go-Koperasi-Merah-Putih
+cd Go-Koperasi-Merah-Putih
 ```
 
 2. Install dependencies
