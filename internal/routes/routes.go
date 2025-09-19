@@ -17,6 +17,7 @@ type Routes struct {
 	wilayahHandler      *handlers.WilayahHandler
 	masterDataHandler   *handlers.MasterDataHandler
 	sequenceHandler     *handlers.SequenceHandler
+	produkHandler       *handlers.ProdukHandler
 	rbacMiddleware      *middleware.RBACMiddleware
 	auditMiddleware     *middleware.AuditMiddleware
 }
@@ -32,6 +33,7 @@ func NewRoutes(
 	wilayahHandler *handlers.WilayahHandler,
 	masterDataHandler *handlers.MasterDataHandler,
 	sequenceHandler *handlers.SequenceHandler,
+	produkHandler *handlers.ProdukHandler,
 	rbacMiddleware *middleware.RBACMiddleware,
 	auditMiddleware *middleware.AuditMiddleware,
 ) *Routes {
@@ -46,6 +48,7 @@ func NewRoutes(
 		wilayahHandler:      wilayahHandler,
 		masterDataHandler:   masterDataHandler,
 		sequenceHandler:     sequenceHandler,
+		produkHandler:       produkHandler,
 		rbacMiddleware:      rbacMiddleware,
 		auditMiddleware:     auditMiddleware,
 	}
@@ -144,6 +147,36 @@ func (r *Routes) SetupRoutes(router *gin.Engine) {
 		klinik.GET("/:koperasi_id/obat/stok-rendah", r.klinikHandler.GetObatStokRendah)
 
 		klinik.GET("/:koperasi_id/statistik", r.rbacMiddleware.AdminOnly(), r.klinikHandler.GetStatistik)
+	}
+
+	produk := api.Group("/produk")
+	produk.Use(middleware.AuthMiddleware(), r.rbacMiddleware.RequireKoperasiAccess())
+	{
+		produk.POST("/kategori", r.rbacMiddleware.AdminOnly(), r.produkHandler.CreateKategoriProduk)
+		produk.GET("/kategori", r.produkHandler.GetAllKategoriProduk)
+		produk.GET("/kategori/:id", r.produkHandler.GetKategoriProdukByID)
+
+		produk.POST("/satuan", r.rbacMiddleware.AdminOnly(), r.produkHandler.CreateSatuanProduk)
+		produk.GET("/satuan", r.produkHandler.GetAllSatuanProduk)
+
+		produk.POST("/supplier", r.rbacMiddleware.AdminOnly(), r.produkHandler.CreateSupplier)
+		produk.GET("/:koperasi_id/supplier", r.produkHandler.GetSuppliersByKoperasi)
+
+		produk.POST("", r.rbacMiddleware.AdminOnly(), r.produkHandler.CreateProduk)
+		produk.GET("/:koperasi_id", r.produkHandler.GetProduksByKoperasi)
+		produk.GET("/detail/:id", r.produkHandler.GetProdukByID)
+		produk.GET("/barcode/:barcode", r.produkHandler.GetProdukByBarcode)
+		produk.POST("/:id/generate-barcode", r.rbacMiddleware.AdminOnly(), r.produkHandler.GenerateBarcode)
+
+		produk.POST("/purchase-order", r.rbacMiddleware.AdminOnly(), r.produkHandler.CreatePurchaseOrder)
+		produk.GET("/:koperasi_id/purchase-order", r.produkHandler.GetPurchaseOrdersByKoperasi)
+
+		produk.POST("/pembelian", r.rbacMiddleware.AdminOnly(), r.produkHandler.CreatePembelian)
+		produk.POST("/penjualan", r.produkHandler.CreatePenjualan)
+
+		produk.GET("/:koperasi_id/stok-report", r.rbacMiddleware.AdminOnly(), r.produkHandler.GetStokReport)
+		produk.GET("/:koperasi_id/stok-rendah", r.rbacMiddleware.AdminOnly(), r.produkHandler.GetProdukStokRendah)
+		produk.GET("/:koperasi_id/expiring-soon", r.rbacMiddleware.AdminOnly(), r.produkHandler.GetProdukExpiringSoon)
 	}
 
 	financial := api.Group("/financial")
