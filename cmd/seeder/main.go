@@ -5,18 +5,23 @@ import (
 	"log"
 	"time"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"koperasi-merah-putih/config"
+	"koperasi-merah-putih/internal/database"
 	"koperasi-merah-putih/internal/models/postgres"
+	"gorm.io/gorm"
 )
 
 func main() {
-	// Database connection
-	dsn := "host=localhost user=postgres password=yourpassword dbname=koperasi_db port=5432 sslmode=disable TimeZone=Asia/Jakarta"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	cfg, err := config.LoadConfig()
+	if err != nil {
+		log.Fatal("Failed to load config:", err)
+	}
+
+	dbManager, err := database.NewPostgresConnection(&cfg.Postgres)
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
+	db := dbManager.DB
 
 	fmt.Println("Starting seeder...")
 
@@ -54,7 +59,7 @@ func main() {
 }
 
 func seedProvinsi(db *gorm.DB) {
-	provinsis := []postgres.Provinsi{
+	provinsis := []postgres.WilayahProvinsi{
 		{ID: 11, Kode: "11", Nama: "ACEH"},
 		{ID: 12, Kode: "12", Nama: "SUMATERA UTARA"},
 		{ID: 31, Kode: "31", Nama: "DKI JAKARTA"},
@@ -65,13 +70,13 @@ func seedProvinsi(db *gorm.DB) {
 	}
 
 	for _, provinsi := range provinsis {
-		db.FirstOrCreate(&provinsi, postgres.Provinsi{ID: provinsi.ID})
+		db.FirstOrCreate(&provinsi, postgres.WilayahProvinsi{ID: provinsi.ID})
 	}
 	fmt.Println("✓ Seeded Provinsi")
 }
 
 func seedKabupaten(db *gorm.DB) {
-	kabupatens := []postgres.Kabupaten{
+	kabupatens := []postgres.WilayahKabupaten{
 		{ID: 3171, ProvinsiID: 31, Kode: "3171", Nama: "KEPULAUAN SERIBU"},
 		{ID: 3201, ProvinsiID: 32, Kode: "3201", Nama: "BOGOR"},
 		{ID: 3202, ProvinsiID: 32, Kode: "3202", Nama: "SUKABUMI"},
@@ -80,13 +85,13 @@ func seedKabupaten(db *gorm.DB) {
 	}
 
 	for _, kabupaten := range kabupatens {
-		db.FirstOrCreate(&kabupaten, postgres.Kabupaten{ID: kabupaten.ID})
+		db.FirstOrCreate(&kabupaten, postgres.WilayahKabupaten{ID: kabupaten.ID})
 	}
 	fmt.Println("✓ Seeded Kabupaten")
 }
 
 func seedKecamatan(db *gorm.DB) {
-	kecamatans := []postgres.Kecamatan{
+	kecamatans := []postgres.WilayahKecamatan{
 		{ID: 320101, KabupatenID: 3201, Kode: "320101", Nama: "NANGGUNG"},
 		{ID: 320102, KabupatenID: 3201, Kode: "320102", Nama: "LEUWILIANG"},
 		{ID: 320103, KabupatenID: 3201, Kode: "320103", Nama: "LEUWISADENG"},
@@ -95,13 +100,13 @@ func seedKecamatan(db *gorm.DB) {
 	}
 
 	for _, kecamatan := range kecamatans {
-		db.FirstOrCreate(&kecamatan, postgres.Kecamatan{ID: kecamatan.ID})
+		db.FirstOrCreate(&kecamatan, postgres.WilayahKecamatan{ID: kecamatan.ID})
 	}
 	fmt.Println("✓ Seeded Kecamatan")
 }
 
 func seedKelurahan(db *gorm.DB) {
-	kelurahans := []postgres.Kelurahan{
+	kelurahans := []postgres.WilayahKelurahan{
 		{ID: 3201011001, KecamatanID: 320101, Kode: "3201011001", Nama: "NANGGUNG"},
 		{ID: 3201011002, KecamatanID: 320101, Kode: "3201011002", Nama: "PARAKANMUNCANG"},
 		{ID: 3201011003, KecamatanID: 320101, Kode: "3201011003", Nama: "CURUGBITUNG"},
@@ -110,18 +115,18 @@ func seedKelurahan(db *gorm.DB) {
 	}
 
 	for _, kelurahan := range kelurahans {
-		db.FirstOrCreate(&kelurahan, postgres.Kelurahan{ID: kelurahan.ID})
+		db.FirstOrCreate(&kelurahan, postgres.WilayahKelurahan{ID: kelurahan.ID})
 	}
 	fmt.Println("✓ Seeded Kelurahan")
 }
 
 func seedKBLI(db *gorm.DB) {
 	kblis := []postgres.KBLI{
-		{Kode: "64191", Nama: "Bank Sentral", Kategori: "Jasa Keuangan", Deskripsi: "Kegiatan bank sentral", IsAktif: true},
-		{Kode: "64921", Nama: "Kegiatan Koperasi Kredit", Kategori: "Jasa Keuangan", Deskripsi: "Kegiatan koperasi kredit dan simpan pinjam", IsAktif: true},
-		{Kode: "64922", Nama: "Kegiatan Koperasi Non-Kredit", Kategori: "Jasa Keuangan", Deskripsi: "Kegiatan koperasi selain kredit", IsAktif: true},
-		{Kode: "86101", Nama: "Kegiatan Rumah Sakit", Kategori: "Kesehatan", Deskripsi: "Kegiatan pelayanan rumah sakit", IsAktif: true},
-		{Kode: "86201", Nama: "Praktik Dokter Umum", Kategori: "Kesehatan", Deskripsi: "Praktik dokter dan dokter gigi umum", IsAktif: true},
+		{Kode: "64191", Nama: "Bank Sentral", Kategori: "Jasa Keuangan", Deskripsi: "Kegiatan bank sentral", IsActive: true},
+		{Kode: "64921", Nama: "Kegiatan Koperasi Kredit", Kategori: "Jasa Keuangan", Deskripsi: "Kegiatan koperasi kredit dan simpan pinjam", IsActive: true},
+		{Kode: "64922", Nama: "Kegiatan Koperasi Non-Kredit", Kategori: "Jasa Keuangan", Deskripsi: "Kegiatan koperasi selain kredit", IsActive: true},
+		{Kode: "86101", Nama: "Kegiatan Rumah Sakit", Kategori: "Kesehatan", Deskripsi: "Kegiatan pelayanan rumah sakit", IsActive: true},
+		{Kode: "86201", Nama: "Praktik Dokter Umum", Kategori: "Kesehatan", Deskripsi: "Praktik dokter dan dokter gigi umum", IsActive: true},
 	}
 
 	for _, kbli := range kblis {
@@ -132,9 +137,9 @@ func seedKBLI(db *gorm.DB) {
 
 func seedJenisKoperasi(db *gorm.DB) {
 	jenisKoperasis := []postgres.JenisKoperasi{
-		{Kode: "KSP", Nama: "Koperasi Simpan Pinjam", Deskripsi: "Koperasi yang bergerak di bidang simpan pinjam", IsAktif: true},
-		{Kode: "KSU", Nama: "Koperasi Serba Usaha", Deskripsi: "Koperasi dengan berbagai bidang usaha", IsAktif: true},
-		{Kode: "KJKS", Nama: "Koperasi Jasa Keuangan Syariah", Deskripsi: "Koperasi jasa keuangan berbasis syariah", IsAktif: true},
+		{Kode: "KSP", Nama: "Koperasi Simpan Pinjam", Deskripsi: "Koperasi yang bergerak di bidang simpan pinjam", IsActive: true},
+		{Kode: "KSU", Nama: "Koperasi Serba Usaha", Deskripsi: "Koperasi dengan berbagai bidang usaha", IsActive: true},
+		{Kode: "KJKS", Nama: "Koperasi Jasa Keuangan Syariah", Deskripsi: "Koperasi jasa keuangan berbasis syariah", IsActive: true},
 	}
 
 	for _, jenis := range jenisKoperasis {
@@ -145,8 +150,8 @@ func seedJenisKoperasi(db *gorm.DB) {
 
 func seedBentukKoperasi(db *gorm.DB) {
 	bentukKoperasis := []postgres.BentukKoperasi{
-		{Kode: "PRIMER", Nama: "Koperasi Primer", Deskripsi: "Koperasi yang beranggotakan orang perorangan", IsAktif: true},
-		{Kode: "SEKUNDER", Nama: "Koperasi Sekunder", Deskripsi: "Koperasi yang beranggotakan koperasi primer", IsAktif: true},
+		{Kode: "PRIMER", Nama: "Koperasi Primer", Deskripsi: "Koperasi yang beranggotakan orang perorangan", IsActive: true},
+		{Kode: "SEKUNDER", Nama: "Koperasi Sekunder", Deskripsi: "Koperasi yang beranggotakan koperasi primer", IsActive: true},
 	}
 
 	for _, bentuk := range bentukKoperasis {
@@ -157,11 +162,11 @@ func seedBentukKoperasi(db *gorm.DB) {
 
 func seedCOAKategori(db *gorm.DB) {
 	kategoris := []postgres.COAKategori{
-		{Nama: "ASET", Tipe: "aset", Urutan: 1, IsAktif: true},
-		{Nama: "KEWAJIBAN", Tipe: "kewajiban", Urutan: 2, IsAktif: true},
-		{Nama: "EKUITAS", Tipe: "ekuitas", Urutan: 3, IsAktif: true},
-		{Nama: "PENDAPATAN", Tipe: "pendapatan", Urutan: 4, IsAktif: true},
-		{Nama: "BEBAN", Tipe: "beban", Urutan: 5, IsAktif: true},
+		{Nama: "ASET", Tipe: "aset", Urutan: 1, IsActive: true},
+		{Nama: "KEWAJIBAN", Tipe: "kewajiban", Urutan: 2, IsActive: true},
+		{Nama: "EKUITAS", Tipe: "ekuitas", Urutan: 3, IsActive: true},
+		{Nama: "PENDAPATAN", Tipe: "pendapatan", Urutan: 4, IsActive: true},
+		{Nama: "BEBAN", Tipe: "beban", Urutan: 5, IsActive: true},
 	}
 
 	for _, kategori := range kategoris {
@@ -320,14 +325,14 @@ func seedAnggotaKoperasi(db *gorm.DB) {
 
 func seedCOAAkun(db *gorm.DB) {
 	akuns := []postgres.COAAkun{
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "1001", NamaAkun: "Kas", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsAktif: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "1101", NamaAkun: "Bank BCA", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsAktif: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "1201", NamaAkun: "Piutang Anggota", KategoriID: 1, SaldoNormal: "debit", IsKas: false, IsAktif: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "2001", NamaAkun: "Simpanan Pokok", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "2002", NamaAkun: "Simpanan Wajib", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "3001", NamaAkun: "Modal Koperasi", KategoriID: 3, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "4001", NamaAkun: "Pendapatan Bunga", KategoriID: 4, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "5001", NamaAkun: "Beban Operasional", KategoriID: 5, SaldoNormal: "debit", IsKas: false, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "1001", NamaAkun: "Kas", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "1101", NamaAkun: "Bank BCA", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "1201", NamaAkun: "Piutang Anggota", KategoriID: 1, SaldoNormal: "debit", IsKas: false, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "2001", NamaAkun: "Simpanan Pokok", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "2002", NamaAkun: "Simpanan Wajib", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "3001", NamaAkun: "Modal Koperasi", KategoriID: 3, SaldoNormal: "kredit", IsKas: false, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "4001", NamaAkun: "Pendapatan Bunga", KategoriID: 4, SaldoNormal: "kredit", IsKas: false, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "5001", NamaAkun: "Beban Operasional", KategoriID: 5, SaldoNormal: "debit", IsKas: false, IsActive: true},
 	}
 
 	for _, akun := range akuns {
@@ -349,7 +354,7 @@ func seedSimpanPinjamProduk(db *gorm.DB) {
 			MinimalSetoran:   1000000,
 			MaksimalSetoran:  50000000,
 			BiayaAdmin:       10000,
-			IsAktif:          true,
+			IsActive:          true,
 		},
 		{
 			KoperasiID:       1,
@@ -362,7 +367,7 @@ func seedSimpanPinjamProduk(db *gorm.DB) {
 			MinimalSetoran:   5000000,
 			MaksimalSetoran:  100000000,
 			BiayaAdmin:       100000,
-			IsAktif:          true,
+			IsActive:          true,
 		},
 	}
 
@@ -525,7 +530,7 @@ func seedKlinikObat(db *gorm.DB) {
 			StokCurrent:   200,
 			HargaBeli:     500,
 			HargaJual:     1000,
-			IsAktif:       true,
+			IsActive:       true,
 		},
 		{
 			KoperasiID:    1,
@@ -539,7 +544,7 @@ func seedKlinikObat(db *gorm.DB) {
 			StokCurrent:   100,
 			HargaBeli:     2000,
 			HargaJual:     3500,
-			IsAktif:       true,
+			IsActive:       true,
 		},
 	}
 
@@ -649,10 +654,10 @@ func seedJurnalUmum(db *gorm.DB) {
 
 func seedPPOBKategori(db *gorm.DB) {
 	kategoris := []postgres.PPOBKategori{
-		{Nama: "Pulsa & Paket Data", Kode: "PULSA", IsAktif: true},
-		{Nama: "PLN", Kode: "PLN", IsAktif: true},
-		{Nama: "PDAM", Kode: "PDAM", IsAktif: true},
-		{Nama: "Internet & TV Kabel", Kode: "INTERNET", IsAktif: true},
+		{Nama: "Pulsa & Paket Data", Kode: "PULSA", IsActive: true},
+		{Nama: "PLN", Kode: "PLN", IsActive: true},
+		{Nama: "PDAM", Kode: "PDAM", IsActive: true},
+		{Nama: "Internet & TV Kabel", Kode: "INTERNET", IsActive: true},
 	}
 
 	for _, kategori := range kategoris {
@@ -663,10 +668,10 @@ func seedPPOBKategori(db *gorm.DB) {
 
 func seedPPOBProduk(db *gorm.DB) {
 	produks := []postgres.PPOBProduk{
-		{KategoriID: 1, Nama: "Telkomsel 10.000", Kode: "TSEL10", Harga: 10500, Deskripsi: "Pulsa Telkomsel 10rb", IsAktif: true},
-		{KategoriID: 1, Nama: "Indosat 25.000", Kode: "ISAT25", Harga: 25200, Deskripsi: "Pulsa Indosat 25rb", IsAktif: true},
-		{KategoriID: 2, Nama: "PLN Token 20.000", Kode: "PLN20", Harga: 20500, Deskripsi: "Token listrik PLN 20rb", IsAktif: true},
-		{KategoriID: 2, Nama: "PLN Token 50.000", Kode: "PLN50", Harga: 50500, Deskripsi: "Token listrik PLN 50rb", IsAktif: true},
+		{KategoriID: 1, Nama: "Telkomsel 10.000", Kode: "TSEL10", Harga: 10500, Deskripsi: "Pulsa Telkomsel 10rb", IsActive: true},
+		{KategoriID: 1, Nama: "Indosat 25.000", Kode: "ISAT25", Harga: 25200, Deskripsi: "Pulsa Indosat 25rb", IsActive: true},
+		{KategoriID: 2, Nama: "PLN Token 20.000", Kode: "PLN20", Harga: 20500, Deskripsi: "Token listrik PLN 20rb", IsActive: true},
+		{KategoriID: 2, Nama: "PLN Token 50.000", Kode: "PLN50", Harga: 50500, Deskripsi: "Token listrik PLN 50rb", IsActive: true},
 	}
 
 	for _, produk := range produks {
@@ -676,7 +681,7 @@ func seedPPOBProduk(db *gorm.DB) {
 }
 
 func seedSequences(db *gorm.DB) {
-	sequences := []postgres.Sequence{
+	sequences := []postgres.SequenceNumber{
 		{TenantID: 1, KoperasiID: 1, SequenceType: "jurnal_umum", CurrentValue: 2},
 		{TenantID: 1, KoperasiID: 1, SequenceType: "nomor_rm", CurrentValue: 2},
 		{TenantID: 1, KoperasiID: 1, SequenceType: "kunjungan", CurrentValue: 2},
@@ -685,7 +690,7 @@ func seedSequences(db *gorm.DB) {
 	}
 
 	for _, seq := range sequences {
-		db.FirstOrCreate(&seq, postgres.Sequence{
+		db.FirstOrCreate(&seq, postgres.SequenceNumber{
 			TenantID: seq.TenantID,
 			KoperasiID: seq.KoperasiID,
 			SequenceType: seq.SequenceType,
