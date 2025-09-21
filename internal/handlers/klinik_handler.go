@@ -190,7 +190,7 @@ func (h *KlinikHandler) GetKunjungan(c *gin.Context) {
 }
 
 func (h *KlinikHandler) GetKunjunganByPasien(c *gin.Context) {
-	pasienIDStr := c.Param("pasien_id")
+	pasienIDStr := c.Param("id")
 	pasienID, err := strconv.ParseUint(pasienIDStr, 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid pasien ID"})

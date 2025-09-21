@@ -1,91 +1,91 @@
-# Go Koperasi Management System
+# Sistem Manajemen Koperasi
 
-Sistem manajemen koperasi berbasis Go dengan arsitektur clean dan fitur lengkap untuk operasional koperasi di Indonesia.
+Aplikasi manajemen koperasi berbasis Go untuk operasional koperasi di Indonesia dengan fitur lengkap dan arsitektur yang mudah dipelihara.
 
-## 🚀 Features
+## Fitur Utama
 
-| Module | Description | Status |
+| Modul | Deskripsi | Status |
 |--------|-------------|--------|
-| **Authentication** | User registration, login, JWT auth | ✅ Complete |
-| **Koperasi Management** | CRUD koperasi, member management | ✅ Complete |
-| **Simpan Pinjam** | Savings & loans products, transactions | ✅ Complete |
-| **Product Management** | Inventory, suppliers, sales, purchases | ✅ Complete |
-| **Klinik** | Healthcare services, patients, medicines | ✅ Complete |
-| **Financial** | Chart of accounts, journals, reports | ✅ Complete |
-| **PPOB** | Payment Point Online Bank services | ✅ Complete |
-| **Payment Gateway** | Midtrans & Xendit integration | ✅ Complete |
-| **Analytics** | Cassandra-based analytics | 🔄 In Progress |
-| **Audit Logging** | Complete system audit trail | ✅ Complete |
+| **Autentikasi** | Registrasi user, login, JWT auth | Selesai |
+| **Manajemen Koperasi** | CRUD koperasi, kelola anggota | Selesai |
+| **Simpan Pinjam** | Produk simpanan & pinjaman, transaksi | Selesai |
+| **Kelola Produk** | Inventori, supplier, penjualan, pembelian | Selesai |
+| **Klinik** | Layanan kesehatan, pasien, obat-obatan | Selesai |
+| **Keuangan** | Chart of accounts, jurnal, laporan | Selesai |
+| **PPOB** | Layanan Payment Point Online Bank | Selesai |
+| **Payment Gateway** | Integrasi Midtrans & Xendit | Selesai |
+| **Analytics** | Analytics berbasis Cassandra | Dalam Proses |
+| **Audit Logging** | Pencatatan audit sistem lengkap | Selesai |
 
-## 🏗️ Architecture
+## Teknologi
 
-### Tech Stack
+### Stack Teknologi
 
-| Component | Technology | Purpose |
+| Komponen | Teknologi | Fungsi |
 |-----------|------------|---------|
 | **Backend** | Go 1.19+, Gin Web Framework | REST API server |
-| **Database** | PostgreSQL 13+ | Primary data storage |
-| **Analytics** | Apache Cassandra | Big data analytics |
-| **Cache** | Redis (optional) | Session & cache management |
-| **ORM** | GORM v2 | Database operations |
-| **Authentication** | JWT + bcrypt | Security layer |
-| **Payment** | Midtrans, Xendit | Payment processing |
+| **Database** | PostgreSQL 13+ | Penyimpanan data utama |
+| **Analytics** | Apache Cassandra | Analytics big data |
+| **Cache** | Redis (opsional) | Manajemen session & cache |
+| **ORM** | GORM v2 | Operasi database |
+| **Authentication** | JWT + bcrypt | Layer keamanan |
+| **Payment** | Midtrans, Xendit | Pemrosesan pembayaran |
 
-## 🛠️ Installation & Setup
+## Instalasi dan Setup
 
-### Prerequisites
+### Persyaratan
 
-| Requirement | Version | Installation |
+| Kebutuhan | Versi | Instalasi |
 |-------------|---------|--------------|
 | **Go** | 1.19+ | [Download Go](https://golang.org/dl/) |
 | **PostgreSQL** | 13+ | [Download PostgreSQL](https://www.postgresql.org/download/) |
-| **Git** | Latest | [Download Git](https://git-scm.com/downloads) |
+| **Git** | Terbaru | [Download Git](https://git-scm.com/downloads) |
 
-### Quick Start
+### Panduan Instalasi
 
-#### For Unix/Linux/macOS:
+#### Untuk Unix/Linux/macOS:
 ```bash
 # 1. Clone Repository
-git clone <repository-url>
+git clone https://github.com/fdciabdul/Go-Koperasi-Merah-Putih
 cd go_koperasi
 
 # 2. Install Dependencies
 go mod download
 
-# 3. Configure Environment
+# 3. Konfigurasi Environment
 cp .env.example .env
-# Edit .env with your database credentials
+# Edit .env dengan kredensial database Anda
 
 # 4. Setup Database
 createdb koperasi_db
 make migrate-fresh
 
-# 5. Run Application
+# 5. Jalankan Aplikasi
 make run
 ```
 
-#### For Windows:
+#### Untuk Windows:
 ```cmd
 REM 1. Clone Repository
-git clone <repository-url>
+git clone https://github.com/fdciabdul/Go-Koperasi-Merah-Putih
 cd go_koperasi
 
 REM 2. Install Dependencies
 go mod download
 
-REM 3. Configure Environment
+REM 3. Konfigurasi Environment
 copy .env.example .env
-REM Edit .env with your database credentials
+REM Edit .env dengan kredensial database Anda
 
 REM 4. Setup Database
 createdb koperasi_db
 make.bat migrate-fresh
 
-REM 5. Run Application
+REM 5. Jalankan Aplikasi
 make.bat run
 ```
 
-#### One-Command Setup:
+#### Setup Satu Perintah:
 ```bash
 # Unix/Linux/macOS
 make quick-start
@@ -94,218 +94,219 @@ make quick-start
 make.bat quick-start
 ```
 
-## 📋 Available Commands
+## Perintah yang Tersedia
 
-This project supports both **Unix/Linux/macOS** (Makefile) and **Windows** (make.bat) environments.
+Proyek ini mendukung environment **Unix/Linux/macOS** (Makefile) dan **Windows** (make.bat).
 
-### Command Usage
+### Cara Penggunaan
 
-| Platform | Usage | Example |
+| Platform | Penggunaan | Contoh |
 |----------|-------|---------|
-| **Unix/Linux/macOS** | `make <command>` | `make run` |
-| **Windows** | `make.bat <command>` | `make.bat run` |
+| **Unix/Linux/macOS** | `make <perintah>` | `make run` |
+| **Windows** | `make.bat <perintah>` | `make.bat run` |
 
-### Development Commands
+### Perintah Development
 
-| Command | Description | Unix | Windows |
+| Perintah | Deskripsi | Unix | Windows |
 |---------|-------------|------|---------|
-| `help` | Show all available commands | `make help` | `make.bat help` |
-| `build` | Build the application | `make build` | `make.bat build` |
-| `run` | Run the application | `make run` | `make.bat run` |
-| `test` | Run all tests | `make test` | `make.bat test` |
-| `fmt` | Format code | `make fmt` | `make.bat fmt` |
-| `lint` | Lint code | `make lint` | `make.bat lint` |
+| `help` | Tampilkan semua perintah yang tersedia | `make help` | `make.bat help` |
+| `build` | Build aplikasi | `make build` | `make.bat build` |
+| `run` | Jalankan aplikasi | `make run` | `make.bat run` |
+| `test` | Jalankan semua test | `make test` | `make.bat test` |
+| `fmt` | Format kode | `make fmt` | `make.bat fmt` |
+| `lint` | Lint kode | `make lint` | `make.bat lint` |
 | `dev` | Hot reload development | `make dev` | `make.bat dev` |
 
-### Database Commands
+### Perintah Database
 
-| Command | Description | Unix | Windows |
+| Perintah | Deskripsi | Unix | Windows |
 |---------|-------------|------|---------|
-| `migrate` | Run GORM auto-migrations | `make migrate` | `make.bat migrate` |
-| `seed` | Run database seeders | `make seed` | `make.bat seed` |
-| `migrate-fresh` | Drop, migrate, and seed | `make migrate-fresh` | `make.bat migrate-fresh` |
-| `migrate-drop` | Drop all tables and migrate | `make migrate-drop` | `make.bat migrate-drop` |
-| `dev-setup` | Complete development setup | `make dev-setup` | `make.bat dev-setup` |
+| `migrate` | Jalankan GORM auto-migrations | `make migrate` | `make.bat migrate` |
+| `seed` | Jalankan database seeders | `make seed` | `make.bat seed` |
+| `migrate-fresh` | Drop, migrate, dan seed | `make migrate-fresh` | `make.bat migrate-fresh` |
+| `migrate-drop` | Drop semua tabel dan migrate | `make migrate-drop` | `make.bat migrate-drop` |
+| `dev-setup` | Setup development lengkap | `make dev-setup` | `make.bat dev-setup` |
 
-### Tool Commands
+### Perintah Tools
 
-| Command | Description | Unix | Windows |
+| Perintah | Deskripsi | Unix | Windows |
 |---------|-------------|------|---------|
 | `install-tools` | Install development tools | `make install-tools` | `make.bat install-tools` |
-| `quick-start` | Complete setup for new developers | `make quick-start` | `make.bat quick-start` |
-| `clean` | Clean build artifacts | `make clean` | `make.bat clean` |
-| `env-info` | Show environment information | `make env-info` | `make.bat env-info` |
+| `quick-start` | Setup lengkap untuk developer baru | `make quick-start` | `make.bat quick-start` |
+| `clean` | Bersihkan build artifacts | `make clean` | `make.bat clean` |
+| `env-info` | Tampilkan informasi environment | `make env-info` | `make.bat env-info` |
 
-## 🗄️ Database Migration
+## Migrasi Database
 
 ### GORM Auto-Migration
 
-This project uses **GORM's auto-migration** instead of SQL files:
+Proyek ini menggunakan **GORM auto-migration** daripada file SQL:
 
 ```go
-// Run migrations
+// Jalankan migrasi
 go run cmd/migrate/main.go
 
 // Fresh migration (drop + migrate + seed)
 go run cmd/migrate/main.go -fresh
 
-// Drop tables and migrate
+// Drop tabel dan migrate
 go run cmd/migrate/main.go -drop
 ```
 
-### Migration Features
+### Fitur Migrasi
 
-| Feature | Description |
+| Fitur | Deskripsi |
 |---------|-------------|
-| **Auto-Migration** | GORM automatically creates/updates tables |
-| **Model-Based** | Migrations based on Go struct models |
-| **Index Creation** | Automatic index creation for performance |
-| **Constraint Addition** | Custom business rule constraints |
-| **Seeder Integration** | Automatic seeding after migration |
+| **Auto-Migration** | GORM otomatis membuat/update tabel |
+| **Berbasis Model** | Migrasi berdasarkan Go struct models |
+| **Pembuatan Index** | Pembuatan index otomatis untuk performa |
+| **Penambahan Constraint** | Custom business rule constraints |
+| **Integrasi Seeder** | Seeding otomatis setelah migrasi |
 
-### Migration Command Options
+### Opsi Perintah Migrasi
 
-| Flag | Description | Example |
+| Flag | Deskripsi | Contoh |
 |------|-------------|---------|
-| `-drop` | Drop all tables before migration | `go run cmd/migrate/main.go -drop` |
-| `-seed` | Run seeders after migration | `go run cmd/migrate/main.go -seed` |
-| `-fresh` | Drop, migrate, and seed | `go run cmd/migrate/main.go -fresh` |
+| `-drop` | Drop semua tabel sebelum migrasi | `go run cmd/migrate/main.go -drop` |
+| `-seed` | Jalankan seeders setelah migrasi | `go run cmd/migrate/main.go -seed` |
+| `-fresh` | Drop, migrate, dan seed | `go run cmd/migrate/main.go -fresh` |
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Authentication
 
-| Method | Endpoint | Description | Auth |
+| Method | Endpoint | Deskripsi | Auth |
 |--------|----------|-------------|------|
-| `POST` | `/api/v1/users/register` | User registration | Public |
-| `POST` | `/api/v1/auth/login` | User login | Public |
-| `PUT` | `/api/v1/users/verify-payment/:id` | Verify payment | Public |
+| `POST` | `/api/v1/users/register` | Registrasi user | Public |
+| `POST` | `/api/v1/auth/login` | Login user | Public |
+| `PUT` | `/api/v1/users/verify-payment/:id` | Verifikasi pembayaran | Public |
 
-### Koperasi Management
+### Manajemen Koperasi
 
-| Method | Endpoint | Description | Auth |
+| Method | Endpoint | Deskripsi | Auth |
 |--------|----------|-------------|------|
-| `POST` | `/api/v1/koperasi` | Create koperasi | SuperAdmin |
+| `POST` | `/api/v1/koperasi` | Buat koperasi | SuperAdmin |
 | `GET` | `/api/v1/koperasi` | List koperasi | Authenticated |
-| `GET` | `/api/v1/koperasi/:id` | Get koperasi details | Authenticated |
+| `GET` | `/api/v1/koperasi/:id` | Detail koperasi | Authenticated |
 | `PUT` | `/api/v1/koperasi/:id` | Update koperasi | Admin |
 
-### Product Management
+### Manajemen Produk
 
-| Method | Endpoint | Description | Auth |
+| Method | Endpoint | Deskripsi | Auth |
 |--------|----------|-------------|------|
-| `POST` | `/api/v1/produk` | Create product | Admin |
-| `GET` | `/api/v1/produk/:koperasi_id` | List products | Authenticated |
-| `POST` | `/api/v1/produk/purchase-order` | Create purchase order | Admin |
-| `POST` | `/api/v1/produk/penjualan` | Create sales transaction | Authenticated |
+| `POST` | `/api/v1/produk` | Buat produk | Admin |
+| `GET` | `/api/v1/produk/:koperasi_id` | List produk | Authenticated |
+| `POST` | `/api/v1/produk/purchase-order` | Buat purchase order | Admin |
+| `POST` | `/api/v1/produk/penjualan` | Buat transaksi penjualan | Authenticated |
 
-### Financial Management
+### Manajemen Keuangan
 
-| Method | Endpoint | Description | Auth |
+| Method | Endpoint | Deskripsi | Auth |
 |--------|----------|-------------|------|
-| `POST` | `/api/v1/financial/jurnal` | Create journal entry | Financial |
-| `GET` | `/api/v1/financial/:id/neraca-saldo` | Trial balance | Financial |
-| `GET` | `/api/v1/financial/:id/laba-rugi` | Profit & loss | Financial |
+| `POST` | `/api/v1/financial/jurnal` | Buat jurnal entry | Financial |
+| `GET` | `/api/v1/financial/:id/neraca-saldo` | Neraca saldo | Financial |
+| `GET` | `/api/v1/financial/:id/laba-rugi` | Laba rugi | Financial |
 
-## 🏗️ Modular Routes Architecture
+## Arsitektur Routes Modular
 
-Routes are organized in a modular structure for better maintainability:
+Routes diorganisir dalam struktur modular untuk kemudahan maintenance:
 
 ```
 internal/routes/
 ├── routes.go              # Main orchestrator
 └── modules/               # Domain-specific modules
     ├── auth_routes.go     # Authentication & payments
-    ├── koperasi_routes.go # Koperasi management
-    ├── produk_routes.go   # Product management
-    ├── financial_routes.go # Financial operations
-    └── ...                # Other domain routes
+    ├── koperasi_routes.go # Manajemen koperasi
+    ├── produk_routes.go   # Manajemen produk
+    ├── financial_routes.go # Operasi keuangan
+    └── ...                # Route domain lainnya
 ```
 
-### Benefits
+### Keuntungan
 
-| Benefit | Description |
+| Keuntungan | Deskripsi |
 |---------|-------------|
-| **Separation of Concerns** | Each domain has its own route file |
-| **Maintainability** | Easy to locate and modify endpoints |
-| **Scalability** | Easy to add new domain modules |
-| **Team Collaboration** | Reduces conflicts when working on different features |
+| **Separation of Concerns** | Setiap domain punya file route sendiri |
+| **Maintainability** | Mudah mencari dan memodifikasi endpoint |
+| **Scalability** | Mudah menambah modul domain baru |
+| **Kolaborasi Tim** | Mengurangi konflik saat bekerja pada fitur berbeda |
 
-## 🔐 Authentication & Authorization
+## Authentication & Authorization
 
 ### Role-Based Access Control (RBAC)
 
-| Role | Permissions | Access Level |
+| Role | Permission | Level Akses |
 |------|-------------|--------------|
-| **SuperAdmin** | Full system access | All operations |
-| **Admin** | Koperasi management | Koperasi-specific |
-| **Financial** | Financial operations | Financial modules |
-| **User** | Basic operations | Limited access |
-| **Operator** | Data entry | Specific modules |
+| **SuperAdmin** | Akses sistem penuh | Semua operasi |
+| **Admin** | Manajemen koperasi | Spesifik koperasi |
+| **Financial** | Operasi keuangan | Modul keuangan |
+| **User** | Operasi dasar | Akses terbatas |
+| **Operator** | Entry data | Modul spesifik |
 
-## 📊 Business Features
+## Fitur Bisnis
 
-### Indonesian Compliance
+### Kepatuhan Indonesia
 
-| Feature | Description | Implementation |
+| Fitur | Deskripsi | Implementasi |
 |---------|-------------|----------------|
-| **NIAK Generation** | Automatic cooperative ID | Algorithm-based |
-| **NIK Validation** | Indonesian ID validation | 16-digit validation |
-| **Regional Data** | Complete Indonesian regions | Provinsi → Kelurahan |
-| **KBLI Integration** | Business classification | Standard compliance |
+| **NIAK Generation** | ID koperasi otomatis | Berbasis algoritma |
+| **Validasi NIK** | Validasi ID Indonesia | Validasi 16 digit |
+| **Data Regional** | Data wilayah Indonesia lengkap | Provinsi hingga Kelurahan |
+| **Integrasi KBLI** | Klasifikasi bisnis | Kepatuhan standar |
 
-### Product Management
+### Manajemen Produk
 
-| Feature | Description | Benefits |
+| Fitur | Deskripsi | Keuntungan |
 |---------|-------------|----------|
-| **12 Product Categories** | Food, beverages, livestock, etc. | Organized inventory |
-| **Barcode Support** | EAN-13 generation | Efficient tracking |
-| **Supplier Management** | Multi-supplier support | Cost optimization |
-| **Perishable Tracking** | Expiry date management | Waste reduction |
-| **Purchase Orders** | Complete procurement workflow | Organized purchasing |
-| **Sales Transactions** | POS-style sales processing | Easy transactions |
-| **Stock Movement** | Real-time inventory tracking | Accurate stock levels |
+| **12 Kategori Produk** | Makanan, minuman, ternak, dll | Inventori terorganisir |
+| **Support Barcode** | Generasi EAN-13 | Tracking efisien |
+| **Manajemen Supplier** | Dukungan multi-supplier | Optimasi biaya |
+| **Tracking Kedaluwarsa** | Manajemen tanggal expire | Pengurangan waste |
+| **Purchase Orders** | Workflow procurement lengkap | Pembelian terorganisir |
+| **Transaksi Penjualan** | Pemrosesan penjualan style POS | Transaksi mudah |
+| **Pergerakan Stok** | Tracking inventori real-time | Level stok akurat |
 
-## 🧪 Testing
+## Testing
 
 ```bash
-# Run all tests
+# Jalankan semua test
 make test
 
-# Run specific package tests
+# Jalankan test package spesifik
 go test ./internal/services/... -v
 
-# Run with coverage
+# Jalankan dengan coverage
 go test ./... -cover
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Environment Variables
 
-| Variable | Description | Example |
+| Variable | Deskripsi | Contoh |
 |----------|-------------|---------|
-| `DB_HOST` | Database host | `localhost` |
-| `DB_PORT` | Database port | `5432` |
-| `DB_NAME` | Database name | `koperasi_db` |
-| `DB_USER` | Database user | `postgres` |
-| `DB_PASSWORD` | Database password | `password` |
+| `DB_HOST` | Host database | `localhost` |
+| `DB_PORT` | Port database | `5432` |
+| `DB_NAME` | Nama database | `koperasi_db` |
+| `DB_USER` | User database | `postgres` |
+| `DB_PASSWORD` | Password database | `password` |
 | `JWT_SECRET` | JWT signing key | `your-secret-key` |
 
-## 🤝 Contributing
+## Kontribusi
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+1. Fork repository ini
+2. Buat feature branch (`git checkout -b feature/fitur-keren`)
+3. Commit perubahan (`git commit -m 'Tambah fitur keren'`)
+4. Push ke branch (`git push origin feature/fitur-keren`)
+5. Buka Pull Request
 
-## 📄 License
+## Lisensi
 
-This project is licensed under the MIT License.
+Proyek ini menggunakan lisensi MIT License.
 
-## 📞 Support
+## Kontak
 
-- 📧 Email: support@example.com
-- 🐛 Issues: GitHub Issues
-- 💬 Discussions: GitHub Discussions
+- Repository: https://github.com/fdciabdul/Go-Koperasi-Merah-Putih
+- Telegram: cp@imtaqin.id
+- Issues: GitHub Issues
+- Diskusi: GitHub Discussions
