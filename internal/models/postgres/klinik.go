@@ -2,8 +2,6 @@ package postgres
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type KlinikPasien struct {
@@ -12,13 +10,13 @@ type KlinikPasien struct {
 	NomorRM        string     `gorm:"size:20;not null" json:"nomor_rm"`
 	NIK            string     `gorm:"size:20;index" json:"nik"`
 	NamaLengkap    string     `gorm:"size:255;not null;index" json:"nama_lengkap"`
-	JenisKelamin   string     `gorm:"type:enum('L','P');not null" json:"jenis_kelamin"`
+	JenisKelamin   string     `gorm:"type:varchar(1);not null" json:"jenis_kelamin"`
 	TempatLahir    string     `gorm:"size:100" json:"tempat_lahir"`
 	TanggalLahir   *time.Time `json:"tanggal_lahir"`
 	Alamat         string     `gorm:"type:text" json:"alamat"`
 	Telepon        string     `gorm:"size:20" json:"telepon"`
 	Email          string     `gorm:"size:100" json:"email"`
-	GolonganDarah  string     `gorm:"type:enum('A','B','AB','O','-')" json:"golongan_darah"`
+	GolonganDarah  string     `gorm:"type:varchar(3)" json:"golongan_darah"`
 	Alergi         string     `gorm:"type:text" json:"alergi"`
 	RiwayatPenyakit string    `gorm:"type:text" json:"riwayat_penyakit"`
 	AnggotaID      uint64     `json:"anggota_id"`
@@ -35,7 +33,7 @@ type KlinikTenagaMedis struct {
 	KoperasiID        uint64    `gorm:"not null" json:"koperasi_id"`
 	NIP               string    `gorm:"size:30" json:"nip"`
 	NamaLengkap       string    `gorm:"size:255;not null;index" json:"nama_lengkap"`
-	JenisKelamin      string    `gorm:"type:enum('L','P');not null" json:"jenis_kelamin"`
+	JenisKelamin      string    `gorm:"type:varchar(1);not null" json:"jenis_kelamin"`
 	Spesialisasi      string    `gorm:"size:100;index" json:"spesialisasi"`
 	NoSTR             string    `gorm:"size:50" json:"no_str"`
 	NoSIP             string    `gorm:"size:50" json:"no_sip"`
@@ -43,7 +41,7 @@ type KlinikTenagaMedis struct {
 	Email             string    `gorm:"size:100" json:"email"`
 	JadwalPraktik     string    `gorm:"type:json" json:"jadwal_praktik"`
 	TarifKonsultasi   float64   `gorm:"type:decimal(15,2);default:0" json:"tarif_konsultasi"`
-	Status            string    `gorm:"type:enum('aktif','non_aktif','cuti');default:'aktif'" json:"status"`
+	Status            string    `gorm:"type:varchar(20);default:'aktif'" json:"status"`
 	CreatedAt         time.Time `gorm:"autoCreateTime" json:"created_at"`
 
 	Koperasi        Koperasi          `gorm:"foreignKey:KoperasiID" json:"koperasi,omitempty"`
@@ -66,7 +64,7 @@ type KlinikKunjungan struct {
 	BiayaTindakan     float64   `gorm:"type:decimal(15,2);default:0" json:"biaya_tindakan"`
 	BiayaObat         float64   `gorm:"type:decimal(15,2);default:0" json:"biaya_obat"`
 	TotalBiaya        float64   `gorm:"type:decimal(15,2);default:0" json:"total_biaya"`
-	StatusPembayaran  string    `gorm:"type:enum('belum_bayar','lunas','cicil');default:'belum_bayar'" json:"status_pembayaran"`
+	StatusPembayaran  string    `gorm:"type:varchar(20);default:'belum_bayar'" json:"status_pembayaran"`
 	JurnalID          uint64    `json:"jurnal_id"`
 	CreatedAt         time.Time `gorm:"autoCreateTime" json:"created_at"`
 

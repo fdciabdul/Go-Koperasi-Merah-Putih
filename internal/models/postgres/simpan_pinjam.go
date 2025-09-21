@@ -11,7 +11,7 @@ type ProdukSimpanPinjam struct {
 	KoperasiID        uint64         `gorm:"not null" json:"koperasi_id"`
 	KodeProduk        string         `gorm:"size:20;not null" json:"kode_produk"`
 	NamaProduk        string         `gorm:"size:255;not null" json:"nama_produk"`
-	Jenis             string         `gorm:"type:enum('simpanan','pinjaman');not null" json:"jenis"`
+	Jenis             string         `gorm:"type:varchar(20);not null" json:"jenis"`
 	Kategori          string         `gorm:"size:100" json:"kategori"`
 	BungaSimpanan     float64        `gorm:"type:decimal(5,2);default:0" json:"bunga_simpanan"`
 	MinimalSaldo      float64        `gorm:"type:decimal(15,2);default:0" json:"minimal_saldo"`
@@ -44,7 +44,7 @@ type RekeningSimpanPinjam struct {
 	JangkaWaktu           int        `json:"jangka_waktu"`
 	AngsuranPokok         float64    `gorm:"type:decimal(15,2);default:0" json:"angsuran_pokok"`
 	AngsuranBunga         float64    `gorm:"type:decimal(15,2);default:0" json:"angsuran_bunga"`
-	Status                string     `gorm:"type:enum('aktif','lunas','macet','tutup');default:'aktif';index" json:"status"`
+	Status                string     `gorm:"type:varchar(20);default:'aktif';index" json:"status"`
 	TanggalBuka           time.Time  `gorm:"default:CURRENT_DATE" json:"tanggal_buka"`
 	TanggalTutup          *time.Time `json:"tanggal_tutup"`
 	CreatedAt             time.Time  `gorm:"autoCreateTime" json:"created_at"`
@@ -61,7 +61,7 @@ type TransaksiSimpanPinjam struct {
 	RekeningID        uint64    `gorm:"not null;index" json:"rekening_id"`
 	NomorTransaksi    string    `gorm:"size:50;not null" json:"nomor_transaksi"`
 	TanggalTransaksi  time.Time `gorm:"default:CURRENT_TIMESTAMP;index" json:"tanggal_transaksi"`
-	JenisTransaksi    string    `gorm:"type:enum('setoran','penarikan','pencairan','angsuran','bunga','denda');not null;index" json:"jenis_transaksi"`
+	JenisTransaksi    string    `gorm:"type:varchar(20);not null;index" json:"jenis_transaksi"`
 	Jumlah            float64   `gorm:"type:decimal(15,2);not null" json:"jumlah"`
 	SaldoSebelum      float64   `gorm:"type:decimal(15,2);default:0" json:"saldo_sebelum"`
 	SaldoSesudah      float64   `gorm:"type:decimal(15,2);default:0" json:"saldo_sesudah"`

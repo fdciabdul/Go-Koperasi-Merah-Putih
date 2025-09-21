@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"go_koperasi/internal/handlers"
-	"go_koperasi/internal/middleware"
-	"go_koperasi/internal/routes/modules"
+	"koperasi-merah-putih/internal/handlers"
+	"koperasi-merah-putih/internal/middleware"
+	"koperasi-merah-putih/internal/routes/modules"
 )
 
 type Routes struct {

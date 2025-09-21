@@ -2,7 +2,7 @@ package modules
 
 import (
 	"github.com/gin-gonic/gin"
-	"go_koperasi/internal/handlers"
+	"koperasi-merah-putih/internal/handlers"
 )
 
 type WilayahRoutes struct {

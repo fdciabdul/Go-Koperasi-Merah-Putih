@@ -2,8 +2,6 @@ package postgres
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type PaymentProvider struct {

@@ -10,7 +10,7 @@ type COAKategori struct {
 	ID        uint64         `gorm:"primaryKey;autoIncrement" json:"id"`
 	Kode      string         `gorm:"uniqueIndex;size:10;not null" json:"kode"`
 	Nama      string         `gorm:"size:100;not null" json:"nama"`
-	Tipe      string         `gorm:"type:enum('aset','kewajiban','ekuitas','pendapatan','beban');not null" json:"tipe"`
+	Tipe      string    `gorm:"type:varchar(20);not null" json:"tipe"`
 	Urutan    int            `gorm:"default:0" json:"urutan"`
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted_at"`
 
@@ -26,7 +26,7 @@ type COAAkun struct {
 	KategoriID   uint64    `gorm:"not null;index" json:"kategori_id"`
 	ParentID     uint64    `gorm:"index" json:"parent_id"`
 	LevelAkun    int       `gorm:"default:1" json:"level_akun"`
-	SaldoNormal  string    `gorm:"type:enum('debit','kredit');not null" json:"saldo_normal"`
+	SaldoNormal  string    `gorm:"type:varchar(10);not null" json:"saldo_normal"`
 	IsKas        bool      `gorm:"default:false" json:"is_kas"`
 	IsAktif      bool      `gorm:"default:true" json:"is_aktif"`
 	CreatedAt    time.Time `gorm:"autoCreateTime" json:"created_at"`
@@ -44,7 +44,7 @@ type COAAkun struct {
 type ModalKoperasi struct {
 	ID                uint64     `gorm:"primaryKey;autoIncrement" json:"id"`
 	KoperasiID        uint64     `gorm:"not null;index" json:"koperasi_id"`
-	JenisModal        string     `gorm:"type:enum('simpanan_pokok','simpanan_wajib','dana_cadangan','dana_hibah','modal_penyertaan');not null" json:"jenis_modal"`
+	JenisModal        string     `gorm:"type:varchar(30);not null" json:"jenis_modal"`
 	Jumlah            float64    `gorm:"type:decimal(15,2);default:0" json:"jumlah"`
 	Keterangan        string     `gorm:"type:text" json:"keterangan"`
 	TanggalPencatatan *time.Time `json:"tanggal_pencatatan"`
@@ -63,7 +63,7 @@ type JurnalUmum struct {
 	Keterangan       string      `gorm:"type:text" json:"keterangan"`
 	TotalDebit       float64     `gorm:"type:decimal(15,2);default:0" json:"total_debit"`
 	TotalKredit      float64     `gorm:"type:decimal(15,2);default:0" json:"total_kredit"`
-	Status           string      `gorm:"type:enum('draft','posted','cancelled');default:'draft';index" json:"status"`
+	Status           string      `gorm:"type:varchar(20);default:'draft';index" json:"status"`
 	CreatedAt        time.Time   `gorm:"autoCreateTime" json:"created_at"`
 	CreatedBy        uint64      `json:"created_by"`
 	PostedAt         *time.Time  `json:"posted_at"`

@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"go_koperasi/internal/repository"
-	"go_koperasi/internal/services"
+	"koperasi-merah-putih/internal/repository"
+	"koperasi-merah-putih/internal/services"
 
 	"github.com/gin-gonic/gin"
 )

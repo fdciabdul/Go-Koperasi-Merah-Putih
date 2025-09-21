@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"go_koperasi/internal/models/postgres"
-	"go_koperasi/internal/repository"
+	"koperasi-merah-putih/internal/models/postgres"
+	"koperasi-merah-putih/internal/repository"
 )
 
 type ProdukService struct {

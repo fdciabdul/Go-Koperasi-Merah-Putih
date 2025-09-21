@@ -53,7 +53,7 @@ type WilayahKelurahan struct {
 	Kode        string `gorm:"uniqueIndex;size:15;not null" json:"kode"`
 	Nama        string `gorm:"size:255;not null" json:"nama"`
 	KecamatanID uint64 `gorm:"not null" json:"kecamatan_id"`
-	Jenis       string `gorm:"type:enum('kelurahan','desa');default:'desa'" json:"jenis"`
+	Jenis       string `gorm:"type:varchar(20);default:'desa'" json:"jenis"`
 
 	Kecamatan      WilayahKecamatan     `gorm:"foreignKey:KecamatanID" json:"kecamatan,omitempty"`
 	AnggotaKoperasi []AnggotaKoperasi   `gorm:"foreignKey:KelurahanID" json:"anggota_koperasi,omitempty"`

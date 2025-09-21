@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:15
+    image: postgres:latest
     container_name: koperasi_postgres
     environment:
       POSTGRES_DB: koperasi_merah_putih
@@ -17,7 +17,7 @@ services:
       - koperasi_network
 
   cassandra:
-    image: cassandra:4.1
+    image: cassandra:latest
     container_name: koperasi_cassandra
     environment:
       CASSANDRA_CLUSTER_NAME: koperasi_cluster

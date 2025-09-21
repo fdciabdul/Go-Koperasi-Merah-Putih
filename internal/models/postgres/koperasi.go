@@ -95,14 +95,13 @@ type Koperasi struct {
 	ProdukSimpanPinjam []ProdukSimpanPinjam       `gorm:"foreignKey:KoperasiID" json:"produk_simpan_pinjam,omitempty"`
 	PPOBTransaksi      []PPOBTransaksi            `gorm:"foreignKey:KoperasiID" json:"ppob_transaksi,omitempty"`
 	PaymentTransactions []PaymentTransaction      `gorm:"foreignKey:KoperasiID" json:"payment_transactions,omitempty"`
-	SimpananPokokConfig SimpananPokokConfig       `gorm:"foreignKey:KoperasiID" json:"simpanan_pokok_config,omitempty"`
 }
 
 type KoperasiAktivitasUsaha struct {
 	ID           uint64    `gorm:"primaryKey;autoIncrement" json:"id"`
 	KoperasiID   uint64    `gorm:"not null" json:"koperasi_id"`
 	KBLIID       uint64    `gorm:"not null" json:"kbli_id"`
-	JenisUsaha   string    `gorm:"type:enum('utama','sampingan');default:'utama'" json:"jenis_usaha"`
+	JenisUsaha   string    `gorm:"type:varchar(20);default:'utama'" json:"jenis_usaha"`
 	Keterangan   string    `gorm:"type:text" json:"keterangan"`
 	IsActive     bool      `gorm:"default:true" json:"is_active"`
 	CreatedAt    time.Time `gorm:"autoCreateTime" json:"created_at"`

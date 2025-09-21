@@ -3,7 +3,7 @@ package postgres
 import (
 	"time"
 
-	"go_koperasi/internal/models/postgres"
+	"koperasi-merah-putih/internal/models/postgres"
 
 	"gorm.io/gorm"
 )

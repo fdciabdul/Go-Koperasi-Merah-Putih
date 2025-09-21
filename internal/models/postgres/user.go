@@ -2,8 +2,6 @@ package postgres
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type User struct {
@@ -15,7 +13,7 @@ type User struct {
 	PasswordHash string     `gorm:"size:255;not null" json:"password_hash"`
 	NamaLengkap  string     `gorm:"size:255;not null" json:"nama_lengkap"`
 	Telepon      string     `gorm:"size:20" json:"telepon"`
-	Role         string     `gorm:"type:enum('super_admin','admin_koperasi','bendahara','sekretaris','operator','anggota');not null" json:"role"`
+	Role         string     `gorm:"type:varchar(20);not null" json:"role"`
 	IsActive     bool       `gorm:"default:true" json:"is_active"`
 	LastLogin    *time.Time `json:"last_login"`
 	AnggotaID    uint64     `json:"anggota_id"`
@@ -43,7 +41,7 @@ type Permission struct {
 
 type RolePermission struct {
 	ID           uint64 `gorm:"primaryKey;autoIncrement" json:"id"`
-	Role         string `gorm:"type:enum('super_admin','admin_koperasi','bendahara','sekretaris','operator','anggota');not null" json:"role"`
+	Role         string `gorm:"type:varchar(20);not null" json:"role"`
 	PermissionID uint64 `gorm:"not null" json:"permission_id"`
 
 	Permission Permission `gorm:"foreignKey:PermissionID" json:"permission,omitempty"`

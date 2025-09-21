@@ -1,421 +1,311 @@
-#  Koperasi Merah Putih
+# Go Koperasi Management System
 
-Aplikasi manajemen koperasi berbasis Go untuk pengelolaan koperasi di Indonesia dengan fitur lengkap mulai dari manajemen anggota, simpan pinjam, klinik, hingga akuntansi.
+Sistem manajemen koperasi berbasis Go dengan arsitektur clean dan fitur lengkap untuk operasional koperasi di Indonesia.
 
-## Gambaran Sistem
+## 🚀 Features
 
-Sistem ini dikembangkan khusus untuk kebutuhan koperasi di Indonesia dengan mempertimbangkan regulasi dan praktik bisnis lokal. Aplikasi menyediakan solusi terintegrasi untuk operasional koperasi sehari-hari.
+| Module | Description | Status |
+|--------|-------------|--------|
+| **Authentication** | User registration, login, JWT auth | ✅ Complete |
+| **Koperasi Management** | CRUD koperasi, member management | ✅ Complete |
+| **Simpan Pinjam** | Savings & loans products, transactions | ✅ Complete |
+| **Product Management** | Inventory, suppliers, sales, purchases | ✅ Complete |
+| **Klinik** | Healthcare services, patients, medicines | ✅ Complete |
+| **Financial** | Chart of accounts, journals, reports | ✅ Complete |
+| **PPOB** | Payment Point Online Bank services | ✅ Complete |
+| **Payment Gateway** | Midtrans & Xendit integration | ✅ Complete |
+| **Analytics** | Cassandra-based analytics | 🔄 In Progress |
+| **Audit Logging** | Complete system audit trail | ✅ Complete |
 
-## Fitur Utama
+## 🏗️ Architecture
 
-### Manajemen Koperasi
-- Registrasi dan pengelolaan data koperasi
-- Manajemen anggota dengan sistem keanggotaan bertingkat
-- Validasi NIK dan data wilayah Indonesia
-- Generate NIAK otomatis sesuai standar
+### Tech Stack
 
-### Simpan Pinjam
-- Produk simpanan dan pinjaman yang fleksibel
-- Perhitungan bunga dan angsuran otomatis
-- Tracking jatuh tempo dan tunggakan
-- Laporan keuangan anggota
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **Backend** | Go 1.19+, Gin Web Framework | REST API server |
+| **Database** | PostgreSQL 13+ | Primary data storage |
+| **Analytics** | Apache Cassandra | Big data analytics |
+| **Cache** | Redis (optional) | Session & cache management |
+| **ORM** | GORM v2 | Database operations |
+| **Authentication** | JWT + bcrypt | Security layer |
+| **Payment** | Midtrans, Xendit | Payment processing |
 
-### Klinik
-- Manajemen pasien dan rekam medis
-- Jadwal praktik tenaga medis
-- Inventory obat dengan alert stok minimum
-- Sistem resep dan billing terintegrasi
-
-### Akuntansi & Keuangan
-- Chart of Account (COA) sesuai standar akuntansi Indonesia
-- Jurnal umum dengan validasi debit-kredit
-- Laporan keuangan: Neraca, Laba Rugi, Neraca Saldo
-- Posting dan reversal jurnal
-
-### PPOB (Payment Point Online Bank)
-- Integrasi dengan penyedia layanan PPOB
-- Transaksi pulsa, token listrik, PDAM, dll
-- Settlement otomatis dan rekonsiliasi
-
-### Payment Gateway
-- Integrasi Midtrans dan Xendit
-- Pembayaran simpanan pokok saat registrasi
-- Callback handling dan verifikasi otomatis
-
-## Tech Stack
-
-### Backend
-- **Language**: Go 1.19+
-- **Framework**: Gin Web Framework
-- **ORM**: GORM v2
-- **Database**: PostgreSQL (primary), Apache Cassandra (analytics)
-- **Authentication**: JWT dengan bcrypt
-
-### External Services
-- Midtrans & Xendit untuk payment gateway
-- Provider PPOB untuk layanan pembayaran
-- API wilayah Indonesia untuk validasi alamat
-
-## Arsitektur Sistem
-
-### System Architecture Flow
-
-```mermaid
-flowchart TB
-    subgraph "Client Layer"
-        UI[Frontend Application]
-        API[API Requests]
-    end
-
-    subgraph "API Gateway Layer"
-        Router[Gin Router]
-        Auth[Auth Middleware]
-        RBAC[RBAC Middleware]
-        Audit[Audit Middleware]
-    end
-
-    subgraph "Handler Layer"
-        UH[User Handler]
-        PH[Payment Handler]
-        KH[Koperasi Handler]
-        SPH[SimpanPinjam Handler]
-        KLH[Klinik Handler]
-        FH[Financial Handler]
-        WH[Wilayah Handler]
-        MDH[MasterData Handler]
-        SH[Sequence Handler]
-        PPH[PPOB Handler]
-    end
-
-    subgraph "Service Layer"
-        US[User Service]
-        PS[Payment Service]
-        KS[Koperasi Service]
-        SPS[SimpanPinjam Service]
-        KLS[Klinik Service]
-        FS[Financial Service]
-        WS[Wilayah Service]
-        MDS[MasterData Service]
-        SS[Sequence Service]
-        PPS[PPOB Service]
-    end
-
-    subgraph "Repository Layer"
-        UR[User Repository]
-        PR[Payment Repository]
-        KR[Koperasi Repository]
-        SPR[SimpanPinjam Repository]
-        KLR[Klinik Repository]
-        FR[Financial Repository]
-        WR[Wilayah Repository]
-        MDR[MasterData Repository]
-        SR[Sequence Repository]
-        PPR[PPOB Repository]
-    end
-
-    subgraph "Database Layer"
-        PG[(PostgreSQL)]
-        CASS[(Cassandra)]
-    end
-
-    subgraph "External Services"
-        MT[Midtrans Gateway]
-        XD[Xendit Gateway]
-        PPOB_EXT[PPOB Providers]
-    end
-
-    %% Client to API Gateway
-    UI --> API
-    API --> Router
-
-    %% Middleware Chain
-    Router --> Auth
-    Auth --> RBAC
-    RBAC --> Audit
-
-    %% Audit to Handlers
-    Audit --> UH
-    Audit --> PH
-    Audit --> KH
-    Audit --> SPH
-    Audit --> KLH
-    Audit --> FH
-    Audit --> WH
-    Audit --> MDH
-    Audit --> SH
-    Audit --> PPH
-
-    %% Handlers to Services
-    UH --> US
-    PH --> PS
-    KH --> KS
-    SPH --> SPS
-    KLH --> KLS
-    FH --> FS
-    WH --> WS
-    MDH --> MDS
-    SH --> SS
-    PPH --> PPS
-
-    %% Services to Repositories
-    US --> UR
-    PS --> PR
-    KS --> KR
-    SPS --> SPR
-    KLS --> KLR
-    FS --> FR
-    WS --> WR
-    MDS --> MDR
-    SS --> SR
-    PPS --> PPR
-
-    %% Repositories to Databases
-    UR --> PG
-    PR --> PG
-    KR --> PG
-    SPR --> PG
-    KLR --> PG
-    FR --> PG
-    WR --> PG
-    MDR --> PG
-    SR --> PG
-    PPR --> PG
-
-    %% Audit to Cassandra
-    Audit --> CASS
-
-    %% External Services
-    PS --> MT
-    PS --> XD
-    PPS --> PPOB_EXT
-
-    %% Styling
-    classDef clientClass fill:#e1f5fe
-    classDef middlewareClass fill:#f3e5f5
-    classDef handlerClass fill:#e8f5e8
-    classDef serviceClass fill:#fff3e0
-    classDef repoClass fill:#fce4ec
-    classDef dbClass fill:#f1f8e9
-    classDef externalClass fill:#fff8e1
-
-    class UI,API clientClass
-    class Router,Auth,RBAC,Audit middlewareClass
-    class UH,PH,KH,SPH,KLH,FH,WH,MDH,SH,PPH handlerClass
-    class US,PS,KS,SPS,KLS,FS,WS,MDS,SS,PPS serviceClass
-    class UR,PR,KR,SPR,KLR,FR,WR,MDR,SR,PPR repoClass
-    class PG,CASS dbClass
-    class MT,XD,PPOB_EXT externalClass
-```
-
-### Business Process Flow
-
-```mermaid
-flowchart TD
-    subgraph "User Registration Flow"
-        A[User Registration] --> B[Payment Simpanan Pokok]
-        B --> C[Payment Gateway Processing]
-        C --> D{Payment Success?}
-        D -->|Yes| E[Account Activation]
-        D -->|No| F[Registration Pending]
-        E --> G[Welcome to Koperasi]
-    end
-
-    subgraph "Koperasi Operations"
-        H[Create Koperasi] --> I[Setup COA]
-        I --> J[Create Products]
-        J --> K[Add Members]
-        K --> L[Operational Ready]
-    end
-
-    subgraph "Financial Management"
-        M[Create Journal Entry] --> N[Validate Debit=Kredit]
-        N --> O[Post Journal]
-        O --> P[Update Account Balances]
-        P --> Q[Generate Reports]
-    end
-
-    subgraph "Simpan Pinjam Flow"
-        R[Create Product] --> S[Member Apply]
-        S --> T[Account Creation]
-        T --> U[Transaction Processing]
-        U --> V[Calculate Interest/Angsuran]
-        V --> W[Update Balances]
-    end
-
-    subgraph "Klinik Operations"
-        X[Patient Registration] --> Y[Generate Medical Record]
-        Y --> Z[Doctor Visit]
-        Z --> AA[Diagnosis & Treatment]
-        AA --> BB[Prescription]
-        BB --> CC[Update Medicine Stock]
-        CC --> DD[Payment Processing]
-    end
-
-    %% Cross-module connections
-    E --> H
-    L --> R
-    L --> X
-    G --> M
-
-    %% Styling
-    classDef processClass fill:#e3f2fd
-    classDef decisionClass fill:#fff3e0
-    classDef successClass fill:#e8f5e8
-    classDef errorClass fill:#ffebee
-
-    class A,B,H,I,J,K,M,N,O,P,R,S,T,U,V,X,Y,Z,AA,BB,CC processClass
-    class D decisionClass
-    class E,G,L,Q,W,DD successClass
-    class F errorClass
-```
-
-## Struktur Project
-
-```
-internal/
-├── handlers/          # HTTP request handlers
-├── services/          # Business logic layer
-├── repository/        # Data access layer
-├── models/           # Database models
-├── middleware/       # Authentication, RBAC, audit
-└── routes/           # Route definitions
-
-cmd/
-└── server/           # Application entry point
-```
-
-## Setup Development
+## 🛠️ Installation & Setup
 
 ### Prerequisites
-- Go 1.19 atau lebih baru
-- PostgreSQL 13+
-- Apache Cassandra 4.0+ (optional, untuk analytics)
 
-### Installation
+| Requirement | Version | Installation |
+|-------------|---------|--------------|
+| **Go** | 1.19+ | [Download Go](https://golang.org/dl/) |
+| **PostgreSQL** | 13+ | [Download PostgreSQL](https://www.postgresql.org/download/) |
+| **Git** | Latest | [Download Git](https://git-scm.com/downloads) |
 
-1. Clone repository
+### Quick Start
+
+#### For Unix/Linux/macOS:
 ```bash
-git clone https://github.com/fdciabdul/Go-Koperasi-Merah-Putih
-cd Go-Koperasi-Merah-Putih
-```
+# 1. Clone Repository
+git clone <repository-url>
+cd go_koperasi
 
-2. Install dependencies
-```bash
+# 2. Install Dependencies
 go mod download
-```
 
-3. Setup database
-```bash
-# PostgreSQL
-createdb koperasi_db
-
-# Jalankan migrasi
-go run cmd/migrate/main.go
-```
-
-4. Configuration
-```bash
+# 3. Configure Environment
 cp .env.example .env
-# Edit konfigurasi database dan API keys
+# Edit .env with your database credentials
+
+# 4. Setup Database
+createdb koperasi_db
+make migrate-fresh
+
+# 5. Run Application
+make run
 ```
 
-5. Run application
+#### For Windows:
+```cmd
+REM 1. Clone Repository
+git clone <repository-url>
+cd go_koperasi
+
+REM 2. Install Dependencies
+go mod download
+
+REM 3. Configure Environment
+copy .env.example .env
+REM Edit .env with your database credentials
+
+REM 4. Setup Database
+createdb koperasi_db
+make.bat migrate-fresh
+
+REM 5. Run Application
+make.bat run
+```
+
+#### One-Command Setup:
 ```bash
-go run cmd/server/main.go
+# Unix/Linux/macOS
+make quick-start
+
+# Windows
+make.bat quick-start
 ```
 
-## API Documentation
+## 📋 Available Commands
 
-Server berjalan di `http://localhost:8080` dengan endpoint utama:
+This project supports both **Unix/Linux/macOS** (Makefile) and **Windows** (make.bat) environments.
 
-### Public Endpoints
-- `POST /api/v1/users/register` - Registrasi user baru
-- `POST /api/v1/payments/*/callback` - Callback payment gateway
+### Command Usage
+
+| Platform | Usage | Example |
+|----------|-------|---------|
+| **Unix/Linux/macOS** | `make <command>` | `make run` |
+| **Windows** | `make.bat <command>` | `make.bat run` |
+
+### Development Commands
+
+| Command | Description | Unix | Windows |
+|---------|-------------|------|---------|
+| `help` | Show all available commands | `make help` | `make.bat help` |
+| `build` | Build the application | `make build` | `make.bat build` |
+| `run` | Run the application | `make run` | `make.bat run` |
+| `test` | Run all tests | `make test` | `make.bat test` |
+| `fmt` | Format code | `make fmt` | `make.bat fmt` |
+| `lint` | Lint code | `make lint` | `make.bat lint` |
+| `dev` | Hot reload development | `make dev` | `make.bat dev` |
+
+### Database Commands
+
+| Command | Description | Unix | Windows |
+|---------|-------------|------|---------|
+| `migrate` | Run GORM auto-migrations | `make migrate` | `make.bat migrate` |
+| `seed` | Run database seeders | `make seed` | `make.bat seed` |
+| `migrate-fresh` | Drop, migrate, and seed | `make migrate-fresh` | `make.bat migrate-fresh` |
+| `migrate-drop` | Drop all tables and migrate | `make migrate-drop` | `make.bat migrate-drop` |
+| `dev-setup` | Complete development setup | `make dev-setup` | `make.bat dev-setup` |
+
+### Tool Commands
+
+| Command | Description | Unix | Windows |
+|---------|-------------|------|---------|
+| `install-tools` | Install development tools | `make install-tools` | `make.bat install-tools` |
+| `quick-start` | Complete setup for new developers | `make quick-start` | `make.bat quick-start` |
+| `clean` | Clean build artifacts | `make clean` | `make.bat clean` |
+| `env-info` | Show environment information | `make env-info` | `make.bat env-info` |
+
+## 🗄️ Database Migration
+
+### GORM Auto-Migration
+
+This project uses **GORM's auto-migration** instead of SQL files:
+
+```go
+// Run migrations
+go run cmd/migrate/main.go
+
+// Fresh migration (drop + migrate + seed)
+go run cmd/migrate/main.go -fresh
+
+// Drop tables and migrate
+go run cmd/migrate/main.go -drop
+```
+
+### Migration Features
+
+| Feature | Description |
+|---------|-------------|
+| **Auto-Migration** | GORM automatically creates/updates tables |
+| **Model-Based** | Migrations based on Go struct models |
+| **Index Creation** | Automatic index creation for performance |
+| **Constraint Addition** | Custom business rule constraints |
+| **Seeder Integration** | Automatic seeding after migration |
+
+### Migration Command Options
+
+| Flag | Description | Example |
+|------|-------------|---------|
+| `-drop` | Drop all tables before migration | `go run cmd/migrate/main.go -drop` |
+| `-seed` | Run seeders after migration | `go run cmd/migrate/main.go -seed` |
+| `-fresh` | Drop, migrate, and seed | `go run cmd/migrate/main.go -fresh` |
+
+## 🔌 API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/api/v1/users/register` | User registration | Public |
+| `POST` | `/api/v1/auth/login` | User login | Public |
+| `PUT` | `/api/v1/users/verify-payment/:id` | Verify payment | Public |
 
 ### Koperasi Management
-- `POST /api/v1/koperasi` - Buat koperasi baru
-- `GET /api/v1/koperasi` - List koperasi
-- `POST /api/v1/koperasi/anggota` - Tambah anggota
 
-### Financial
-- `POST /api/v1/financial/coa/akun` - Buat akun COA
-- `POST /api/v1/financial/jurnal` - Input jurnal
-- `GET /api/v1/financial/:id/neraca-saldo` - Neraca saldo
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/api/v1/koperasi` | Create koperasi | SuperAdmin |
+| `GET` | `/api/v1/koperasi` | List koperasi | Authenticated |
+| `GET` | `/api/v1/koperasi/:id` | Get koperasi details | Authenticated |
+| `PUT` | `/api/v1/koperasi/:id` | Update koperasi | Admin |
 
-### Klinik
-- `POST /api/v1/klinik/pasien` - Registrasi pasien
-- `POST /api/v1/klinik/kunjungan` - Input kunjungan
-- `GET /api/v1/klinik/:id/statistik` - Statistik klinik
+### Product Management
 
-Dokumentasi lengkap API tersedia di `/swagger` setelah aplikasi berjalan.
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/api/v1/produk` | Create product | Admin |
+| `GET` | `/api/v1/produk/:koperasi_id` | List products | Authenticated |
+| `POST` | `/api/v1/produk/purchase-order` | Create purchase order | Admin |
+| `POST` | `/api/v1/produk/penjualan` | Create sales transaction | Authenticated |
 
-## Database Design
+### Financial Management
 
-### PostgreSQL Tables
-- User management: `users`, `user_registrations`, `user_payments`
-- Koperasi: `koperasi`, `anggota_koperasi`
-- Financial: `coa_akun`, `jurnal_umum`, `jurnal_detail`
-- Klinik: `klinik_pasien`, `klinik_kunjungan`, `klinik_obat`
-- Master data: `kbli`, `jenis_koperasi`, `bentuk_koperasi`
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/api/v1/financial/jurnal` | Create journal entry | Financial |
+| `GET` | `/api/v1/financial/:id/neraca-saldo` | Trial balance | Financial |
+| `GET` | `/api/v1/financial/:id/laba-rugi` | Profit & loss | Financial |
 
-### Cassandra Tables
-- Audit logs: `audit_logs`, `user_activities`
-- Analytics: `transaction_metrics`, `performance_logs`
+## 🏗️ Modular Routes Architecture
 
-## Security
+Routes are organized in a modular structure for better maintainability:
 
-Sistem menggunakan middleware berlapis untuk keamanan:
-
-1. **Authentication**: JWT token validation
-2. **RBAC**: Role-based access control
-3. **Audit**: Logging semua aktivitas user
-4. **Validation**: Input sanitization dan validation
-
-## Deployment
-
-### Docker
-```bash
-docker build -t koperasi-app .
-docker run -p 8080:8080 koperasi-app
 ```
+internal/routes/
+├── routes.go              # Main orchestrator
+└── modules/               # Domain-specific modules
+    ├── auth_routes.go     # Authentication & payments
+    ├── koperasi_routes.go # Koperasi management
+    ├── produk_routes.go   # Product management
+    ├── financial_routes.go # Financial operations
+    └── ...                # Other domain routes
+```
+
+### Benefits
+
+| Benefit | Description |
+|---------|-------------|
+| **Separation of Concerns** | Each domain has its own route file |
+| **Maintainability** | Easy to locate and modify endpoints |
+| **Scalability** | Easy to add new domain modules |
+| **Team Collaboration** | Reduces conflicts when working on different features |
+
+## 🔐 Authentication & Authorization
+
+### Role-Based Access Control (RBAC)
+
+| Role | Permissions | Access Level |
+|------|-------------|--------------|
+| **SuperAdmin** | Full system access | All operations |
+| **Admin** | Koperasi management | Koperasi-specific |
+| **Financial** | Financial operations | Financial modules |
+| **User** | Basic operations | Limited access |
+| **Operator** | Data entry | Specific modules |
+
+## 📊 Business Features
+
+### Indonesian Compliance
+
+| Feature | Description | Implementation |
+|---------|-------------|----------------|
+| **NIAK Generation** | Automatic cooperative ID | Algorithm-based |
+| **NIK Validation** | Indonesian ID validation | 16-digit validation |
+| **Regional Data** | Complete Indonesian regions | Provinsi → Kelurahan |
+| **KBLI Integration** | Business classification | Standard compliance |
+
+### Product Management
+
+| Feature | Description | Benefits |
+|---------|-------------|----------|
+| **12 Product Categories** | Food, beverages, livestock, etc. | Organized inventory |
+| **Barcode Support** | EAN-13 generation | Efficient tracking |
+| **Supplier Management** | Multi-supplier support | Cost optimization |
+| **Perishable Tracking** | Expiry date management | Waste reduction |
+| **Purchase Orders** | Complete procurement workflow | Organized purchasing |
+| **Sales Transactions** | POS-style sales processing | Easy transactions |
+| **Stock Movement** | Real-time inventory tracking | Accurate stock levels |
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+make test
+
+# Run specific package tests
+go test ./internal/services/... -v
+
+# Run with coverage
+go test ./... -cover
+```
+
+## 🚀 Deployment
 
 ### Environment Variables
-```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=koperasi_db
-DB_USER=postgres
-DB_PASSWORD=yourpassword
-JWT_SECRET=your-jwt-secret
-MIDTRANS_SERVER_KEY=your-midtrans-key
-XENDIT_SECRET_KEY=your-xendit-key
-```
 
-## Testing
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DB_HOST` | Database host | `localhost` |
+| `DB_PORT` | Database port | `5432` |
+| `DB_NAME` | Database name | `koperasi_db` |
+| `DB_USER` | Database user | `postgres` |
+| `DB_PASSWORD` | Database password | `password` |
+| `JWT_SECRET` | JWT signing key | `your-secret-key` |
 
-```bash
-# Unit tests
-go test ./...
+## 🤝 Contributing
 
-# Integration tests
-go test -tags=integration ./...
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
-# Coverage report
-go test -cover ./...
-```
+## 📄 License
 
-## Contributing
+This project is licensed under the MIT License.
 
-1. Fork repository
-2. Buat feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -m 'Add new feature'`)
-4. Push branch (`git push origin feature/new-feature`)
-5. Buat Pull Request
+## 📞 Support
 
-## License
-
-MIT License - lihat file LICENSE untuk detail lengkap.
-
-## Support
-
-Untuk pertanyaan atau issue, silakan buat issue di repository ini atau hubungi tim development.
+- 📧 Email: support@example.com
+- 🐛 Issues: GitHub Issues
+- 💬 Discussions: GitHub Discussions

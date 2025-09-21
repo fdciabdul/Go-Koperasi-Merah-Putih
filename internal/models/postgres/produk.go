@@ -47,8 +47,8 @@ type Supplier struct {
 	NamaBank       string         `gorm:"size:100" json:"nama_bank"`
 	AtasNamaBank   string         `gorm:"size:100" json:"atas_nama_bank"`
 	NPWP           string         `gorm:"size:20" json:"npwp"`
-	JenisSupplier  string         `gorm:"type:enum('individu','perusahaan','koperasi');default:'individu'" json:"jenis_supplier"`
-	Status         string         `gorm:"type:enum('aktif','nonaktif','blacklist');default:'aktif'" json:"status"`
+	JenisSupplier  string         `gorm:"type:varchar(20);default:'individu'" json:"jenis_supplier"`
+	Status         string         `gorm:"type:varchar(20);default:'aktif'" json:"status"`
 	TermPembayaran int            `gorm:"default:30;comment:hari" json:"term_pembayaran"`
 	IsActive       bool           `gorm:"default:true" json:"is_active"`
 	CreatedAt      time.Time      `gorm:"autoCreateTime" json:"created_at"`
@@ -151,7 +151,6 @@ type PurchaseOrder struct {
 	Koperasi           Koperasi           `gorm:"foreignKey:KoperasiID" json:"koperasi,omitempty"`
 	Supplier           Supplier           `gorm:"foreignKey:SupplierID" json:"supplier,omitempty"`
 	PurchaseOrderDetail []PurchaseOrderDetail `gorm:"foreignKey:PurchaseOrderID" json:"purchase_order_detail,omitempty"`
-	PembelianHeader    PembelianHeader    `gorm:"foreignKey:PurchaseOrderID" json:"pembelian_header,omitempty"`
 }
 
 type PurchaseOrderDetail struct {

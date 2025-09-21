@@ -1,0 +1,1198 @@
+{
+	"info": {
+		"_postman_id": "12345678-1234-1234-1234-123456789012",
+		"name": "Koperasi Merah Putih API",
+		"description": "Comprehensive API collection for Koperasi Merah Putih backend system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nama_lengkap\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"telepon\": \"081234567890\",\n  \"nik\": \"1234567890123456\",\n  \"alamat\": \"Jl. Contoh No. 123\",\n  \"koperasi_id\": 1,\n  \"jenis_simpanan\": \"pokok\",\n  \"nominal_simpanan\": 100000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					}
+				},
+				{
+					"name": "Verify Payment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"success\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/verify-payment/{{payment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"verify-payment",
+								"{{payment_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Approve Registration",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"approval_notes\": \"Registration approved\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/registrations/{{user_id}}/approve",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"registrations",
+								"{{user_id}}",
+								"approve"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Koperasi Management",
+			"item": [
+				{
+					"name": "Create Koperasi",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nama_koperasi\": \"Koperasi Sejahtera\",\n  \"nama_sk\": \"Koperasi Sejahtera Mandiri\",\n  \"nomor_sk\": \"001/SK/2024\",\n  \"jenis_koperasi_id\": 1,\n  \"bentuk_koperasi_id\": 1,\n  \"provinsi_id\": 31,\n  \"kabupaten_id\": 3101,\n  \"kecamatan_id\": 310101,\n  \"kelurahan_id\": 31010101,\n  \"alamat\": \"Jl. Merdeka No. 123\",\n  \"rt\": \"01\",\n  \"rw\": \"02\",\n  \"kode_pos\": \"12345\",\n  \"email\": \"info@koperasisejahtera.com\",\n  \"telepon\": \"021-1234567\",\n  \"website\": \"https://koperasisejahtera.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/koperasi",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"koperasi"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Koperasi List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/koperasi?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"koperasi"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Koperasi Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/koperasi/{{koperasi_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"koperasi",
+								"{{koperasi_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Anggota",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"user_id\": 1,\n  \"nomor_anggota\": \"A001\",\n  \"tanggal_bergabung\": \"2024-01-01\",\n  \"status_keanggotaan\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/koperasi/anggota",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"koperasi",
+								"anggota"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Product Management",
+			"item": [
+				{
+					"name": "Create Product Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"kode\": \"FOOD\",\n  \"nama\": \"Makanan\",\n  \"deskripsi\": \"Produk makanan dan cemilan\",\n  \"icon\": \"🍽️\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produk/kategori",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"produk",
+								"kategori"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Product Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produk/kategori",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"produk",
+								"kategori"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"kategori_produk_id\": 1,\n  \"satuan_produk_id\": 1,\n  \"nama_produk\": \"Beras Premium 5kg\",\n  \"deskripsi\": \"Beras putih premium kualitas terbaik\",\n  \"brand\": \"Sania\",\n  \"harga_beli\": 45000,\n  \"harga_jual\": 52000,\n  \"stok_minimal\": 10,\n  \"stok_maksimal\": 100\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produk",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"produk"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Products by Koperasi",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/produk/{{koperasi_id}}?page=1&limit=10&kategori_id=1&nama=beras",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"produk",
+								"{{koperasi_id}}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "kategori_id",
+									"value": "1"
+								},
+								{
+									"key": "nama",
+									"value": "beras"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Purchase Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"supplier_id\": 1,\n  \"tanggal_po\": \"2024-01-01T00:00:00Z\",\n  \"keterangan\": \"Purchase order untuk restok\",\n  \"items\": [\n    {\n      \"produk_id\": 1,\n      \"qty\": 50,\n      \"harga_satuan\": 45000,\n      \"keterangan\": \"Beras premium\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produk/purchase-order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"produk",
+								"purchase-order"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Sales Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"anggota_id\": 1,\n  \"tanggal_transaksi\": \"2024-01-01T10:00:00Z\",\n  \"metode_pembayaran\": \"cash\",\n  \"jumlah_bayar\": 60000,\n  \"kasir\": \"Admin\",\n  \"items\": [\n    {\n      \"produk_id\": 1,\n      \"qty\": 1,\n      \"harga_satuan\": 52000,\n      \"diskon_persen\": 0,\n      \"diskon_rupiah\": 0\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/produk/penjualan",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"produk",
+								"penjualan"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Financial Management",
+			"item": [
+				{
+					"name": "Create COA Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"kode_akun\": \"1001\",\n  \"nama_akun\": \"Kas\",\n  \"kategori_id\": 1,\n  \"tipe_normal\": \"debit\",\n  \"parent_id\": null,\n  \"level\": 1,\n  \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/financial/coa/akun",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial",
+								"coa",
+								"akun"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Journal Entry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"tanggal_jurnal\": \"2024-01-01\",\n  \"nomor_jurnal\": \"JU001\",\n  \"keterangan\": \"Penjualan produk\",\n  \"total_debit\": 52000,\n  \"total_kredit\": 52000,\n  \"details\": [\n    {\n      \"akun_id\": 1,\n      \"keterangan\": \"Kas dari penjualan\",\n      \"debit\": 52000,\n      \"kredit\": 0\n    },\n    {\n      \"akun_id\": 2,\n      \"keterangan\": \"Pendapatan penjualan\",\n      \"debit\": 0,\n      \"kredit\": 52000\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/financial/jurnal",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial",
+								"jurnal"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Neraca Saldo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/financial/{{koperasi_id}}/neraca-saldo?periode=2024-01",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"financial",
+								"{{koperasi_id}}",
+								"neraca-saldo"
+							],
+							"query": [
+								{
+									"key": "periode",
+									"value": "2024-01"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Simpan Pinjam",
+			"item": [
+				{
+					"name": "Create Savings Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"kode_produk\": \"SP001\",\n  \"nama_produk\": \"Simpanan Sukarela\",\n  \"jenis_produk\": \"simpanan\",\n  \"bunga_persen\": 3.5,\n  \"minimum_saldo\": 100000,\n  \"biaya_admin\": 5000,\n  \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/simpan-pinjam/produk",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"simpan-pinjam",
+								"produk"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"anggota_id\": 1,\n  \"produk_id\": 1,\n  \"nomor_rekening\": \"SP001001\",\n  \"saldo_awal\": 100000,\n  \"status_rekening\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/simpan-pinjam/rekening",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"simpan-pinjam",
+								"rekening"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rekening_id\": 1,\n  \"jenis_transaksi\": \"setor\",\n  \"nominal\": 50000,\n  \"keterangan\": \"Setoran bulanan\",\n  \"referensi\": \"REF001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/simpan-pinjam/transaksi",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"simpan-pinjam",
+								"transaksi"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "PPOB Services",
+			"item": [
+				{
+					"name": "Get PPOB Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/ppob/kategoris",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ppob",
+								"kategoris"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get PPOB Products by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/ppob/kategoris/{{kategori_id}}/produks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ppob",
+								"kategoris",
+								"{{kategori_id}}",
+								"produks"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create PPOB Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"produk_id\": 1,\n  \"customer_id\": \"081234567890\",\n  \"nominal\": 50000,\n  \"biaya_admin\": 2500,\n  \"total_bayar\": 52500\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/ppob/transactions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ppob",
+								"transactions"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Healthcare (Klinik)",
+			"item": [
+				{
+					"name": "Create Patient",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"koperasi_id\": 1,\n  \"nomor_rekam_medis\": \"RM001\",\n  \"nama_lengkap\": \"John Doe\",\n  \"nik\": \"1234567890123456\",\n  \"tanggal_lahir\": \"1990-01-01\",\n  \"jenis_kelamin\": \"laki-laki\",\n  \"alamat\": \"Jl. Sehat No. 123\",\n  \"telepon\": \"081234567890\",\n  \"pekerjaan\": \"Karyawan\",\n  \"golongan_darah\": \"O\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/klinik/pasien",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"klinik",
+								"pasien"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Visit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"pasien_id\": 1,\n  \"tenaga_medis_id\": 1,\n  \"tanggal_kunjungan\": \"2024-01-01T10:00:00Z\",\n  \"keluhan\": \"Demam dan batuk\",\n  \"diagnosis\": \"Flu\",\n  \"tindakan\": \"Pemberian obat dan istirahat\",\n  \"resep\": \"Paracetamol 3x1, OBH 3x1\",\n  \"biaya_konsultasi\": 50000,\n  \"total_biaya\": 75000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/klinik/kunjungan",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"klinik",
+								"kunjungan"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Reports & Analytics",
+			"item": [
+				{
+					"name": "Get Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/reports/{{koperasi_id}}/dashboard?period=monthly",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"{{koperasi_id}}",
+								"dashboard"
+							],
+							"query": [
+								{
+									"key": "period",
+									"value": "monthly"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Quick Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/reports/{{koperasi_id}}/quick-summary",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"{{koperasi_id}}",
+								"quick-summary"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Sales Report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/reports/{{koperasi_id}}/sales?start_date=2024-01-01&end_date=2024-01-31",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"{{koperasi_id}}",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "end_date",
+									"value": "2024-01-31"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Inventory Report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/reports/{{koperasi_id}}/inventory",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"{{koperasi_id}}",
+								"inventory"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Financial Report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/reports/{{koperasi_id}}/financial/balance_sheet?period=2024-01",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"{{koperasi_id}}",
+								"financial",
+								"balance_sheet"
+							],
+							"query": [
+								{
+									"key": "period",
+									"value": "2024-01"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Export Sales Report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/reports/{{koperasi_id}}/export/sales?format=excel&start_date=2024-01-01&end_date=2024-01-31",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"{{koperasi_id}}",
+								"export",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "excel"
+								},
+								{
+									"key": "start_date",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "end_date",
+									"value": "2024-01-31"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Regional Data",
+			"item": [
+				{
+					"name": "Get Provinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/wilayah/provinsi",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wilayah",
+								"provinsi"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Kabupaten by Province",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/wilayah/provinsi/{{provinsi_id}}/kabupaten",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wilayah",
+								"provinsi",
+								"{{provinsi_id}}",
+								"kabupaten"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Master Data",
+			"item": [
+				{
+					"name": "Get KBLI List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/master-data/kbli?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master-data",
+								"kbli"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Jenis Koperasi",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/master-data/jenis-koperasi",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master-data",
+								"jenis-koperasi"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Sequences",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/sequences",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"sequences"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Sequence Value",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tenant_id\": 1,\n  \"koperasi_id\": 1,\n  \"sequence_type\": \"produk\",\n  \"new_value\": 1000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/admin/sequences/update-value",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"sequences",
+								"update-value"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "your_jwt_token_here",
+			"type": "string"
+		},
+		{
+			"key": "koperasi_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "payment_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "kategori_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "provinsi_id",
+			"value": "31",
+			"type": "string"
+		}
+	]
+}

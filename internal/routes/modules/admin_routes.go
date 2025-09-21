@@ -2,8 +2,8 @@ package modules
 
 import (
 	"github.com/gin-gonic/gin"
-	"go_koperasi/internal/handlers"
-	"go_koperasi/internal/middleware"
+	"koperasi-merah-putih/internal/handlers"
+	"koperasi-merah-putih/internal/middleware"
 )
 
 type AdminRoutes struct {
