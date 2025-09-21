@@ -176,7 +176,7 @@ func (h *KoperasiHandler) GetAnggota(c *gin.Context) {
 }
 
 func (h *KoperasiHandler) GetAnggotaList(c *gin.Context) {
-	koperasiIDStr := c.Param("koperasi_id")
+	koperasiIDStr := c.Param("id")
 	koperasiID, err := strconv.ParseUint(koperasiIDStr, 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid koperasi ID"})

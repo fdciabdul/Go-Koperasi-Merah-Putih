@@ -19,6 +19,7 @@ type Routes struct {
 	financialRoutes  *modules.FinancialRoutes
 	masterDataRoutes *modules.MasterDataRoutes
 	adminRoutes      *modules.AdminRoutes
+	reportingRoutes  *modules.ReportingRoutes
 
 	// Middleware
 	auditMiddleware *middleware.AuditMiddleware
@@ -36,6 +37,7 @@ func NewRoutes(
 	masterDataHandler *handlers.MasterDataHandler,
 	sequenceHandler *handlers.SequenceHandler,
 	produkHandler *handlers.ProdukHandler,
+	reportingHandler *handlers.ReportingHandler,
 	rbacMiddleware *middleware.RBACMiddleware,
 	auditMiddleware *middleware.AuditMiddleware,
 ) *Routes {
@@ -50,6 +52,7 @@ func NewRoutes(
 		financialRoutes:  modules.NewFinancialRoutes(financialHandler, rbacMiddleware),
 		masterDataRoutes: modules.NewMasterDataRoutes(masterDataHandler, rbacMiddleware),
 		adminRoutes:      modules.NewAdminRoutes(sequenceHandler, rbacMiddleware),
+		reportingRoutes:  modules.NewReportingRoutes(reportingHandler, rbacMiddleware),
 		auditMiddleware:  auditMiddleware,
 	}
 }
@@ -75,4 +78,5 @@ func (r *Routes) SetupRoutes(router *gin.Engine) {
 	r.financialRoutes.SetupRoutes(api)
 	r.masterDataRoutes.SetupRoutes(api)
 	r.adminRoutes.SetupRoutes(api)
+	r.reportingRoutes.SetupRoutes(api)
 }

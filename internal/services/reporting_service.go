@@ -509,7 +509,7 @@ func (s *ReportingService) GenerateMemberReport(koperasiID uint64) (interface{},
 
 	activeCount := 0
 	for _, member := range members {
-		if member.StatusKeanggotaan == "active" {
+		if member.StatusAnggota == "aktif" {
 			activeCount++
 		}
 	}

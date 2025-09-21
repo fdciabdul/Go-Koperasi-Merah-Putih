@@ -31,7 +31,7 @@ func (r *KoperasiRoutes) SetupRoutes(router *gin.RouterGroup) {
 
 		// Anggota Management
 		koperasi.POST("/anggota", r.rbacMiddleware.AdminOnly(), r.koperasiHandler.CreateAnggota)
-		koperasi.GET("/:koperasi_id/anggota", r.koperasiHandler.GetAnggotaList)
+		koperasi.GET("/:id/anggota", r.koperasiHandler.GetAnggotaList)
 		koperasi.GET("/anggota/:id", r.koperasiHandler.GetAnggota)
 		koperasi.PUT("/anggota/:id/status", r.rbacMiddleware.AdminOnly(), r.koperasiHandler.UpdateAnggotaStatus)
 	}

@@ -15,7 +15,7 @@ import (
 type UserService struct {
 	userRepo         *postgresRepo.UserRepository
 	registrationRepo *postgresRepo.UserRegistrationRepository
-	koperasiRepo     *postgresRepo.KoperasiRepository
+	anggotaRepo      *postgresRepo.AnggotaKoperasiRepository
 	paymentService   *PaymentService
 	sequenceService  *SequenceService
 }
@@ -23,14 +23,14 @@ type UserService struct {
 func NewUserService(
 	userRepo *postgresRepo.UserRepository,
 	registrationRepo *postgresRepo.UserRegistrationRepository,
-	koperasiRepo *postgresRepo.KoperasiRepository,
+	anggotaRepo *postgresRepo.AnggotaKoperasiRepository,
 	paymentService *PaymentService,
 	sequenceService *SequenceService,
 ) *UserService {
 	return &UserService{
 		userRepo:         userRepo,
 		registrationRepo: registrationRepo,
-		koperasiRepo:     koperasiRepo,
+		anggotaRepo:      anggotaRepo,
 		paymentService:   paymentService,
 		sequenceService:  sequenceService,
 	}
@@ -158,7 +158,7 @@ func (s *UserService) ApproveRegistration(registrationID uint64, approvedBy uint
 	}
 
 	// Save anggota to database
-	if err := s.koperasiRepo.CreateAnggota(anggota); err != nil {
+	if err := s.anggotaRepo.Create(anggota); err != nil {
 		return fmt.Errorf("failed to create anggota: %v", err)
 	}
 

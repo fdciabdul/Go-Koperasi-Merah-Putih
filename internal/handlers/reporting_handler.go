@@ -292,19 +292,18 @@ func (h *ReportingHandler) ExportSalesReport(c *gin.Context) {
 		endDateStr = endDate.Format("2006-01-02")
 	}
 
-	startDate, err := time.Parse("2006-01-02", startDateStr)
-	if err != nil {
+	if _, err := time.Parse("2006-01-02", startDateStr); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid start_date format"})
 		return
 	}
 
-	endDate, err := time.Parse("2006-01-02", endDateStr)
-	if err != nil {
+	if _, err := time.Parse("2006-01-02", endDateStr); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid end_date format"})
 		return
 	}
 
 	// For now, return a success message
+	// TODO: Implement export functionality using startDate and endDate
 	// In production, this would generate and return actual file
 	c.JSON(http.StatusOK, gin.H{
 		"success": true,
@@ -422,13 +421,14 @@ func (h *ReportingHandler) GetQuickSummary(c *gin.Context) {
 // Real-time metrics
 func (h *ReportingHandler) GetRealTimeMetrics(c *gin.Context) {
 	koperasiIDStr := c.Param("koperasi_id")
-	koperasiID, err := strconv.ParseUint(koperasiIDStr, 10, 64)
+	_, err := strconv.ParseUint(koperasiIDStr, 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid koperasi ID format"})
 		return
 	}
 
 	// Real-time metrics (would come from live data)
+	// TODO: Implement using koperasiID
 	metrics := map[string]interface{}{
 		"timestamp": time.Now(),
 		"metrics": map[string]interface{}{

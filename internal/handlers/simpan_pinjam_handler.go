@@ -17,7 +17,7 @@ func NewSimpanPinjamHandler(simpanPinjamService *services.SimpanPinjamService) *
 }
 
 func (h *SimpanPinjamHandler) CreateProduk(c *gin.Context) {
-	var req services.CreateProdukRequest
+	var req services.CreateProdukSimpanPinjamRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

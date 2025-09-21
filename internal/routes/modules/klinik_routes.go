@@ -35,7 +35,7 @@ func (r *KlinikRoutes) SetupRoutes(router *gin.RouterGroup) {
 		// Kunjungan Management
 		klinik.POST("/kunjungan", r.klinikHandler.CreateKunjungan)
 		klinik.GET("/kunjungan/:id", r.klinikHandler.GetKunjungan)
-		klinik.GET("/pasien/:pasien_id/kunjungan", r.klinikHandler.GetKunjunganByPasien)
+		klinik.GET("/pasien/:id/kunjungan", r.klinikHandler.GetKunjunganByPasien)
 
 		// Obat Management
 		klinik.POST("/obat", r.rbacMiddleware.AdminOnly(), r.klinikHandler.CreateObat)
