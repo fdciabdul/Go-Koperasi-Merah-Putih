@@ -117,7 +117,7 @@ func (m *CacheMiddleware) RateLimit(requests int64, window time.Duration) gin.Ha
 		key := fmt.Sprintf("rate_limit:%s", clientID)
 
 		// Check current rate
-		allowed, count, err := m.cache.CheckRateLimit(key, requests)
+		allowed, _, err := m.cache.CheckRateLimit(key, requests)
 		if err != nil {
 			// If Redis is down, allow the request
 			c.Next()

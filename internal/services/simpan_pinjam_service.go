@@ -24,7 +24,7 @@ func NewSimpanPinjamService(
 	}
 }
 
-func (s *SimpanPinjamService) CreateProduk(req *CreateProdukRequest) (*postgres.ProdukSimpanPinjam, error) {
+func (s *SimpanPinjamService) CreateProduk(req *CreateProdukSimpanPinjamRequest) (*postgres.ProdukSimpanPinjam, error) {
 	produk := &postgres.ProdukSimpanPinjam{
 		KoperasiID:       req.KoperasiID,
 		KodeProduk:       req.KodeProduk,
@@ -229,7 +229,7 @@ func (s *SimpanPinjamService) calculateAngsuran(pokok, bunga float64, jangkaWakt
 	return angsuranPokok, angsuranBunga
 }
 
-type CreateProdukRequest struct {
+type CreateProdukSimpanPinjamRequest struct {
 	KoperasiID       uint64  `json:"koperasi_id" binding:"required"`
 	KodeProduk       string  `json:"kode_produk" binding:"required"`
 	NamaProduk       string  `json:"nama_produk" binding:"required"`

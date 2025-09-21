@@ -52,7 +52,7 @@ type UserRegistration struct {
 	KoperasiID           uint64     `gorm:"not null" json:"koperasi_id"`
 	NIK                  string     `gorm:"size:20;not null" json:"nik"`
 	NamaLengkap          string     `gorm:"size:255;not null" json:"nama_lengkap"`
-	JenisKelamin         string     `gorm:"type:enum('L','P');not null" json:"jenis_kelamin"`
+	JenisKelamin         string     `gorm:"type:varchar(1);not null" json:"jenis_kelamin"`
 	TempatLahir          string     `gorm:"size:100" json:"tempat_lahir"`
 	TanggalLahir         *time.Time `json:"tanggal_lahir"`
 	Alamat               string     `gorm:"type:text" json:"alamat"`
@@ -65,7 +65,7 @@ type UserRegistration struct {
 	PasswordHash         string     `gorm:"size:255;not null" json:"password_hash"`
 	SimpananPokokAmount  float64    `gorm:"type:decimal(15,2);not null" json:"simpanan_pokok_amount"`
 	PaymentID            uint64     `json:"payment_id"`
-	Status               string     `gorm:"type:enum('pending_payment','payment_verified','approved','rejected','expired');default:'pending_payment';index" json:"status"`
+	Status               string     `gorm:"type:varchar(20);default:'pending_payment';index" json:"status"`
 	VerificationToken    string     `gorm:"size:100" json:"verification_token"`
 	ApprovedBy           uint64     `json:"approved_by"`
 	ApprovedAt           *time.Time `json:"approved_at"`
@@ -85,7 +85,7 @@ type UserRegistration struct {
 type UserRegistrationLog struct {
 	ID             uint64    `gorm:"primaryKey;autoIncrement" json:"id"`
 	RegistrationID uint64    `gorm:"not null;index" json:"registration_id"`
-	Action         string    `gorm:"type:enum('created','payment_initiated','payment_completed','payment_failed','approved','rejected','expired');not null" json:"action"`
+	Action         string    `gorm:"type:varchar(20);not null" json:"action"`
 	Description    string    `gorm:"type:text" json:"description"`
 	Metadata       string    `gorm:"type:json" json:"metadata"`
 	CreatedAt      time.Time `gorm:"autoCreateTime" json:"created_at"`
@@ -120,7 +120,7 @@ type SimpananPokokTransaksi struct {
 	NomorTransaksi   string     `gorm:"size:50;not null" json:"nomor_transaksi"`
 	Jumlah           float64    `gorm:"type:decimal(15,2);not null" json:"jumlah"`
 	PaymentID        uint64     `json:"payment_id"`
-	Status           string     `gorm:"type:enum('pending','paid','cancelled');default:'pending';index" json:"status"`
+	Status           string     `gorm:"type:varchar(10);default:'pending';index" json:"status"`
 	TanggalTransaksi time.Time  `gorm:"default:CURRENT_TIMESTAMP" json:"tanggal_transaksi"`
 	TanggalLunas     *time.Time `json:"tanggal_lunas"`
 	JurnalID         uint64     `json:"jurnal_id"`

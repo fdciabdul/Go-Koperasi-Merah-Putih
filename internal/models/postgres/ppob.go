@@ -61,13 +61,13 @@ type PPOBTransaksi struct {
 	HargaBeli          float64    `gorm:"type:decimal(15,2);not null" json:"harga_beli"`
 	HargaJual          float64    `gorm:"type:decimal(15,2);not null" json:"harga_jual"`
 	FeeAgen            float64    `gorm:"type:decimal(15,2);default:0" json:"fee_agen"`
-	Status             string     `gorm:"type:enum('pending','success','failed','cancelled');default:'pending';index" json:"status"`
+	Status             string     `gorm:"type:varchar(20);default:'pending';index" json:"status"`
 	PesanResponse      string     `gorm:"type:text" json:"pesan_response"`
 	TanggalTransaksi   time.Time  `gorm:"default:CURRENT_TIMESTAMP;index" json:"tanggal_transaksi"`
 	TanggalSettlement  *time.Time `json:"tanggal_settlement"`
 	JurnalID           uint64     `json:"jurnal_id"`
 	PaymentID          uint64     `json:"payment_id"`
-	PaymentStatus      string     `gorm:"type:enum('pending','paid','failed');default:'pending';index" json:"payment_status"`
+	PaymentStatus      string     `gorm:"type:varchar(20);default:'pending';index" json:"payment_status"`
 	CustomerName       string     `gorm:"size:255" json:"customer_name"`
 	CustomerEmail      string     `gorm:"size:255" json:"customer_email"`
 	CustomerPhone      string     `gorm:"size:20" json:"customer_phone"`
@@ -87,9 +87,9 @@ type PPOBPaymentConfig struct {
 	AllowedPaymentMethods   string `gorm:"type:json" json:"allowed_payment_methods"`
 	DefaultPaymentMethodID  uint64 `json:"default_payment_method_id"`
 	AutoSettlement          bool   `gorm:"default:false" json:"auto_settlement"`
-	SettlementSchedule      string `gorm:"type:enum('immediate','daily','weekly','monthly');default:'daily'" json:"settlement_schedule"`
+	SettlementSchedule      string `gorm:"type:varchar(20);default:'daily'" json:"settlement_schedule"`
 	PPOBAdminFee            float64 `gorm:"type:decimal(15,2);default:0" json:"ppob_admin_fee"`
-	PPOBAdminFeeType        string `gorm:"type:enum('fixed','percentage');default:'fixed'" json:"ppob_admin_fee_type"`
+	PPOBAdminFeeType        string `gorm:"type:varchar(20);default:'fixed'" json:"ppob_admin_fee_type"`
 	IsActive                bool   `gorm:"default:true" json:"is_active"`
 
 	Koperasi              Koperasi       `gorm:"foreignKey:KoperasiID" json:"koperasi,omitempty"`
@@ -108,7 +108,7 @@ type PPOBSettlement struct {
 	TotalFeeAgen     float64    `gorm:"type:decimal(15,2);default:0" json:"total_fee_agen"`
 	TotalAdminFee    float64    `gorm:"type:decimal(15,2);default:0" json:"total_admin_fee"`
 	TotalSettlement  float64    `gorm:"type:decimal(15,2);default:0" json:"total_settlement"`
-	Status           string     `gorm:"type:enum('draft','processed','paid');default:'draft';index" json:"status"`
+	Status           string     `gorm:"type:varchar(20);default:'draft';index" json:"status"`
 	JurnalID         uint64     `json:"jurnal_id"`
 	ProcessedAt      *time.Time `json:"processed_at"`
 	ProcessedBy      uint64     `json:"processed_by"`

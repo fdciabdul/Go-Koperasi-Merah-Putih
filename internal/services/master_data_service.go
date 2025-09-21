@@ -26,7 +26,7 @@ func (s *MasterDataService) CreateKBLI(req *CreateKBLIRequest) (*postgres.KBLI, 
 		Nama:        req.Nama,
 		Kategori:    req.Kategori,
 		Deskripsi:   req.Deskripsi,
-		IsAktif:     true,
+		IsActive:    true,
 	}
 
 	err := s.masterDataRepo.CreateKBLI(kbli)
@@ -55,7 +55,7 @@ func (s *MasterDataService) UpdateKBLI(id uint64, req *UpdateKBLIRequest) (*post
 	kbli.Nama = req.Nama
 	kbli.Kategori = req.Kategori
 	kbli.Deskripsi = req.Deskripsi
-	kbli.IsAktif = req.IsAktif
+	kbli.IsActive = req.IsAktif
 
 	err = s.masterDataRepo.UpdateKBLI(kbli)
 	if err != nil {
@@ -75,7 +75,7 @@ func (s *MasterDataService) CreateJenisKoperasi(req *CreateJenisKoperasiRequest)
 		Kode:      req.Kode,
 		Nama:      req.Nama,
 		Deskripsi: req.Deskripsi,
-		IsAktif:   true,
+		IsActive:  true,
 	}
 
 	err := s.masterDataRepo.CreateJenisKoperasi(jenis)
@@ -102,7 +102,7 @@ func (s *MasterDataService) UpdateJenisKoperasi(id uint64, req *UpdateJenisKoper
 
 	jenis.Nama = req.Nama
 	jenis.Deskripsi = req.Deskripsi
-	jenis.IsAktif = req.IsAktif
+	jenis.IsActive = req.IsAktif
 
 	err = s.masterDataRepo.UpdateJenisKoperasi(jenis)
 	if err != nil {
@@ -122,7 +122,7 @@ func (s *MasterDataService) CreateBentukKoperasi(req *CreateBentukKoperasiReques
 		Kode:      req.Kode,
 		Nama:      req.Nama,
 		Deskripsi: req.Deskripsi,
-		IsAktif:   true,
+		IsActive:  true,
 	}
 
 	err := s.masterDataRepo.CreateBentukKoperasi(bentuk)
@@ -149,7 +149,7 @@ func (s *MasterDataService) UpdateBentukKoperasi(id uint64, req *UpdateBentukKop
 
 	bentuk.Nama = req.Nama
 	bentuk.Deskripsi = req.Deskripsi
-	bentuk.IsAktif = req.IsAktif
+	bentuk.IsActive = req.IsAktif
 
 	err = s.masterDataRepo.UpdateBentukKoperasi(bentuk)
 	if err != nil {

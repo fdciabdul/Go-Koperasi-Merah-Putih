@@ -112,6 +112,17 @@ func (r *PPOBRepository) MarkTransaksiSettled(transaksiIDs []uint64) error {
 		Update("tanggal_settlement", &now).Error
 }
 
+func (r *PPOBRepository) GetTransaksiByPaymentID(paymentID uint64) (*postgres.PPOBTransaksi, error) {
+	var transaksi postgres.PPOBTransaksi
+	err := r.db.Where("payment_id = ?", paymentID).
+		Preload("Koperasi").Preload("Anggota").Preload("Produk").
+		Preload("Payment").First(&transaksi).Error
+	if err != nil {
+		return nil, err
+	}
+	return &transaksi, nil
+}
+
 func (r *PPOBRepository) GetPaymentConfig(koperasiID uint64) (*postgres.PPOBPaymentConfig, error) {
 	var config postgres.PPOBPaymentConfig
 	err := r.db.Where("koperasi_id = ?", koperasiID).First(&config).Error

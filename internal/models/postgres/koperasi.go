@@ -44,6 +44,7 @@ type KBLI struct {
 	Kode      string         `gorm:"uniqueIndex;size:10;not null" json:"kode"`
 	Nama      string         `gorm:"type:text;not null" json:"nama"`
 	Kategori  string         `gorm:"size:100" json:"kategori"`
+	Deskripsi string         `gorm:"type:text" json:"deskripsi"`
 	IsActive  bool           `gorm:"default:true" json:"is_active"`
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted_at"`
 

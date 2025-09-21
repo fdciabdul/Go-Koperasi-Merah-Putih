@@ -6,28 +6,31 @@ import (
 
 	"koperasi-merah-putih/internal/cache"
 	"koperasi-merah-putih/internal/models/postgres"
-	"koperasi-merah-putih/internal/repository"
+	repo "koperasi-merah-putih/internal/repository/postgres"
 )
 
 type ReportingService struct {
-	koperasiRepo     *repository.KoperasiRepository
-	produkRepo       *repository.ProdukRepository
-	simpanPinjamRepo *repository.SimpanPinjamRepository
-	financialRepo    *repository.FinancialRepository
-	klinikRepo       *repository.KlinikRepository
+	koperasiRepo     *repo.KoperasiRepository
+	anggotaRepo      *repo.AnggotaKoperasiRepository
+	produkRepo       *repo.ProdukRepository
+	simpanPinjamRepo *repo.SimpanPinjamRepository
+	financialRepo    *repo.FinancialRepository
+	klinikRepo       *repo.KlinikRepository
 	cache            *cache.RedisCache
 }
 
 func NewReportingService(
-	koperasiRepo *repository.KoperasiRepository,
-	produkRepo *repository.ProdukRepository,
-	simpanPinjamRepo *repository.SimpanPinjamRepository,
-	financialRepo *repository.FinancialRepository,
-	klinikRepo *repository.KlinikRepository,
+	koperasiRepo *repo.KoperasiRepository,
+	anggotaRepo *repo.AnggotaKoperasiRepository,
+	produkRepo *repo.ProdukRepository,
+	simpanPinjamRepo *repo.SimpanPinjamRepository,
+	financialRepo *repo.FinancialRepository,
+	klinikRepo *repo.KlinikRepository,
 	cache *cache.RedisCache,
 ) *ReportingService {
 	return &ReportingService{
 		koperasiRepo:     koperasiRepo,
+		anggotaRepo:      anggotaRepo,
 		produkRepo:       produkRepo,
 		simpanPinjamRepo: simpanPinjamRepo,
 		financialRepo:    financialRepo,
@@ -488,7 +491,9 @@ func (s *ReportingService) GenerateFinancialReport(koperasiID uint64, reportType
 	case "balance_sheet":
 		return s.financialRepo.GetNeraca(koperasiID, parsePeriod(period))
 	case "profit_loss":
-		return s.financialRepo.GetLabaRugi(koperasiID, parsePeriod(period))
+		startDate := parsePeriod(period)
+		endDate := startDate.AddDate(0, 1, -1) // End of month
+		return s.financialRepo.GetLabaRugi(koperasiID, startDate, endDate)
 	case "cash_flow":
 		return s.generateCashFlowReport(koperasiID, period)
 	default:
@@ -497,7 +502,7 @@ func (s *ReportingService) GenerateFinancialReport(koperasiID uint64, reportType
 }
 
 func (s *ReportingService) GenerateMemberReport(koperasiID uint64) (interface{}, error) {
-	members, err := s.koperasiRepo.GetAnggotaList(koperasiID, 10000, 0)
+	members, err := s.anggotaRepo.GetByKoperasiID(koperasiID, 10000, 0)
 	if err != nil {
 		return nil, err
 	}

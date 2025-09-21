@@ -2,7 +2,6 @@ package services
 
 import (
 	"fmt"
-	"time"
 
 	"koperasi-merah-putih/internal/models/postgres"
 	postgresRepo "koperasi-merah-putih/internal/repository/postgres"
@@ -20,7 +19,7 @@ func (s *SequenceService) GetNextNumber(tenantID, koperasiID uint64, sequenceTyp
 	return s.sequenceRepo.GetNextSequenceNumber(tenantID, koperasiID, sequenceType)
 }
 
-func (s *SequenceService) GetSequenceList(tenantID uint64, koperasiID *uint64) ([]postgres.Sequence, error) {
+func (s *SequenceService) GetSequenceList(tenantID uint64, koperasiID *uint64) ([]postgres.SequenceNumber, error) {
 	return s.sequenceRepo.GetSequenceList(tenantID, koperasiID)
 }
 

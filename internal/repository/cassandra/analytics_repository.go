@@ -1,8 +1,6 @@
 package cassandra
 
 import (
-	"time"
-
 	"github.com/gocql/gocql"
 	"koperasi-merah-putih/internal/models/cassandra"
 )

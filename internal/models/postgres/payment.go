@@ -8,13 +8,13 @@ type PaymentProvider struct {
 	ID            uint64    `gorm:"primaryKey;autoIncrement" json:"id"`
 	Kode          string    `gorm:"uniqueIndex;size:50;not null" json:"kode"`
 	Nama          string    `gorm:"size:255;not null" json:"nama"`
-	Jenis         string    `gorm:"type:enum('bank_transfer','e_wallet','virtual_account','qris','credit_card');not null;index" json:"jenis"`
+	Jenis         string    `gorm:"type:varchar(20);not null;index" json:"jenis"`
 	BaseURL       string    `gorm:"size:500" json:"base_url"`
 	MerchantID    string    `gorm:"size:255" json:"merchant_id"`
 	APIKey        string    `gorm:"size:500" json:"api_key"`
 	SecretKey     string    `gorm:"size:500" json:"secret_key"`
 	CallbackURL   string    `gorm:"size:500" json:"callback_url"`
-	FeeType       string    `gorm:"type:enum('fixed','percentage','both');default:'percentage'" json:"fee_type"`
+	FeeType       string    `gorm:"type:varchar(20);default:'percentage'" json:"fee_type"`
 	FeeAmount     float64   `gorm:"type:decimal(15,2);default:0" json:"fee_amount"`
 	FeePercentage float64   `gorm:"type:decimal(5,2);default:0" json:"fee_percentage"`
 	IsActive      bool      `gorm:"default:true" json:"is_active"`
@@ -29,7 +29,7 @@ type PaymentMethod struct {
 	ProviderID     uint64  `gorm:"not null" json:"provider_id"`
 	Kode           string  `gorm:"size:50;not null" json:"kode"`
 	Nama           string  `gorm:"size:255;not null" json:"nama"`
-	Jenis          string  `gorm:"type:enum('bank_transfer','e_wallet','virtual_account','qris','credit_card');not null;index" json:"jenis"`
+	Jenis          string  `gorm:"type:varchar(20);not null;index" json:"jenis"`
 	BankCode       string  `gorm:"size:10" json:"bank_code"`
 	WalletCode     string  `gorm:"size:20" json:"wallet_code"`
 	LogoURL        string  `gorm:"size:500" json:"logo_url"`
@@ -58,12 +58,12 @@ type PaymentTransaction struct {
 	CustomerEmail    string     `gorm:"size:255" json:"customer_email"`
 	CustomerPhone    string     `gorm:"size:20" json:"customer_phone"`
 	Description      string     `gorm:"type:text" json:"description"`
-	Status           string     `gorm:"type:enum('pending','paid','expired','failed','cancelled');default:'pending';index" json:"status"`
+	Status           string     `gorm:"type:varchar(20);default:'pending';index" json:"status"`
 	PaymentDate      *time.Time `json:"payment_date"`
 	ExpiredDate      *time.Time `json:"expired_date"`
 	GatewayResponse  string     `gorm:"type:json" json:"gateway_response"`
 	CallbackData     string     `gorm:"type:json" json:"callback_data"`
-	TransactionType  string     `gorm:"type:enum('simpanan_pokok','ppob','simpanan','pinjaman','klinik','other');not null" json:"transaction_type"`
+	TransactionType  string     `gorm:"type:varchar(20);not null" json:"transaction_type"`
 	ReferenceID      uint64     `json:"reference_id"`
 	ReferenceTable   string     `gorm:"size:100" json:"reference_table"`
 	CreatedAt        time.Time  `gorm:"autoCreateTime;index" json:"created_at"`
@@ -82,7 +82,7 @@ type PaymentTransaction struct {
 type PaymentCallback struct {
 	ID            uint64     `gorm:"primaryKey;autoIncrement" json:"id"`
 	PaymentID     uint64     `gorm:"not null;index" json:"payment_id"`
-	CallbackType  string     `gorm:"type:enum('notification','return','webhook');not null" json:"callback_type"`
+	CallbackType  string     `gorm:"type:varchar(20);not null" json:"callback_type"`
 	RawData       string     `gorm:"type:text" json:"raw_data"`
 	ProcessedData string     `gorm:"type:json" json:"processed_data"`
 	Signature     string     `gorm:"size:500" json:"signature"`

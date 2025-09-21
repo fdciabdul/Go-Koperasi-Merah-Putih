@@ -13,18 +13,18 @@ func NewWilayahService(wilayahRepo *postgresRepo.WilayahRepository) *WilayahServ
 	return &WilayahService{wilayahRepo: wilayahRepo}
 }
 
-func (s *WilayahService) GetProvinsiList() ([]postgres.Provinsi, error) {
+func (s *WilayahService) GetProvinsiList() ([]postgres.WilayahProvinsi, error) {
 	return s.wilayahRepo.GetProvinsiList()
 }
 
-func (s *WilayahService) GetKabupatenByProvinsi(provinsiID uint64) ([]postgres.Kabupaten, error) {
-	return s.wilayahRepo.GetKabupatenByProvinsi(provinsiID)
+func (s *WilayahService) GetKabupatenByProvinsi(provinsiID uint64) ([]postgres.WilayahKabupaten, error) {
+	return s.wilayahRepo.GetKabupatenByProvinsiID(provinsiID)
 }
 
-func (s *WilayahService) GetKecamatanByKabupaten(kabupatenID uint64) ([]postgres.Kecamatan, error) {
-	return s.wilayahRepo.GetKecamatanByKabupaten(kabupatenID)
+func (s *WilayahService) GetKecamatanByKabupaten(kabupatenID uint64) ([]postgres.WilayahKecamatan, error) {
+	return s.wilayahRepo.GetKecamatanByKabupatenID(kabupatenID)
 }
 
-func (s *WilayahService) GetKelurahanByKecamatan(kecamatanID uint64) ([]postgres.Kelurahan, error) {
-	return s.wilayahRepo.GetKelurahanByKecamatan(kecamatanID)
+func (s *WilayahService) GetKelurahanByKecamatan(kecamatanID uint64) ([]postgres.WilayahKelurahan, error) {
+	return s.wilayahRepo.GetKelurahanByKecamatanID(kecamatanID)
 }

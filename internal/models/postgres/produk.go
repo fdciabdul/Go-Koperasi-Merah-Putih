@@ -138,7 +138,7 @@ type PurchaseOrder struct {
 	BiayaKirim       float64        `gorm:"type:decimal(15,2);default:0" json:"biaya_kirim"`
 	Diskon           float64        `gorm:"type:decimal(15,2);default:0" json:"diskon"`
 	GrandTotal       float64        `gorm:"type:decimal(15,2);default:0" json:"grand_total"`
-	Status           string         `gorm:"type:enum('draft','waiting_approval','approved','sent','partial_received','received','cancelled');default:'draft'" json:"status"`
+	Status           string         `gorm:"type:varchar(20);default:'draft'" json:"status"`
 	Keterangan       string         `gorm:"type:text" json:"keterangan"`
 	ApprovedBy       uint64         `json:"approved_by"`
 	ApprovedAt       *time.Time     `json:"approved_at"`
@@ -183,7 +183,7 @@ type PembelianHeader struct {
 	BiayaKirim       float64        `gorm:"type:decimal(15,2);default:0" json:"biaya_kirim"`
 	Diskon           float64        `gorm:"type:decimal(15,2);default:0" json:"diskon"`
 	GrandTotal       float64        `gorm:"type:decimal(15,2);default:0" json:"grand_total"`
-	StatusPembayaran string         `gorm:"type:enum('unpaid','partial','paid','overdue');default:'unpaid'" json:"status_pembayaran"`
+	StatusPembayaran string         `gorm:"type:varchar(20);default:'unpaid'" json:"status_pembayaran"`
 	TotalBayar       float64        `gorm:"type:decimal(15,2);default:0" json:"total_bayar"`
 	Keterangan       string         `gorm:"type:text" json:"keterangan"`
 	CreatedAt        time.Time      `gorm:"autoCreateTime" json:"created_at"`
@@ -220,7 +220,7 @@ type PembayaranPembelian struct {
 	PembelianHeaderID uint64         `gorm:"not null" json:"pembelian_header_id"`
 	TanggalBayar      time.Time      `json:"tanggal_bayar"`
 	JumlahBayar       float64        `gorm:"type:decimal(15,2);not null" json:"jumlah_bayar"`
-	MetodePembayaran  string         `gorm:"type:enum('cash','transfer','giro','other');default:'cash'" json:"metode_pembayaran"`
+	MetodePembayaran  string         `gorm:"type:varchar(20);default:'cash'" json:"metode_pembayaran"`
 	NomorReferensi    string         `gorm:"size:100" json:"nomor_referensi"`
 	Keterangan        string         `gorm:"type:text" json:"keterangan"`
 	CreatedAt         time.Time      `gorm:"autoCreateTime" json:"created_at"`
@@ -242,8 +242,8 @@ type PenjualanHeader struct {
 	TotalPajak       float64        `gorm:"type:decimal(15,2);default:0" json:"total_pajak"`
 	Diskon           float64        `gorm:"type:decimal(15,2);default:0" json:"diskon"`
 	GrandTotal       float64        `gorm:"type:decimal(15,2);default:0" json:"grand_total"`
-	MetodePembayaran string         `gorm:"type:enum('cash','debit','credit','transfer','simpanan');default:'cash'" json:"metode_pembayaran"`
-	StatusPembayaran string         `gorm:"type:enum('pending','paid','failed','refund');default:'pending'" json:"status_pembayaran"`
+	MetodePembayaran string         `gorm:"type:varchar(20);default:'cash'" json:"metode_pembayaran"`
+	StatusPembayaran string         `gorm:"type:varchar(20);default:'pending'" json:"status_pembayaran"`
 	JumlahBayar      float64        `gorm:"type:decimal(15,2);default:0" json:"jumlah_bayar"`
 	JumlahKembalian  float64        `gorm:"type:decimal(15,2);default:0" json:"jumlah_kembalian"`
 	Kasir            string         `gorm:"size:100" json:"kasir"`
@@ -279,8 +279,8 @@ type StokMovement struct {
 	ID             uint64         `gorm:"primaryKey;autoIncrement" json:"id"`
 	KoperasiID     uint64         `gorm:"not null;index" json:"koperasi_id"`
 	ProdukID       uint64         `gorm:"not null" json:"produk_id"`
-	TipeMovement   string         `gorm:"type:enum('in','out','adjustment','transfer');not null" json:"tipe_movement"`
-	ReferensiTipe  string         `gorm:"type:enum('pembelian','penjualan','adjustment','transfer','expired','damaged');not null" json:"referensi_tipe"`
+	TipeMovement   string         `gorm:"type:varchar(20);not null" json:"tipe_movement"`
+	ReferensiTipe  string         `gorm:"type:varchar(20);not null" json:"referensi_tipe"`
 	ReferensiID    uint64         `json:"referensi_id"`
 	TanggalMovement time.Time     `json:"tanggal_movement"`
 	QtyBefore      int            `gorm:"not null" json:"qty_before"`
@@ -301,7 +301,7 @@ type ProdukDiskon struct {
 	ID            uint64         `gorm:"primaryKey;autoIncrement" json:"id"`
 	ProdukID      uint64         `gorm:"not null" json:"produk_id"`
 	NamaDiskon    string         `gorm:"size:100;not null" json:"nama_diskon"`
-	TipeDiskon    string         `gorm:"type:enum('percentage','fixed');default:'percentage'" json:"tipe_diskon"`
+	TipeDiskon    string         `gorm:"type:varchar(20);default:'percentage'" json:"tipe_diskon"`
 	NilaiDiskon   float64        `gorm:"type:decimal(15,2);not null" json:"nilai_diskon"`
 	TanggalMulai  time.Time      `json:"tanggal_mulai"`
 	TanggalSelesai time.Time     `json:"tanggal_selesai"`

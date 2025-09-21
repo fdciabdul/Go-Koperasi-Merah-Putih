@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"koperasi-merah-putih/internal/repository"
+	"koperasi-merah-putih/internal/repository/postgres"
 	"koperasi-merah-putih/internal/services"
 
 	"github.com/gin-gonic/gin"
@@ -235,7 +235,7 @@ func (h *ProdukHandler) GetProduksByKoperasi(c *gin.Context) {
 		limit = 10
 	}
 
-	filters := repository.ProdukFilters{
+	filters := postgres.ProdukFilters{
 		Nama:  nama,
 		Brand: brand,
 	}

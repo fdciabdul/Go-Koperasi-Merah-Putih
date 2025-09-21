@@ -6,15 +6,15 @@ import (
 	"time"
 
 	"koperasi-merah-putih/internal/models/postgres"
-	"koperasi-merah-putih/internal/repository"
+	repo "koperasi-merah-putih/internal/repository/postgres"
 )
 
 type ProdukService struct {
-	produkRepo    *repository.ProdukRepository
-	sequenceRepo  *repository.SequenceRepository
+	produkRepo    *repo.ProdukRepository
+	sequenceRepo  *repo.SequenceRepository
 }
 
-func NewProdukService(produkRepo *repository.ProdukRepository, sequenceRepo *repository.SequenceRepository) *ProdukService {
+func NewProdukService(produkRepo *repo.ProdukRepository, sequenceRepo *repo.SequenceRepository) *ProdukService {
 	return &ProdukService{
 		produkRepo:   produkRepo,
 		sequenceRepo: sequenceRepo,
@@ -225,7 +225,7 @@ func (s *ProdukService) GetSuppliersByKoperasi(koperasiID uint64, page, limit in
 
 // Produk Services
 func (s *ProdukService) CreateProduk(req *CreateProdukRequest) (*postgres.Produk, error) {
-	sequence, err := s.sequenceRepo.GetNextNumber(1, req.KoperasiID, "produk")
+	sequence, err := s.sequenceRepo.GetNextSequenceNumber(1, req.KoperasiID, "produk")
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate product code: %v", err)
 	}
@@ -277,7 +277,7 @@ func (s *ProdukService) GetProdukByBarcode(barcode string) (*postgres.Produk, er
 	return s.produkRepo.GetProdukByBarcode(barcode)
 }
 
-func (s *ProdukService) GetProduksByKoperasi(koperasiID uint64, filters repository.ProdukFilters, page, limit int) ([]postgres.Produk, error) {
+func (s *ProdukService) GetProduksByKoperasi(koperasiID uint64, filters repo.ProdukFilters, page, limit int) ([]postgres.Produk, error) {
 	if page < 1 {
 		page = 1
 	}
@@ -290,7 +290,7 @@ func (s *ProdukService) GetProduksByKoperasi(koperasiID uint64, filters reposito
 }
 
 func (s *ProdukService) GenerateBarcode(produkID uint64) (string, error) {
-	sequence, err := s.sequenceRepo.GetNextNumber(1, 0, "barcode")
+	sequence, err := s.sequenceRepo.GetNextSequenceNumber(1, 0, "barcode")
 	if err != nil {
 		return "", fmt.Errorf("failed to generate barcode: %v", err)
 	}
@@ -315,7 +315,7 @@ func (s *ProdukService) calculateCheckDigit(code string) int {
 
 // Purchase Order Services
 func (s *ProdukService) CreatePurchaseOrder(req *CreatePurchaseOrderRequest) (*postgres.PurchaseOrder, error) {
-	sequence, err := s.sequenceRepo.GetNextNumber(1, req.KoperasiID, "purchase_order")
+	sequence, err := s.sequenceRepo.GetNextSequenceNumber(1, req.KoperasiID, "purchase_order")
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate PO number: %v", err)
 	}
@@ -427,7 +427,7 @@ func (s *ProdukService) CreatePembelian(req *CreatePembelianRequest) (*postgres.
 
 // Penjualan Services
 func (s *ProdukService) CreatePenjualan(req *CreatePenjualanRequest) (*postgres.PenjualanHeader, error) {
-	sequence, err := s.sequenceRepo.GetNextNumber(1, req.KoperasiID, "penjualan")
+	sequence, err := s.sequenceRepo.GetNextSequenceNumber(1, req.KoperasiID, "penjualan")
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate transaction number: %v", err)
 	}
