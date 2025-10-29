@@ -19,6 +19,7 @@ func NewAuthRoutes(userHandler *handlers.UserHandler, paymentHandler *handlers.P
 }
 
 func (r *AuthRoutes) SetupPublicRoutes(router *gin.RouterGroup) {
+	router.POST("/auth/login", r.userHandler.Login)
 	router.POST("/users/register", r.userHandler.RegisterUser)
 	router.POST("/payments/midtrans/callback", r.paymentHandler.HandleMidtransCallback)
 	router.POST("/payments/xendit/callback", r.paymentHandler.HandleXenditCallback)

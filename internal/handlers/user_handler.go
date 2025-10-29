@@ -16,6 +16,25 @@ func NewUserHandler(userService *services.UserService) *UserHandler {
 	return &UserHandler{userService: userService}
 }
 
+func (h *UserHandler) Login(c *gin.Context) {
+	var req services.LoginRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	response, err := h.userService.Login(&req)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Login successful",
+		"data":    response,
+	})
+}
+
 func (h *UserHandler) RegisterUser(c *gin.Context) {
 	var req services.UserRegistrationRequest
 	if err := c.ShouldBindJSON(&req); err != nil {

@@ -36,6 +36,49 @@ func NewUserService(
 	}
 }
 
+type LoginRequest struct {
+	Email    string `json:"email" binding:"required,email"`
+	Password string `json:"password" binding:"required,min=6"`
+}
+
+type LoginResponse struct {
+	Token     string         `json:"token"`
+	User      *postgres.User `json:"user"`
+	ExpiresAt time.Time      `json:"expires_at"`
+}
+
+func (s *UserService) Login(req *LoginRequest) (*LoginResponse, error) {
+	// Find user by email
+	user, err := s.userRepo.GetByEmail(req.Email)
+	if err != nil {
+		return nil, errors.New("invalid email or password")
+	}
+
+	// Check if user is active
+	if !user.IsActive {
+		return nil, errors.New("account is not active")
+	}
+
+	// Verify password
+	err = bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password))
+	if err != nil {
+		return nil, errors.New("invalid email or password")
+	}
+
+	// Generate JWT token
+	expiresAt := time.Now().Add(24 * time.Hour)
+	token, err := GenerateJWT(user.ID, user.TenantID, user.Role, expiresAt)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate token: %v", err)
+	}
+
+	return &LoginResponse{
+		Token:     token,
+		User:      user,
+		ExpiresAt: expiresAt,
+	}, nil
+}
+
 func (s *UserService) RegisterUser(req *UserRegistrationRequest) (*postgres.UserRegistration, error) {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
