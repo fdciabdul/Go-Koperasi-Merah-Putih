@@ -26,19 +26,22 @@ func main() {
 	fmt.Println("Starting seeder...")
 
 	// Run seeders in order
-	seedProvinsi(db)
-	seedKabupaten(db)
-	seedKecamatan(db)
-	seedKelurahan(db)
+	// Seed Wilayah from CSV (Provinsi, Kabupaten, Kecamatan, Kelurahan)
+	seedWilayahFromCSV(db)
+
 	seedKBLI(db)
 	seedJenisKoperasi(db)
 	seedBentukKoperasi(db)
-	seedCOAKategori(db)
+	seedStatusKoperasi(db)
 	seedTenants(db)
 	seedUsers(db)
 	seedKoperasi(db)
 	seedAnggotaKoperasi(db)
-	seedCOAAkun(db)
+
+	// Seed COA and Jurnal from CSV
+	seedCOAFromCSV(db)
+	seedJurnalFromCSV(db)
+
 	seedSimpanPinjamProduk(db)
 	seedSimpanPinjamRekening(db)
 	seedSimpanPinjamTransaksi(db)
@@ -46,8 +49,8 @@ func main() {
 	seedKlinikPasien(db)
 	seedKlinikObat(db)
 	seedKlinikKunjungan(db)
-	seedJurnalUmum(db)
 	seedPPOBKategori(db)
+	seedPPOBProvider(db)
 	seedPPOBProduk(db)
 	seedKategoriProduk(db)
 	seedSatuanProduk(db)
@@ -56,68 +59,6 @@ func main() {
 	seedSequences(db)
 
 	fmt.Println("Seeder completed successfully!")
-}
-
-func seedProvinsi(db *gorm.DB) {
-	provinsis := []postgres.WilayahProvinsi{
-		{ID: 11, Kode: "11", Nama: "ACEH"},
-		{ID: 12, Kode: "12", Nama: "SUMATERA UTARA"},
-		{ID: 31, Kode: "31", Nama: "DKI JAKARTA"},
-		{ID: 32, Kode: "32", Nama: "JAWA BARAT"},
-		{ID: 33, Kode: "33", Nama: "JAWA TENGAH"},
-		{ID: 34, Kode: "34", Nama: "DI YOGYAKARTA"},
-		{ID: 35, Kode: "35", Nama: "JAWA TIMUR"},
-	}
-
-	for _, provinsi := range provinsis {
-		db.FirstOrCreate(&provinsi, postgres.WilayahProvinsi{ID: provinsi.ID})
-	}
-	fmt.Println("✓ Seeded Provinsi")
-}
-
-func seedKabupaten(db *gorm.DB) {
-	kabupatens := []postgres.WilayahKabupaten{
-		{ID: 3171, ProvinsiID: 31, Kode: "3171", Nama: "KEPULAUAN SERIBU"},
-		{ID: 3201, ProvinsiID: 32, Kode: "3201", Nama: "BOGOR"},
-		{ID: 3202, ProvinsiID: 32, Kode: "3202", Nama: "SUKABUMI"},
-		{ID: 3203, ProvinsiID: 32, Kode: "3203", Nama: "CIANJUR"},
-		{ID: 3204, ProvinsiID: 32, Kode: "3204", Nama: "BANDUNG"},
-	}
-
-	for _, kabupaten := range kabupatens {
-		db.FirstOrCreate(&kabupaten, postgres.WilayahKabupaten{ID: kabupaten.ID})
-	}
-	fmt.Println("✓ Seeded Kabupaten")
-}
-
-func seedKecamatan(db *gorm.DB) {
-	kecamatans := []postgres.WilayahKecamatan{
-		{ID: 320101, KabupatenID: 3201, Kode: "320101", Nama: "NANGGUNG"},
-		{ID: 320102, KabupatenID: 3201, Kode: "320102", Nama: "LEUWILIANG"},
-		{ID: 320103, KabupatenID: 3201, Kode: "320103", Nama: "LEUWISADENG"},
-		{ID: 320104, KabupatenID: 3201, Kode: "320104", Nama: "PAMIJAHAN"},
-		{ID: 320105, KabupatenID: 3201, Kode: "320105", Nama: "CIBUNGBULANG"},
-	}
-
-	for _, kecamatan := range kecamatans {
-		db.FirstOrCreate(&kecamatan, postgres.WilayahKecamatan{ID: kecamatan.ID})
-	}
-	fmt.Println("✓ Seeded Kecamatan")
-}
-
-func seedKelurahan(db *gorm.DB) {
-	kelurahans := []postgres.WilayahKelurahan{
-		{ID: 3201011001, KecamatanID: 320101, Kode: "3201011001", Nama: "NANGGUNG"},
-		{ID: 3201011002, KecamatanID: 320101, Kode: "3201011002", Nama: "PARAKANMUNCANG"},
-		{ID: 3201011003, KecamatanID: 320101, Kode: "3201011003", Nama: "CURUGBITUNG"},
-		{ID: 3201011004, KecamatanID: 320101, Kode: "3201011004", Nama: "BANTARJAYA"},
-		{ID: 3201011005, KecamatanID: 320101, Kode: "3201011005", Nama: "HAMBARO"},
-	}
-
-	for _, kelurahan := range kelurahans {
-		db.FirstOrCreate(&kelurahan, postgres.WilayahKelurahan{ID: kelurahan.ID})
-	}
-	fmt.Println("✓ Seeded Kelurahan")
 }
 
 func seedKBLI(db *gorm.DB) {
@@ -160,13 +101,26 @@ func seedBentukKoperasi(db *gorm.DB) {
 	fmt.Println("✓ Seeded Bentuk Koperasi")
 }
 
+func seedStatusKoperasi(db *gorm.DB) {
+	statuses := []postgres.StatusKoperasi{
+		{Kode: "AKTIF", Nama: "Aktif", Deskripsi: "Koperasi yang masih beroperasi", IsActive: true},
+		{Kode: "NON_AKTIF", Nama: "Non-Aktif", Deskripsi: "Koperasi yang tidak beroperasi sementara", IsActive: true},
+		{Kode: "DIBUBARKAN", Nama: "Dibubarkan", Deskripsi: "Koperasi yang sudah dibubarkan", IsActive: true},
+	}
+
+	for _, status := range statuses {
+		db.FirstOrCreate(&status, postgres.StatusKoperasi{Kode: status.Kode})
+	}
+	fmt.Println("✓ Seeded Status Koperasi")
+}
+
 func seedCOAKategori(db *gorm.DB) {
 	kategoris := []postgres.COAKategori{
-		{Nama: "ASET", Tipe: "aset", Urutan: 1, IsActive: true},
-		{Nama: "KEWAJIBAN", Tipe: "kewajiban", Urutan: 2, IsActive: true},
-		{Nama: "EKUITAS", Tipe: "ekuitas", Urutan: 3, IsActive: true},
-		{Nama: "PENDAPATAN", Tipe: "pendapatan", Urutan: 4, IsActive: true},
-		{Nama: "BEBAN", Tipe: "beban", Urutan: 5, IsActive: true},
+		{Kode: "1", Nama: "ASET", Tipe: "aset", Urutan: 1},
+		{Kode: "2", Nama: "KEWAJIBAN", Tipe: "kewajiban", Urutan: 2},
+		{Kode: "3", Nama: "EKUITAS", Tipe: "ekuitas", Urutan: 3},
+		{Kode: "4", Nama: "PENDAPATAN", Tipe: "pendapatan", Urutan: 4},
+		{Kode: "5", Nama: "BEBAN", Tipe: "beban", Urutan: 5},
 	}
 
 	for _, kategori := range kategoris {
@@ -178,16 +132,16 @@ func seedCOAKategori(db *gorm.DB) {
 func seedTenants(db *gorm.DB) {
 	tenants := []postgres.Tenant{
 		{
-			Nama:        "Koperasi Merah Putih",
-			Domain:      "koperasi-merah-putih.com",
-			DatabaseURL: "postgresql://localhost/koperasi_db",
-			IsActive:    true,
+			TenantCode: "KMP",
+			TenantName: "Koperasi Merah Putih",
+			Domain:     "koperasi-merah-putih.com",
+			IsActive:   true,
 		},
 		{
-			Nama:        "Koperasi Sejahtera",
-			Domain:      "koperasi-sejahtera.com",
-			DatabaseURL: "postgresql://localhost/koperasi_db",
-			IsActive:    true,
+			TenantCode: "KSJ",
+			TenantName: "Koperasi Sejahtera",
+			Domain:     "koperasi-sejahtera.com",
+			IsActive:   true,
 		},
 	}
 
@@ -198,31 +152,33 @@ func seedTenants(db *gorm.DB) {
 }
 
 func seedUsers(db *gorm.DB) {
-	now := time.Now()
 	users := []postgres.User{
 		{
 			TenantID:     1,
+			Username:     "admin",
 			Email:        "admin@koperasi.com",
 			PasswordHash: "$2a$10$rWjnkQr3.yUnqBv0kWpGzO7K4BF4vMEKgBqVmWxvQnRjTzJF5oUXa", // password: admin123
+			NamaLengkap:  "Administrator",
 			Role:         "super_admin",
 			IsActive:     true,
-			EmailVerifiedAt: &now,
 		},
 		{
 			TenantID:     1,
+			Username:     "manager",
 			Email:        "manager@koperasi.com",
 			PasswordHash: "$2a$10$rWjnkQr3.yUnqBv0kWpGzO7K4BF4vMEKgBqVmWxvQnRjTzJF5oUXa", // password: admin123
+			NamaLengkap:  "Manager",
 			Role:         "admin",
 			IsActive:     true,
-			EmailVerifiedAt: &now,
 		},
 		{
 			TenantID:     1,
+			Username:     "staff",
 			Email:        "staff@koperasi.com",
 			PasswordHash: "$2a$10$rWjnkQr3.yUnqBv0kWpGzO7K4BF4vMEKgBqVmWxvQnRjTzJF5oUXa", // password: admin123
+			NamaLengkap:  "Staff",
 			Role:         "staff",
 			IsActive:     true,
-			EmailVerifiedAt: &now,
 		},
 	}
 
@@ -233,106 +189,120 @@ func seedUsers(db *gorm.DB) {
 }
 
 func seedKoperasi(db *gorm.DB) {
+	tanggalBerdiri1 := time.Date(2020, 1, 15, 0, 0, 0, 0, time.UTC)
+	tanggalBerdiri2 := time.Date(2019, 6, 10, 0, 0, 0, 0, time.UTC)
+
 	koperasis := []postgres.Koperasi{
 		{
-			TenantID:       1,
-			Nama:           "Koperasi Sejahtera Mandiri",
-			NIAK:           "1234567890123456",
-			Email:          "info@sejahtera.com",
-			Telepon:        "02112345678",
-			Website:        "www.sejahtera.com",
-			Alamat:         "Jl. Merdeka No. 123",
-			ProvinsiID:     32,
-			KabupatenID:    3201,
-			KecamatanID:    320101,
-			KelurahanID:    3201011001,
-			KodePos:        "16610",
-			JenisKoperasiID: 1,
-			BentukKoperasiID: 1,
-			KBLIID:         2,
-			TanggalBerdiri: time.Date(2020, 1, 15, 0, 0, 0, 0, time.UTC),
-			IsActive:       true,
+			TenantID:          1,
+			NomorSK:           "SK001/2020",
+			NIK:               1234567890123456,
+			NamaKoperasi:      "Koperasi Sejahtera Mandiri",
+			NamaSK:            "Koperasi Sejahtera Mandiri",
+			Email:             "info@sejahtera.com",
+			Telepon:           "02112345678",
+			Website:           "www.sejahtera.com",
+			Alamat:            "Jl. Merdeka No. 123",
+			ProvinsiID:        32,
+			KabupatenID:       3201,
+			KecamatanID:       320101,
+			KelurahanID:       3201011001,
+			KodePos:           "16610",
+			JenisKoperasiID:   1,
+			BentukKoperasiID:  1,
+			StatusKoperasiID:  1, // AKTIF
+			TanggalBerdiri:    &tanggalBerdiri1,
 		},
 		{
-			TenantID:       1,
-			Nama:           "Koperasi Makmur Bersama",
-			NIAK:           "1234567890123457",
-			Email:          "info@makmur.com",
-			Telepon:        "02187654321",
-			Website:        "www.makmur.com",
-			Alamat:         "Jl. Proklamasi No. 456",
-			ProvinsiID:     32,
-			KabupatenID:    3201,
-			KecamatanID:    320101,
-			KelurahanID:    3201011002,
-			KodePos:        "16610",
-			JenisKoperasiID: 2,
-			BentukKoperasiID: 1,
-			KBLIID:         3,
-			TanggalBerdiri: time.Date(2019, 6, 10, 0, 0, 0, 0, time.UTC),
-			IsActive:       true,
+			TenantID:          1,
+			NomorSK:           "SK002/2019",
+			NIK:               1234567890123457,
+			NamaKoperasi:      "Koperasi Makmur Bersama",
+			NamaSK:            "Koperasi Makmur Bersama",
+			Email:             "info@makmur.com",
+			Telepon:           "02187654321",
+			Website:           "www.makmur.com",
+			Alamat:            "Jl. Proklamasi No. 456",
+			ProvinsiID:        32,
+			KabupatenID:       3201,
+			KecamatanID:       320101,
+			KelurahanID:       3201011002,
+			KodePos:           "16610",
+			JenisKoperasiID:   2,
+			BentukKoperasiID:  1,
+			StatusKoperasiID:  1, // AKTIF
+			TanggalBerdiri:    &tanggalBerdiri2,
 		},
 	}
 
 	for _, koperasi := range koperasis {
-		db.FirstOrCreate(&koperasi, postgres.Koperasi{NIAK: koperasi.NIAK})
+		result := db.FirstOrCreate(&koperasi, postgres.Koperasi{NIK: koperasi.NIK})
+		if result.Error != nil {
+			log.Printf("ERROR: Failed to create koperasi: %v", result.Error)
+		} else {
+			fmt.Printf("DEBUG: Created/found koperasi ID=%d, NIK=%d\n", koperasi.ID, koperasi.NIK)
+		}
 	}
-	fmt.Println("✓ Seeded Koperasi")
+
+	// Verify koperasi were created
+	var count int64
+	db.Model(&postgres.Koperasi{}).Count(&count)
+	fmt.Printf("✓ Seeded Koperasi (Total: %d)\n", count)
 }
 
 func seedAnggotaKoperasi(db *gorm.DB) {
-	now := time.Date(1985, 5, 15, 0, 0, 0, 0, time.UTC)
+	tanggalLahir := time.Date(1985, 5, 15, 0, 0, 0, 0, time.UTC)
+	tanggalMasuk := time.Now()
+
 	anggotas := []postgres.AnggotaKoperasi{
 		{
-			KoperasiID:     1,
-			NomorAnggota:   "A001",
-			NIK:            "3201011505850001",
-			NamaLengkap:    "Ahmad Suryadi",
-			JenisKelamin:   "L",
-			TempatLahir:    "Bogor",
-			TanggalLahir:   &now,
-			Alamat:         "Jl. Mawar No. 10",
-			Telepon:        "081234567890",
-			Email:          "ahmad@email.com",
-			Pekerjaan:      "Pegawai Swasta",
-			StatusPernikahan: "Menikah",
-			Status:         "aktif",
-			TanggalBergabung: time.Now(),
+			KoperasiID:    1,
+			NIAK:          "A001",
+			NIK:           "3201011505850001",
+			Nama:          "Ahmad Suryadi",
+			JenisKelamin:  "L",
+			TempatLahir:   "Bogor",
+			TanggalLahir:  &tanggalLahir,
+			Alamat:        "Jl. Mawar No. 10",
+			Telepon:       "081234567890",
+			Email:         "ahmad@email.com",
+			Pekerjaan:     "Pegawai Swasta",
+			StatusAnggota: "aktif",
+			TanggalMasuk:  &tanggalMasuk,
 		},
 		{
-			KoperasiID:     1,
-			NomorAnggota:   "A002",
-			NIK:            "3201011505850002",
-			NamaLengkap:    "Siti Nurhaliza",
-			JenisKelamin:   "P",
-			TempatLahir:    "Jakarta",
-			TanggalLahir:   &now,
-			Alamat:         "Jl. Melati No. 15",
-			Telepon:        "081234567891",
-			Email:          "siti@email.com",
-			Pekerjaan:      "Guru",
-			StatusPernikahan: "Menikah",
-			Status:         "aktif",
-			TanggalBergabung: time.Now(),
+			KoperasiID:    1,
+			NIAK:          "A002",
+			NIK:           "3201011505850002",
+			Nama:          "Siti Nurhaliza",
+			JenisKelamin:  "P",
+			TempatLahir:   "Jakarta",
+			TanggalLahir:  &tanggalLahir,
+			Alamat:        "Jl. Melati No. 15",
+			Telepon:       "081234567891",
+			Email:         "siti@email.com",
+			Pekerjaan:     "Guru",
+			StatusAnggota: "aktif",
+			TanggalMasuk:  &tanggalMasuk,
 		},
 	}
 
 	for _, anggota := range anggotas {
-		db.FirstOrCreate(&anggota, postgres.AnggotaKoperasi{NomorAnggota: anggota.NomorAnggota, KoperasiID: anggota.KoperasiID})
+		db.FirstOrCreate(&anggota, postgres.AnggotaKoperasi{NIAK: anggota.NIAK, KoperasiID: anggota.KoperasiID})
 	}
 	fmt.Println("✓ Seeded Anggota Koperasi")
 }
 
 func seedCOAAkun(db *gorm.DB) {
 	akuns := []postgres.COAAkun{
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "1001", NamaAkun: "Kas", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsActive: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "1101", NamaAkun: "Bank BCA", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsActive: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "1201", NamaAkun: "Piutang Anggota", KategoriID: 1, SaldoNormal: "debit", IsKas: false, IsActive: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "2001", NamaAkun: "Simpanan Pokok", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsActive: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "2002", NamaAkun: "Simpanan Wajib", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsActive: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "3001", NamaAkun: "Modal Koperasi", KategoriID: 3, SaldoNormal: "kredit", IsKas: false, IsActive: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "4001", NamaAkun: "Pendapatan Bunga", KategoriID: 4, SaldoNormal: "kredit", IsKas: false, IsActive: true},
-		{TenantID: 1, KoperasiID: 1, KodeAkun: "5001", NamaAkun: "Beban Operasional", KategoriID: 5, SaldoNormal: "debit", IsKas: false, IsActive: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "1001", NamaAkun: "Kas", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "1101", NamaAkun: "Bank BCA", KategoriID: 1, SaldoNormal: "debit", IsKas: true, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "1201", NamaAkun: "Piutang Anggota", KategoriID: 1, SaldoNormal: "debit", IsKas: false, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "2001", NamaAkun: "Simpanan Pokok", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "2002", NamaAkun: "Simpanan Wajib", KategoriID: 2, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "3001", NamaAkun: "Modal Koperasi", KategoriID: 3, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "4001", NamaAkun: "Pendapatan Bunga", KategoriID: 4, SaldoNormal: "kredit", IsKas: false, IsAktif: true},
+		{TenantID: 1, KoperasiID: 1, KodeAkun: "5001", NamaAkun: "Beban Operasional", KategoriID: 5, SaldoNormal: "debit", IsKas: false, IsAktif: true},
 	}
 
 	for _, akun := range akuns {
@@ -342,95 +312,101 @@ func seedCOAAkun(db *gorm.DB) {
 }
 
 func seedSimpanPinjamProduk(db *gorm.DB) {
-	produks := []postgres.SimpanPinjamProduk{
+	produks := []postgres.ProdukSimpanPinjam{
 		{
-			KoperasiID:       1,
-			KodeProduk:       "SP001",
-			NamaProduk:       "Simpanan Berjangka 12 Bulan",
-			JenisProduk:      "simpanan",
-			Deskripsi:        "Simpanan berjangka dengan tenor 12 bulan",
-			BungaTahun:       6.5,
-			TenorBulan:       12,
-			MinimalSetoran:   1000000,
-			MaksimalSetoran:  50000000,
-			BiayaAdmin:       10000,
-			IsActive:          true,
+			KoperasiID:      1,
+			KodeProduk:      "SP001",
+			NamaProduk:      "Simpanan Berjangka 12 Bulan",
+			Jenis:           "simpanan",
+			Kategori:        "Simpanan Berjangka",
+			BungaSimpanan:   6.5,
+			MinimalSaldo:    1000000,
+			JangkaWaktuMax:  12,
+			SyaratKetentuan: "Simpanan berjangka dengan tenor 12 bulan",
+			IsAktif:         true,
 		},
 		{
 			KoperasiID:       1,
 			KodeProduk:       "SP002",
 			NamaProduk:       "Pinjaman Konsumtif",
-			JenisProduk:      "pinjaman",
-			Deskripsi:        "Pinjaman untuk kebutuhan konsumtif",
-			BungaTahun:       18.0,
-			TenorBulan:       24,
-			MinimalSetoran:   5000000,
-			MaksimalSetoran:  100000000,
-			BiayaAdmin:       100000,
-			IsActive:          true,
+			Jenis:            "pinjaman",
+			Kategori:         "Pinjaman Konsumtif",
+			BungaPinjaman:    18.0,
+			BungaDenda:       2.0,
+			MaksimalPinjaman: 100000000,
+			JangkaWaktuMax:   24,
+			SyaratKetentuan:  "Pinjaman untuk kebutuhan konsumtif",
+			IsAktif:          true,
 		},
 	}
 
 	for _, produk := range produks {
-		db.FirstOrCreate(&produk, postgres.SimpanPinjamProduk{KodeProduk: produk.KodeProduk})
+		db.FirstOrCreate(&produk, postgres.ProdukSimpanPinjam{KodeProduk: produk.KodeProduk})
 	}
 	fmt.Println("✓ Seeded Simpan Pinjam Produk")
 }
 
 func seedSimpanPinjamRekening(db *gorm.DB) {
-	rekenings := []postgres.SimpanPinjamRekening{
+	rekenings := []postgres.RekeningSimpanPinjam{
 		{
+			KoperasiID:     1,
 			ProdukID:       1,
 			AnggotaID:      1,
 			NomorRekening:  "SP001001",
-			SaldoPokok:     5000000,
-			SaldoBunga:     0,
+			SaldoSimpanan:  5000000,
+			BungaBerjalan:  0,
 			Status:         "aktif",
 			TanggalBuka:    time.Now().AddDate(0, -6, 0),
 		},
 		{
-			ProdukID:       2,
-			AnggotaID:      2,
-			NomorRekening:  "SP002001",
-			SaldoPokok:     25000000,
-			SaldoBunga:     0,
-			Status:         "aktif",
-			TanggalBuka:    time.Now().AddDate(0, -3, 0),
+			KoperasiID:    1,
+			ProdukID:      2,
+			AnggotaID:     2,
+			NomorRekening: "SP002001",
+			PokokPinjaman: 25000000,
+			SisaPokok:     25000000,
+			BungaBerjalan: 0,
+			Status:        "aktif",
+			TanggalBuka:   time.Now().AddDate(0, -3, 0),
 		},
 	}
 
 	for _, rekening := range rekenings {
-		db.FirstOrCreate(&rekening, postgres.SimpanPinjamRekening{NomorRekening: rekening.NomorRekening})
+		db.FirstOrCreate(&rekening, postgres.RekeningSimpanPinjam{NomorRekening: rekening.NomorRekening})
 	}
 	fmt.Println("✓ Seeded Simpan Pinjam Rekening")
 }
 
 func seedSimpanPinjamTransaksi(db *gorm.DB) {
-	transaksis := []postgres.SimpanPinjamTransaksi{
+	transaksis := []postgres.TransaksiSimpanPinjam{
 		{
-			RekeningID:     1,
-			NomorTransaksi: "T001",
-			JenisTransaksi: "setoran",
-			Nominal:        5000000,
-			Deskripsi:      "Setoran awal simpanan berjangka",
+			KoperasiID:       1,
+			RekeningID:       1,
+			NomorTransaksi:   "T001",
+			JenisTransaksi:   "setoran",
+			Jumlah:           5000000,
+			SaldoSebelum:     0,
+			SaldoSesudah:     5000000,
+			Keterangan:       "Setoran awal simpanan berjangka",
 			TanggalTransaksi: time.Now().AddDate(0, -6, 0),
-			Status:         "berhasil",
-			UserID:         2,
+			CreatedBy:        2,
 		},
 		{
-			RekeningID:     2,
-			NomorTransaksi: "T002",
-			JenisTransaksi: "pencairan",
-			Nominal:        25000000,
-			Deskripsi:      "Pencairan pinjaman konsumtif",
+			KoperasiID:       1,
+			RekeningID:       2,
+			NomorTransaksi:   "T002",
+			JenisTransaksi:   "pencairan",
+			Jumlah:           25000000,
+			SaldoSebelum:     0,
+			SaldoSesudah:     25000000,
+			Keterangan:       "Pencairan pinjaman konsumtif",
 			TanggalTransaksi: time.Now().AddDate(0, -3, 0),
-			Status:         "berhasil",
-			UserID:         2,
+			CreatedBy:        2,
 		},
 	}
 
 	for _, transaksi := range transaksis {
-		db.FirstOrCreate(&transaksi, postgres.SimpanPinjamTransaksi{NomorTransaksi: transaksi.NomorTransaksi})
+		db.FirstOrCreate(&transaksi, postgres.TransaksiSimpanPinjam{NomorTransaksi: transaksi.NomorTransaksi})
 	}
 	fmt.Println("✓ Seeded Simpan Pinjam Transaksi")
 }
@@ -530,7 +506,7 @@ func seedKlinikObat(db *gorm.DB) {
 			StokCurrent:   200,
 			HargaBeli:     500,
 			HargaJual:     1000,
-			IsActive:       true,
+			IsAktif:       true,
 		},
 		{
 			KoperasiID:    1,
@@ -544,7 +520,7 @@ func seedKlinikObat(db *gorm.DB) {
 			StokCurrent:   100,
 			HargaBeli:     2000,
 			HargaJual:     3500,
-			IsActive:       true,
+			IsAktif:       true,
 		},
 	}
 
@@ -654,10 +630,10 @@ func seedJurnalUmum(db *gorm.DB) {
 
 func seedPPOBKategori(db *gorm.DB) {
 	kategoris := []postgres.PPOBKategori{
-		{Nama: "Pulsa & Paket Data", Kode: "PULSA", IsActive: true},
-		{Nama: "PLN", Kode: "PLN", IsActive: true},
-		{Nama: "PDAM", Kode: "PDAM", IsActive: true},
-		{Nama: "Internet & TV Kabel", Kode: "INTERNET", IsActive: true},
+		{Nama: "Pulsa & Paket Data", Kode: "PULSA", IsAktif: true},
+		{Nama: "PLN", Kode: "PLN", IsAktif: true},
+		{Nama: "PDAM", Kode: "PDAM", IsAktif: true},
+		{Nama: "Internet & TV Kabel", Kode: "INTERNET", IsAktif: true},
 	}
 
 	for _, kategori := range kategoris {
@@ -666,34 +642,45 @@ func seedPPOBKategori(db *gorm.DB) {
 	fmt.Println("✓ Seeded PPOB Kategori")
 }
 
+func seedPPOBProvider(db *gorm.DB) {
+	providers := []postgres.PPOBProvider{
+		{Kode: "DEFAULT", Nama: "Provider Default", BaseURL: "https://api.ppob.local", IsAktif: true},
+	}
+
+	for _, provider := range providers {
+		db.FirstOrCreate(&provider, postgres.PPOBProvider{Kode: provider.Kode})
+	}
+	fmt.Println("✓ Seeded PPOB Provider")
+}
+
 func seedPPOBProduk(db *gorm.DB) {
 	produks := []postgres.PPOBProduk{
-		{KategoriID: 1, Nama: "Telkomsel 10.000", Kode: "TSEL10", Harga: 10500, Deskripsi: "Pulsa Telkomsel 10rb", IsActive: true},
-		{KategoriID: 1, Nama: "Indosat 25.000", Kode: "ISAT25", Harga: 25200, Deskripsi: "Pulsa Indosat 25rb", IsActive: true},
-		{KategoriID: 2, Nama: "PLN Token 20.000", Kode: "PLN20", Harga: 20500, Deskripsi: "Token listrik PLN 20rb", IsActive: true},
-		{KategoriID: 2, Nama: "PLN Token 50.000", Kode: "PLN50", Harga: 50500, Deskripsi: "Token listrik PLN 50rb", IsActive: true},
+		{ProviderID: 1, KategoriID: 1, NamaProduk: "Telkomsel 10.000", KodeProduk: "TSEL10", HargaBeli: 10000, HargaJual: 10500, Deskripsi: "Pulsa Telkomsel 10rb", IsAktif: true},
+		{ProviderID: 1, KategoriID: 1, NamaProduk: "Indosat 25.000", KodeProduk: "ISAT25", HargaBeli: 25000, HargaJual: 25200, Deskripsi: "Pulsa Indosat 25rb", IsAktif: true},
+		{ProviderID: 1, KategoriID: 2, NamaProduk: "PLN Token 20.000", KodeProduk: "PLN20", HargaBeli: 20000, HargaJual: 20500, Deskripsi: "Token listrik PLN 20rb", IsAktif: true},
+		{ProviderID: 1, KategoriID: 2, NamaProduk: "PLN Token 50.000", KodeProduk: "PLN50", HargaBeli: 50000, HargaJual: 50500, Deskripsi: "Token listrik PLN 50rb", IsAktif: true},
 	}
 
 	for _, produk := range produks {
-		db.FirstOrCreate(&produk, postgres.PPOBProduk{Kode: produk.Kode})
+		db.FirstOrCreate(&produk, postgres.PPOBProduk{KodeProduk: produk.KodeProduk})
 	}
 	fmt.Println("✓ Seeded PPOB Produk")
 }
 
 func seedSequences(db *gorm.DB) {
 	sequences := []postgres.SequenceNumber{
-		{TenantID: 1, KoperasiID: 1, SequenceType: "jurnal_umum", CurrentValue: 2},
-		{TenantID: 1, KoperasiID: 1, SequenceType: "nomor_rm", CurrentValue: 2},
-		{TenantID: 1, KoperasiID: 1, SequenceType: "kunjungan", CurrentValue: 2},
-		{TenantID: 1, KoperasiID: 2, SequenceType: "jurnal_umum", CurrentValue: 0},
-		{TenantID: 1, KoperasiID: 2, SequenceType: "nomor_rm", CurrentValue: 0},
+		{TenantID: 1, KoperasiID: 1, SequenceName: "jurnal_umum", Prefix: "JU", CurrentNumber: 2},
+		{TenantID: 1, KoperasiID: 1, SequenceName: "nomor_rm", Prefix: "RM", CurrentNumber: 2},
+		{TenantID: 1, KoperasiID: 1, SequenceName: "kunjungan", Prefix: "KUN", CurrentNumber: 2},
+		{TenantID: 1, KoperasiID: 2, SequenceName: "jurnal_umum", Prefix: "JU", CurrentNumber: 0},
+		{TenantID: 1, KoperasiID: 2, SequenceName: "nomor_rm", Prefix: "RM", CurrentNumber: 0},
 	}
 
 	for _, seq := range sequences {
 		db.FirstOrCreate(&seq, postgres.SequenceNumber{
-			TenantID: seq.TenantID,
-			KoperasiID: seq.KoperasiID,
-			SequenceType: seq.SequenceType,
+			TenantID:     seq.TenantID,
+			KoperasiID:   seq.KoperasiID,
+			SequenceName: seq.SequenceName,
 		})
 	}
 	fmt.Println("✓ Seeded Sequences")

@@ -1,0 +1,102 @@
+Kategori,Sub_Kategori,Item,Penjelasan,Detail
+JENIS KOPERASI,Berdasarkan Fungsi,Koperasi Konsumen,Menyediakan barang kebutuhan konsumsi bagi anggota,Contoh: Koperasi Sekolah
+JENIS KOPERASI,Berdasarkan Fungsi,Koperasi Produsen,Mengolah bahan baku menjadi barang jadi,Contoh: Koperasi Peternak Sapi Perah
+JENIS KOPERASI,Berdasarkan Fungsi,Koperasi Simpan Pinjam,Menyediakan jasa simpanan dan pinjaman,Contoh: KSP Mitra Sejahtera
+JENIS KOPERASI,Berdasarkan Fungsi,Koperasi Pemasaran,Memasarkan produk anggota,Contoh: Koperasi Petani Buah
+JENIS KOPERASI,Berdasarkan Fungsi,Koperasi Jasa,Menyediakan layanan jasa bagi anggota,Contoh: Koperasi Angkutan
+JENIS KOPERASI,Berdasarkan Fungsi,Koperasi Serba Usaha (KSU),Menggabungkan berbagai jenis usaha,Gabungan simpan pinjam dan konsumsi
+JENIS KOPERASI,Berdasarkan Keanggotaan,Koperasi Karyawan (Kopkar),Anggota adalah karyawan suatu perusahaan,Untuk kesejahteraan karyawan
+JENIS KOPERASI,Berdasarkan Keanggotaan,Koperasi Pegawai Republik Indonesia (KPRI),Anggota adalah pegawai negeri sipil,Khusus PNS dan ASN
+JENIS KOPERASI,Berdasarkan Keanggotaan,Koperasi Unit Desa (KUD),Anggota adalah masyarakat pedesaan,Fokus sektor pertanian dan perikanan
+JENIS KOPERASI,Berdasarkan Keanggotaan,Koperasi Sekolah,Anggota adalah siswa guru dan karyawan sekolah,Mendukung kebutuhan pendidikan
+JENIS KOPERASI,Berdasarkan Keanggotaan,Koperasi Pasar,Anggota adalah pedagang pasar,Memberikan akses pinjaman untuk pedagang
+JENIS KOPERASI,Berdasarkan Tingkatan,Koperasi Primer,Didirikan minimal 20 orang perorangan,Tingkat dasar koperasi
+JENIS KOPERASI,Berdasarkan Tingkatan,Koperasi Sekunder,Didirikan minimal 3 koperasi primer,Lingkup wilayah lebih luas
+JENIS KOPERASI,Berdasarkan Tingkatan,Pusat Koperasi,Gabungan minimal 5 koperasi primer,Tingkat kabupaten/kota
+JENIS KOPERASI,Berdasarkan Tingkatan,Gabungan Koperasi,Gabungan minimal 3 pusat koperasi,Tingkat provinsi
+JENIS KOPERASI,Berdasarkan Tingkatan,Induk Koperasi,Gabungan minimal 3 gabungan koperasi,Tingkat nasional
+JENIS KOPERASI,Berdasarkan Sektor,Koperasi Pertanian,Fokus pada sektor pertanian,Petani padi sayur buah
+JENIS KOPERASI,Berdasarkan Sektor,Koperasi Peternakan,Fokus pada sektor peternakan,Peternak sapi ayam kambing
+JENIS KOPERASI,Berdasarkan Sektor,Koperasi Perikanan,Fokus pada sektor perikanan,Nelayan dan pembudidaya ikan
+JENIS KOPERASI,Berdasarkan Sektor,Koperasi Industri,Fokus pada produksi industri,Kerajinan dan manufaktur
+JENIS KOPERASI,Berdasarkan Sektor,Koperasi Pertambangan,Memanfaatkan sumber daya alam,Penambang rakyat
+STRUKTUR ORGANISASI,Perangkat Organisasi,Rapat Anggota Tahunan (RAT),Pemegang kekuasaan tertinggi,Dilaksanakan minimal 1 tahun sekali
+STRUKTUR ORGANISASI,Perangkat Organisasi,Pengurus Koperasi,Menjalankan kegiatan operasional,Ketua Sekretaris Bendahara
+STRUKTUR ORGANISASI,Perangkat Organisasi,Pengawas Koperasi,Mengawasi jalannya koperasi,Minimal 3 orang
+STRUKTUR ORGANISASI,Perangkat Organisasi,Manajer/Pengelola,Mengelola operasional harian,Diangkat oleh pengurus
+STRUKTUR ORGANISASI,Perangkat Organisasi,Karyawan,Pelaksana tugas operasional,Staf administrasi dan teknis
+STRUKTUR ORGANISASI,Tugas Pengurus,Ketua,Memimpin dan mengkoordinasi koperasi,Masa jabatan maksimal 5 tahun
+STRUKTUR ORGANISASI,Tugas Pengurus,Sekretaris,Mengelola administrasi dan surat menyurat,Masa jabatan maksimal 5 tahun
+STRUKTUR ORGANISASI,Tugas Pengurus,Bendahara,Mengelola keuangan koperasi,Masa jabatan maksimal 5 tahun
+STRUKTUR ORGANISASI,Tugas Pengawas,Ketua Pengawas,Memimpin tim pengawas,Mengawasi kinerja pengurus
+STRUKTUR ORGANISASI,Tugas Pengawas,Anggota Pengawas,Membantu pengawasan,Audit internal
+MODAL KOPERASI,Sumber Modal,Simpanan Pokok,Dibayar sekali saat bergabung,Tidak dapat ditarik selama jadi anggota
+MODAL KOPERASI,Sumber Modal,Simpanan Wajib,Dibayar rutin setiap periode,Tidak dapat ditarik selama jadi anggota
+MODAL KOPERASI,Sumber Modal,Simpanan Sukarela,Bersifat opsional,Dapat ditarik sewaktu-waktu
+MODAL KOPERASI,Sumber Modal,Modal Penyertaan,Modal dari pemerintah atau pihak lain,Untuk pengembangan koperasi
+MODAL KOPERASI,Sumber Modal,Hibah/Donasi,Sumbangan yang diterima,Tidak dapat dibagi ke anggota
+MODAL KOPERASI,Sumber Modal,Cadangan,Berasal dari SHU yang disisihkan,Untuk pengembangan koperasi
+MODAL KOPERASI,Modal Luar,Pinjaman dari Bank,Kredit perbankan,Memerlukan agunan
+MODAL KOPERASI,Modal Luar,Pinjaman dari Koperasi Lain,Pinjaman antar koperasi,Kerjasama koperasi
+MODAL KOPERASI,Modal Luar,Penerbitan Obligasi,Surat utang koperasi,Untuk koperasi besar
+SISA HASIL USAHA (SHU),Pembagian SHU,Cadangan Koperasi,Minimal 40% dari SHU,Untuk pengembangan usaha
+SISA HASIL USAHA (SHU),Pembagian SHU,Jasa Modal Anggota,Biasanya 25-30%,Berdasarkan simpanan
+SISA HASIL USAHA (SHU),Pembagian SHU,Jasa Usaha Anggota,Biasanya 25-30%,Berdasarkan transaksi
+SISA HASIL USAHA (SHU),Pembagian SHU,Dana Pengurus,Biasanya 5-10%,Honorarium pengurus
+SISA HASIL USAHA (SHU),Pembagian SHU,Dana Pengawas,Biasanya 5%,Honorarium pengawas
+SISA HASIL USAHA (SHU),Pembagian SHU,Dana Karyawan,Biasanya 5%,Bonus karyawan
+SISA HASIL USAHA (SHU),Pembagian SHU,Dana Pendidikan,Biasanya 5%,Pelatihan dan pendidikan
+SISA HASIL USAHA (SHU),Pembagian SHU,Dana Sosial,Biasanya 5%,Kegiatan sosial
+PERATURAN,Dasar Hukum,UU No 25 Tahun 1992,Tentang Perkoperasian,Undang-undang utama
+PERATURAN,Dasar Hukum,UU No 17 Tahun 2012,Tentang Perkoperasian (revisi),Dibatalkan MK
+PERATURAN,Dasar Hukum,Permenkop No 9 Tahun 2020,Tentang Pedoman Umum Akuntansi Koperasi,Standar akuntansi
+PERATURAN,Dasar Hukum,Permenkop No 4 Tahun 2022,Tentang Pedoman Simpan Pinjam,Aturan simpan pinjam
+PERATURAN,Dokumen Koperasi,Anggaran Dasar (AD),Aturan dasar koperasi,Disahkan dalam rapat pembentukan
+PERATURAN,Dokumen Koperasi,Anggaran Rumah Tangga (ART),Aturan teknis operasional,Pelengkap AD
+PERATURAN,Dokumen Koperasi,Akta Pendirian,Dokumen legal pembentukan,Dari notaris
+PERATURAN,Dokumen Koperasi,Surat Keterangan Terdaftar,Bukti legalitas dari kemenkop,Wajib dimiliki
+PERATURAN,Dokumen Koperasi,NPWP Koperasi,Nomor Pokok Wajib Pajak,Untuk perpajakan
+PRINSIP KOPERASI,7 Prinsip Koperasi,Keanggotaan Sukarela dan Terbuka,Siapa saja boleh masuk dan keluar,Tanpa diskriminasi
+PRINSIP KOPERASI,7 Prinsip Koperasi,Pengelolaan Demokratis,Satu anggota satu suara,Keputusan bersama
+PRINSIP KOPERASI,7 Prinsip Koperasi,Partisipasi Ekonomi Anggota,Anggota menyumbang modal secara adil,Pembagian SHU proporsional
+PRINSIP KOPERASI,7 Prinsip Koperasi,Otonomi dan Kemandirian,Koperasi dikelola mandiri,Tidak bergantung pihak lain
+PRINSIP KOPERASI,7 Prinsip Koperasi,Pendidikan Pelatihan dan Informasi,Meningkatkan kapasitas anggota,Training rutin
+PRINSIP KOPERASI,7 Prinsip Koperasi,Kerjasama Antar Koperasi,Kolaborasi dengan koperasi lain,Memperkuat gerakan koperasi
+PRINSIP KOPERASI,7 Prinsip Koperasi,Kepedulian Terhadap Masyarakat,Berkontribusi untuk masyarakat,Tanggung jawab sosial
+KEGIATAN RUTIN,Rapat dan Pertemuan,Rapat Anggota Tahunan (RAT),Laporan pertanggungjawaban tahunan,Wajib setiap tahun
+KEGIATAN RUTIN,Rapat dan Pertemuan,Rapat Anggota Luar Biasa (RALB),Rapat mendesak di luar RAT,Saat ada kebutuhan khusus
+KEGIATAN RUTIN,Rapat dan Pertemuan,Rapat Pengurus,Koordinasi pengurus,Minimal 1 bulan sekali
+KEGIATAN RUTIN,Rapat dan Pertemuan,Rapat Pengawas,Evaluasi pengawasan,Minimal 3 bulan sekali
+KEGIATAN RUTIN,Administrasi,Pembukuan Harian,Pencatatan transaksi harian,Setiap hari operasional
+KEGIATAN RUTIN,Administrasi,Laporan Bulanan,Laporan keuangan dan operasional,Setiap akhir bulan
+KEGIATAN RUTIN,Administrasi,Laporan Tahunan,Laporan lengkap 1 tahun,Untuk RAT
+KEGIATAN RUTIN,Administrasi,Audit Internal,Pemeriksaan oleh pengawas,Minimal 6 bulan sekali
+KEGIATAN RUTIN,Administrasi,Audit Eksternal,Pemeriksaan oleh auditor independen,Sesuai kebutuhan
+KEGIATAN RUTIN,Keanggotaan,Pendaftaran Anggota Baru,Proses rekrutmen anggota,Berkelanjutan
+KEGIATAN RUTIN,Keanggotaan,Pembayaran Simpanan,Penerimaan simpanan wajib,Setiap bulan
+KEGIATAN RUTIN,Keanggotaan,Pengunduran Diri Anggota,Proses keluar keanggotaan,Sesuai permintaan
+TEKNOLOGI KOPERASI,Sistem Informasi,Software Akuntansi Koperasi,Aplikasi pencatatan keuangan,Accurate Zahir dll
+TEKNOLOGI KOPERASI,Sistem Informasi,Core Banking System,Sistem untuk koperasi simpan pinjam,Djoin eSPADA dll
+TEKNOLOGI KOPERASI,Sistem Informasi,Mobile Banking Koperasi,Aplikasi mobile untuk anggota,Transaksi di smartphone
+TEKNOLOGI KOPERASI,Sistem Informasi,PPOB System,Integrasi layanan PPOB,Kiosbank Fastpay dll
+TEKNOLOGI KOPERASI,Sistem Informasi,E-Commerce Platform,Toko online koperasi,Marketplace sendiri
+TEKNOLOGI KOPERASI,Digital Marketing,Website Koperasi,Promosi dan informasi online,Portal resmi
+TEKNOLOGI KOPERASI,Digital Marketing,Media Sosial,Facebook Instagram WhatsApp,Komunikasi dengan anggota
+TEKNOLOGI KOPERASI,Digital Marketing,Email Marketing,Newsletter untuk anggota,Update berkala
+TANTANGAN KOPERASI,Tantangan Internal,Manajemen Lemah,Kurangnya kapasitas pengelola,Perlu pelatihan
+TANTANGAN KOPERASI,Tantangan Internal,Modal Terbatas,Kesulitan permodalan,Butuh pinjaman atau penyertaan
+TANTANGAN KOPERASI,Tantangan Internal,Partisipasi Anggota Rendah,Anggota kurang aktif,Perlu edukasi
+TANTANGAN KOPERASI,Tantangan Internal,SDM Kurang Kompeten,Kualitas pengelola rendah,Perlu upgrading skill
+TANTANGAN KOPERASI,Tantangan Eksternal,Persaingan dengan Bank,Bunga bank lebih kompetitif,Harus inovasi produk
+TANTANGAN KOPERASI,Tantangan Eksternal,Regulasi Kompleks,Aturan rumit dan berubah,Butuh konsultan
+TANTANGAN KOPERASI,Tantangan Eksternal,Digitalisasi Lambat,Tertinggal teknologi,Butuh investasi IT
+TANTANGAN KOPERASI,Tantangan Eksternal,Pandemi Covid-19,Dampak ekonomi ke anggota,Penyesuaian strategi
+PELUANG PENGEMBANGAN,Peluang Bisnis,Kerjasama dengan BUMN,Program kemitraan PKBL,Akses modal dan pasar
+PELUANG PENGEMBANGAN,Peluang Bisnis,Inkubasi UMKM,Membina usaha mikro anggota,Pengembangan ekonomi lokal
+PELUANG PENGEMBANGAN,Peluang Bisnis,Ekspor Produk Anggota,Memasarkan ke luar negeri,Tingkatkan pendapatan
+PELUANG PENGEMBANGAN,Peluang Bisnis,Koperasi Digital,Transformasi digital penuh,Layanan online 24/7
+PELUANG PENGEMBANGAN,Peluang Bisnis,Green Cooperative,Usaha ramah lingkungan,Produk organik dan berkelanjutan
+PELUANG PENGEMBANGAN,Program Pemerintah,Dana Bergulir Kemenkop,Pinjaman lunak untuk koperasi,Bunga rendah
+PELUANG PENGEMBANGAN,Program Pemerintah,Program KUR,Kredit Usaha Rakyat,Via bank penyalur
+PELUANG PENGEMBANGAN,Program Pemerintah,Sertifikasi Koperasi,Penilaian tingkat kesehatan,Bronze Silver Gold Platinum
+PELUANG PENGEMBANGAN,Program Pemerintah,Koperasi Merah Putih,Program nasional di desa/kelurahan,80 ribu koperasi target

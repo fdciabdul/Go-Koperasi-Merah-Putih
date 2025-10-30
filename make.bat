@@ -85,7 +85,7 @@ goto end
 
 :seed
 echo Running database seeders...
-go run cmd\seeder\main.go
+go run cmd\seeder\*.go
 goto end
 
 :migrate-fresh

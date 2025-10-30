@@ -15,8 +15,9 @@ type PostgresDB struct {
 }
 
 func NewPostgresConnection(cfg *config.PostgresConfig) (*PostgresDB, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
-		cfg.Host, cfg.User, cfg.Password, cfg.Database, cfg.Port, cfg.SSLMode)
+	// Use URI format instead of key-value format (fixes Windows connection issues)
+	dsn := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s?sslmode=%s",
+		cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Database, cfg.SSLMode)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
@@ -33,6 +34,16 @@ func NewPostgresConnection(cfg *config.PostgresConfig) (*PostgresDB, error) {
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetMaxOpenConns(100)
 
-	log.Println("Connected to PostgreSQL successfully")
+	// Verify which database we're actually connected to
+	var currentDB string
+	if err := db.Raw("SELECT current_database()").Scan(&currentDB).Error; err != nil {
+		return nil, fmt.Errorf("failed to verify database connection: %v", err)
+	}
+
+	if currentDB != cfg.Database {
+		return nil, fmt.Errorf("connected to wrong database: expected '%s', got '%s'", cfg.Database, currentDB)
+	}
+
+	log.Printf("Connected to PostgreSQL successfully (database: %s)", currentDB)
 	return &PostgresDB{DB: db}, nil
 }

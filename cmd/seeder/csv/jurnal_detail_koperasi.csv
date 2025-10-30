@@ -1,0 +1,101 @@
+Tanggal,No_Bukti,Kode_Akun,Nama_Akun,Keterangan,Debit,Kredit,Saldo_Debit,Saldo_Kredit
+2025-01-01,SALDO AWAL,1-1001,Kas,Saldo awal kas,0,0,10000000,0
+2025-01-01,SALDO AWAL,1-1002,Bank - Rekening Operasional,Saldo awal bank operasional,0,0,250000000,0
+2025-01-01,SALDO AWAL,1-1003,Bank - Rekening Simpanan,Saldo awal bank simpanan,0,0,100000000,0
+2025-01-01,SALDO AWAL,1-1101,Piutang Pinjaman Anggota,Saldo awal piutang pinjaman,0,0,500000000,0
+2025-01-01,SALDO AWAL,1-1201,Persediaan Barang Dagangan,Saldo awal persediaan,0,0,75000000,0
+2025-01-01,SALDO AWAL,1-2004,Kendaraan,Saldo awal kendaraan,0,0,100000000,0
+2025-01-01,SALDO AWAL,1-2005,Akumulasi Penyusutan Kendaraan,Saldo awal akum penyusutan,0,0,0,20000000
+2025-01-01,SALDO AWAL,1-2006,Peralatan Kantor,Saldo awal peralatan,0,0,50000000,0
+2025-01-01,SALDO AWAL,1-2007,Akumulasi Penyusutan Peralatan,Saldo awal akum penyusutan,0,0,0,15000000
+2025-01-01,SALDO AWAL,2-1001,Simpanan Sukarela Anggota,Saldo awal simpanan sukarela,0,0,0,120000000
+2025-01-01,SALDO AWAL,2-1003,Hutang Usaha,Saldo awal hutang usaha,0,0,0,50000000
+2025-01-01,SALDO AWAL,3-1001,Simpanan Pokok,Saldo awal simpanan pokok,0,0,0,200000000
+2025-01-01,SALDO AWAL,3-1002,Simpanan Wajib,Saldo awal simpanan wajib,0,0,0,300000000
+2025-01-01,SALDO AWAL,3-2001,Cadangan Umum,Saldo awal cadangan,0,0,0,150000000
+2025-01-01,SALDO AWAL,3-3002,SHU Tahun Lalu,Saldo awal SHU tahun lalu,0,0,0,120000000
+2025-01-02,BM001,1-1002,Bank - Rekening Operasional,Terima simpanan pokok Budi,5000000,0,255000000,0
+2025-01-02,BM001,3-1001,Simpanan Pokok,Simpanan pokok Budi,0,5000000,0,205000000
+2025-01-02,BM002,1-1002,Bank - Rekening Operasional,Terima simpanan wajib Januari,25000000,0,280000000,0
+2025-01-02,BM002,3-1002,Simpanan Wajib,Simpanan wajib Januari,0,25000000,0,325000000
+2025-01-03,BM003,1-1003,Bank - Rekening Simpanan,Terima simpanan sukarela,15000000,0,115000000,0
+2025-01-03,BM003,2-1001,Simpanan Sukarela Anggota,Simpanan sukarela anggota,0,15000000,0,135000000
+2025-01-05,BK001,1-1101,Piutang Pinjaman Anggota,Pinjaman Siti Aminah,20000000,0,520000000,0
+2025-01-05,BK001,1-1002,Bank - Rekening Operasional,Cairkan pinjaman Siti,0,20000000,260000000,0
+2025-01-05,BM004,1-1002,Bank - Rekening Operasional,Admin pinjaman,200000,0,260200000,0
+2025-01-05,BM004,4-1003,Pendapatan Administrasi Pinjaman,Admin pinjaman,0,200000,0,200000
+2025-01-10,BM005,1-1002,Bank - Rekening Operasional,Terima angsuran,2100000,0,262300000,0
+2025-01-10,BM005,1-1101,Piutang Pinjaman Anggota,Bayar pokok pinjaman,0,2000000,518000000,0
+2025-01-10,BM005,4-1001,Pendapatan Jasa Pinjaman Anggota,Bunga pinjaman,0,100000,0,100000
+2025-01-12,BK002,1-1201,Persediaan Barang Dagangan,Beli barang dagangan,30000000,0,105000000,0
+2025-01-12,BK002,2-1003,Hutang Usaha,Hutang ke supplier,0,30000000,0,80000000
+2025-01-15,BM006,1-1001,Kas,Penjualan tunai,8500000,0,18500000,0
+2025-01-15,BM006,4-1004,Pendapatan Penjualan Barang,Penjualan barang,0,8500000,0,8500000
+2025-01-15,JU001,5-1001,HPP Pembelian Barang,HPP penjualan,6500000,0,6500000,0
+2025-01-15,JU001,1-1201,Persediaan Barang Dagangan,Kurangi persediaan,0,6500000,98500000,0
+2025-01-20,BK003,6-2001,Beban Gaji Karyawan,Gaji karyawan Januari,12000000,0,12000000,0
+2025-01-20,BK003,1-1002,Bank - Rekening Operasional,Bayar gaji,0,12000000,250300000,0
+2025-01-20,BK004,6-2002,Beban Gaji Pengurus,Honor pengurus,5000000,0,5000000,0
+2025-01-20,BK004,1-1002,Bank - Rekening Operasional,Bayar honor pengurus,0,5000000,245300000,0
+2025-01-22,BK005,6-2005,Beban Listrik,Listrik Januari,1200000,0,1200000,0
+2025-01-22,BK005,1-1002,Bank - Rekening Operasional,Bayar listrik,0,1200000,244100000,0
+2025-01-22,BK006,6-2007,Beban Telepon & Internet,Telepon internet,800000,0,800000,0
+2025-01-22,BK006,1-1002,Bank - Rekening Operasional,Bayar telepon,0,800000,243300000,0
+2025-01-25,BK007,2-1003,Hutang Usaha,Bayar hutang supplier,10000000,0,0,70000000
+2025-01-25,BK007,1-1002,Bank - Rekening Operasional,Bayar hutang,0,10000000,233300000,0
+2025-01-28,BK008,6-2009,Beban Perlengkapan Kantor,Beli perlengkapan,500000,0,500000,0
+2025-01-28,BK008,1-1001,Kas,Bayar perlengkapan,0,500000,18000000,0
+2025-01-30,JU002,6-1002,Beban Bunga Simpanan Sukarela,Bunga simsukar,150000,0,150000,0
+2025-01-30,JU002,2-1001,Simpanan Sukarela Anggota,Kredit bunga simsukar,0,150000,0,135150000
+2025-01-31,JU003,6-2016,Beban Penyusutan Kendaraan,Penyusutan kendaraan,500000,0,500000,0
+2025-01-31,JU003,1-2005,Akumulasi Penyusutan Kendaraan,Akum penyusutan,0,500000,0,20500000
+2025-01-31,JU004,6-2017,Beban Penyusutan Peralatan,Penyusutan peralatan,300000,0,300000,0
+2025-01-31,JU004,1-2007,Akumulasi Penyusutan Peralatan,Akum penyusutan,0,300000,0,15300000
+2025-02-01,BM007,1-1002,Bank - Rekening Operasional,Simpanan wajib Feb,26000000,0,259300000,0
+2025-02-01,BM007,3-1002,Simpanan Wajib,Simpanan wajib Feb,0,26000000,0,351000000
+2025-02-05,BK009,1-1101,Piutang Pinjaman Anggota,Pinjaman Ahmad Yani,15000000,0,533000000,0
+2025-02-05,BK009,1-1002,Bank - Rekening Operasional,Cairkan pinjaman Ahmad,0,15000000,244300000,0
+2025-02-05,BM008,1-1002,Bank - Rekening Operasional,Admin pinjaman Ahmad,150000,0,244450000,0
+2025-02-05,BM008,4-1003,Pendapatan Administrasi Pinjaman,Admin pinjaman,0,150000,0,350000
+2025-02-08,BM009,1-1002,Bank - Rekening Operasional,Bunga bank,500000,0,244950000,0
+2025-02-08,BM009,4-2001,Pendapatan Bunga Bank,Bunga bank,0,500000,0,500000
+2025-02-10,BM010,1-1002,Bank - Rekening Operasional,Terima angsuran,8500000,0,253450000,0
+2025-02-10,BM010,1-1101,Piutang Pinjaman Anggota,Bayar pokok,0,8000000,525000000,0
+2025-02-10,BM010,4-1001,Pendapatan Jasa Pinjaman Anggota,Bunga pinjaman,0,500000,0,600000
+2025-02-15,BM011,1-1104,Piutang Lain-lain,Penjualan kredit,12000000,0,12000000,0
+2025-02-15,BM011,4-1004,Pendapatan Penjualan Barang,Penjualan kredit,0,12000000,0,20500000
+2025-02-15,JU005,5-1001,HPP Pembelian Barang,HPP kredit,9000000,0,15500000,0
+2025-02-15,JU005,1-1201,Persediaan Barang Dagangan,Kurangi persediaan,0,9000000,89500000,0
+2025-02-18,BK010,1-1201,Persediaan Barang Dagangan,Beli barang tunai,25000000,0,114500000,0
+2025-02-18,BK010,1-1002,Bank - Rekening Operasional,Bayar barang,0,25000000,228450000,0
+2025-02-20,BK011,1-1302,Sewa Dibayar Dimuka,Bayar sewa 6 bulan,18000000,0,18000000,0
+2025-02-20,BK011,1-1002,Bank - Rekening Operasional,Bayar sewa,0,18000000,210450000,0
+2025-02-25,BM012,1-1002,Bank - Rekening Operasional,Terima bayar piutang,12000000,0,222450000,0
+2025-02-25,BM012,1-1104,Piutang Lain-lain,Lunas piutang,0,12000000,0,0
+2025-02-28,JU006,6-2008,Beban Sewa Kantor,Amortisasi sewa,3000000,0,3000000,0
+2025-02-28,JU006,1-1302,Sewa Dibayar Dimuka,Amortisasi sewa,0,3000000,15000000,0
+2025-02-28,BK012,6-2010,Beban Rapat,Biaya RAT,5000000,0,5000000,0
+2025-02-28,BK012,1-1002,Bank - Rekening Operasional,Bayar RAT,0,5000000,217450000,0
+2025-03-01,BM013,1-1002,Bank - Rekening Operasional,Simpanan wajib Maret,27000000,0,244450000,0
+2025-03-01,BM013,3-1002,Simpanan Wajib,Simpanan wajib Maret,0,27000000,0,378000000
+2025-03-03,BM014,2-1001,Simpanan Sukarela Anggota,Tarik simsukar,5000000,0,0,130150000
+2025-03-03,BM014,1-1003,Bank - Rekening Simpanan,Bayar penarikan,0,5000000,110000000,0
+2025-03-05,BK013,1-2004,Kendaraan,Beli kendaraan baru,150000000,0,250000000,0
+2025-03-05,BK013,1-1002,Bank - Rekening Operasional,Bayar kendaraan,0,150000000,94450000,0
+2025-03-10,BM015,1-1002,Bank - Rekening Operasional,Terima angsuran,9200000,0,103650000,0
+2025-03-10,BM015,1-1101,Piutang Pinjaman Anggota,Bayar pokok,0,8500000,516500000,0
+2025-03-10,BM015,4-1001,Pendapatan Jasa Pinjaman Anggota,Bunga pinjaman,0,700000,0,1300000
+2025-03-15,BM016,1-1001,Kas,Penjualan tunai,15000000,0,33000000,0
+2025-03-15,BM016,4-1004,Pendapatan Penjualan Barang,Penjualan tunai,0,15000000,0,35500000
+2025-03-15,JU007,5-1001,HPP Pembelian Barang,HPP Maret,11000000,0,26500000,0
+2025-03-15,JU007,1-1201,Persediaan Barang Dagangan,Kurangi persediaan,0,11000000,103500000,0
+2025-03-20,BK014,6-2013,Beban Asuransi,Asuransi kendaraan,3000000,0,3000000,0
+2025-03-20,BK014,1-1002,Bank - Rekening Operasional,Bayar asuransi,0,3000000,100650000,0
+2025-03-25,BK015,6-2020,Beban Pelatihan & Pendidikan,Pelatihan anggota,4000000,0,4000000,0
+2025-03-25,BK015,1-1002,Bank - Rekening Operasional,Bayar pelatihan,0,4000000,96650000,0
+2025-03-28,BK016,6-2019,Beban Pemeliharaan & Perbaikan,Maintenance kendaraan,2500000,0,2500000,0
+2025-03-28,BK016,1-1001,Kas,Bayar maintenance,0,2500000,30500000,0
+2025-03-31,JU008,6-2016,Beban Penyusutan Kendaraan,Penyusutan kendaraan,2500000,0,3000000,0
+2025-03-31,JU008,1-2005,Akumulasi Penyusutan Kendaraan,Akum penyusutan,0,2500000,0,23000000
+2025-03-31,JU009,6-1002,Beban Bunga Simpanan Sukarela,Bunga simsukar,180000,0,330000,0
+2025-03-31,JU009,2-1001,Simpanan Sukarela Anggota,Kredit bunga,0,180000,0,130330000

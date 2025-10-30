@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"strings"
 
 	"koperasi-merah-putih/config"
 	"koperasi-merah-putih/internal/database"
@@ -223,11 +224,9 @@ func createCustomIndexes(db *gorm.DB) {
 		"CREATE INDEX IF NOT EXISTS idx_pembelian_header_koperasi_id ON pembelian_headers(koperasi_id)",
 		"CREATE INDEX IF NOT EXISTS idx_rekening_simpan_pinjam_koperasi_id ON rekening_simpan_pinjams(koperasi_id)",
 		"CREATE INDEX IF NOT EXISTS idx_rekening_simpan_pinjam_anggota_id ON rekening_simpan_pinjams(anggota_id)",
-		"CREATE INDEX IF NOT EXISTS idx_pinjaman_koperasi_id ON pinjamen(koperasi_id)",
-		"CREATE INDEX IF NOT EXISTS idx_pinjaman_anggota_id ON pinjamen(anggota_id)",
-		"CREATE INDEX IF NOT EXISTS idx_pasien_koperasi_id ON pasiens(koperasi_id)",
-		"CREATE INDEX IF NOT EXISTS idx_kunjungan_pasien_id ON kunjungans(pasien_id)",
-		"CREATE INDEX IF NOT EXISTS idx_kunjungan_tanggal ON kunjungans(tanggal_kunjungan)",
+		"CREATE INDEX IF NOT EXISTS idx_klinik_pasien_koperasi_id ON klinik_pasiens(koperasi_id)",
+		"CREATE INDEX IF NOT EXISTS idx_klinik_kunjungan_pasien_id ON klinik_kunjungans(pasien_id)",
+		"CREATE INDEX IF NOT EXISTS idx_klinik_kunjungan_tanggal ON klinik_kunjungans(tanggal_kunjungan)",
 		"CREATE INDEX IF NOT EXISTS idx_ppob_transaksi_koperasi_id ON ppob_transaksis(koperasi_id)",
 		"CREATE INDEX IF NOT EXISTS idx_ppob_transaksi_tanggal ON ppob_transaksis(tanggal_transaksi)",
 		"CREATE INDEX IF NOT EXISTS idx_audit_logs_user_id ON audit_logs(user_id)",
@@ -246,66 +245,53 @@ func createCustomIndexes(db *gorm.DB) {
 func createCustomConstraints(db *gorm.DB) {
 	constraints := []string{
 		"ALTER TABLE koperasis ADD CONSTRAINT check_nik_length CHECK (LENGTH(CAST(nik AS TEXT)) = 16)",
-		"ALTER TABLE anggota_koperasis ADD CONSTRAINT check_nik_length CHECK (LENGTH(nik) = 16)",
-		"ALTER TABLE users ADD CONSTRAINT check_nik_length CHECK (nik IS NULL OR LENGTH(nik) = 16)",
+		"ALTER TABLE anggota_koperasis ADD CONSTRAINT check_nik_length_anggota CHECK (LENGTH(nik) = 16)",
 		"ALTER TABLE wilayah_kelurahans ADD CONSTRAINT check_jenis CHECK (jenis IN ('kelurahan', 'desa'))",
-		"ALTER TABLE jabatan_koperasis ADD CONSTRAINT check_tingkat CHECK (tingkat IN ('pengurus', 'pengawas', 'anggota'))",
-		"ALTER TABLE anggota_koperasis ADD CONSTRAINT check_jenis_kelamin CHECK (jenis_kelamin IN ('L', 'P'))",
+		"ALTER TABLE anggota_koperasis ADD CONSTRAINT check_jenis_kelamin_anggota CHECK (jenis_kelamin IN ('L', 'P'))",
 		"ALTER TABLE anggota_koperasis ADD CONSTRAINT check_posisi CHECK (posisi IN ('pengurus', 'pengawas', 'anggota'))",
 		"ALTER TABLE anggota_koperasis ADD CONSTRAINT check_status_anggota CHECK (status_anggota IN ('aktif', 'non_aktif', 'keluar'))",
-		"ALTER TABLE users ADD CONSTRAINT check_role CHECK (role IN ('super_admin', 'admin_koperasi', 'bendahara', 'sekretaris', 'operator', 'anggota'))",
-		"ALTER TABLE role_permissions ADD CONSTRAINT check_role CHECK (role IN ('super_admin', 'admin_koperasi', 'bendahara', 'sekretaris', 'operator', 'anggota'))",
+		"ALTER TABLE users ADD CONSTRAINT check_role CHECK (role IN ('super_admin', 'admin', 'staff', 'anggota'))",
 		"ALTER TABLE koperasi_aktivitas_usahas ADD CONSTRAINT check_jenis_usaha CHECK (jenis_usaha IN ('utama', 'sampingan'))",
 		"ALTER TABLE modal_koperasis ADD CONSTRAINT check_jenis_modal CHECK (jenis_modal IN ('simpanan_pokok', 'simpanan_wajib', 'dana_cadangan', 'dana_hibah', 'modal_penyertaan'))",
 		"ALTER TABLE coa_kategoris ADD CONSTRAINT check_tipe CHECK (tipe IN ('aset', 'kewajiban', 'ekuitas', 'pendapatan', 'beban'))",
 		"ALTER TABLE coa_akuns ADD CONSTRAINT check_saldo_normal CHECK (saldo_normal IN ('debit', 'kredit'))",
-		"ALTER TABLE jurnal_umums ADD CONSTRAINT check_status CHECK (status IN ('draft', 'posted', 'cancelled'))",
+		"ALTER TABLE jurnal_umums ADD CONSTRAINT check_status_jurnal CHECK (status IN ('draft', 'posted', 'cancelled'))",
 		"ALTER TABLE produk_simpan_pinjams ADD CONSTRAINT check_jenis CHECK (jenis IN ('simpanan', 'pinjaman'))",
-		"ALTER TABLE rekening_simpan_pinjams ADD CONSTRAINT check_status CHECK (status IN ('aktif', 'lunas', 'macet', 'tutup'))",
+		"ALTER TABLE rekening_simpan_pinjams ADD CONSTRAINT check_status_rekening CHECK (status IN ('aktif', 'lunas', 'macet', 'tutup'))",
 		"ALTER TABLE transaksi_simpan_pinjams ADD CONSTRAINT check_jenis_transaksi CHECK (jenis_transaksi IN ('setoran', 'penarikan', 'pencairan', 'angsuran', 'bunga', 'denda'))",
-		"ALTER TABLE klinik_tenaga_medis ADD CONSTRAINT check_jenis_kelamin CHECK (jenis_kelamin IN ('L', 'P'))",
-		"ALTER TABLE klinik_tenaga_medis ADD CONSTRAINT check_status CHECK (status IN ('aktif', 'non_aktif', 'cuti'))",
-		"ALTER TABLE klinik_pasiens ADD CONSTRAINT check_jenis_kelamin CHECK (jenis_kelamin IN ('L', 'P'))",
+		"ALTER TABLE klinik_tenaga_medis ADD CONSTRAINT check_jenis_kelamin_medis CHECK (jenis_kelamin IN ('L', 'P'))",
+		"ALTER TABLE klinik_tenaga_medis ADD CONSTRAINT check_status_medis CHECK (status IN ('aktif', 'non_aktif', 'cuti'))",
+		"ALTER TABLE klinik_pasiens ADD CONSTRAINT check_jenis_kelamin_pasien CHECK (jenis_kelamin IN ('L', 'P'))",
 		"ALTER TABLE klinik_pasiens ADD CONSTRAINT check_golongan_darah CHECK (golongan_darah IN ('A', 'B', 'AB', 'O', '-'))",
-		"ALTER TABLE klinik_kunjungans ADD CONSTRAINT check_status_pembayaran CHECK (status_pembayaran IN ('belum_bayar', 'lunas', 'cicil'))",
+		"ALTER TABLE klinik_kunjungans ADD CONSTRAINT check_status_pembayaran_kunjungan CHECK (status_pembayaran IN ('belum_bayar', 'lunas', 'cicil'))",
 		"ALTER TABLE suppliers ADD CONSTRAINT check_jenis_supplier CHECK (jenis_supplier IN ('individu', 'perusahaan', 'koperasi'))",
-		"ALTER TABLE suppliers ADD CONSTRAINT check_status CHECK (status IN ('aktif', 'nonaktif', 'blacklist'))",
-		"ALTER TABLE purchase_orders ADD CONSTRAINT check_status CHECK (status IN ('draft', 'waiting_approval', 'approved', 'sent', 'partial_received', 'received', 'cancelled'))",
-		"ALTER TABLE pembelian_headers ADD CONSTRAINT check_status_pembayaran CHECK (status_pembayaran IN ('unpaid', 'partial', 'paid', 'overdue'))",
-		"ALTER TABLE pembayaran_pembelians ADD CONSTRAINT check_metode_pembayaran CHECK (metode_pembayaran IN ('cash', 'transfer', 'giro', 'other'))",
-		"ALTER TABLE penjualan_headers ADD CONSTRAINT check_metode_pembayaran CHECK (metode_pembayaran IN ('cash', 'debit', 'credit', 'transfer', 'simpanan'))",
-		"ALTER TABLE penjualan_headers ADD CONSTRAINT check_status_pembayaran CHECK (status_pembayaran IN ('pending', 'paid', 'failed', 'refund'))",
+		"ALTER TABLE suppliers ADD CONSTRAINT check_status_supplier CHECK (status IN ('aktif', 'nonaktif', 'blacklist'))",
+		"ALTER TABLE purchase_orders ADD CONSTRAINT check_status_po CHECK (status IN ('draft', 'waiting_approval', 'approved', 'sent', 'partial_received', 'received', 'cancelled'))",
+		"ALTER TABLE pembelian_headers ADD CONSTRAINT check_status_pembayaran_pembelian CHECK (status_pembayaran IN ('unpaid', 'partial', 'paid', 'overdue'))",
+		"ALTER TABLE pembayaran_pembelians ADD CONSTRAINT check_metode_pembayaran_pembelian CHECK (metode_pembayaran IN ('cash', 'transfer', 'giro', 'other'))",
+		"ALTER TABLE penjualan_headers ADD CONSTRAINT check_metode_pembayaran_penjualan CHECK (metode_pembayaran IN ('cash', 'debit', 'credit', 'transfer', 'simpanan'))",
+		"ALTER TABLE penjualan_headers ADD CONSTRAINT check_status_pembayaran_penjualan CHECK (status_pembayaran IN ('pending', 'paid', 'failed', 'refund'))",
 		"ALTER TABLE stok_movements ADD CONSTRAINT check_tipe_movement CHECK (tipe_movement IN ('in', 'out', 'adjustment', 'transfer'))",
 		"ALTER TABLE stok_movements ADD CONSTRAINT check_referensi_tipe CHECK (referensi_tipe IN ('pembelian', 'penjualan', 'adjustment', 'transfer', 'expired', 'damaged'))",
 		"ALTER TABLE produk_diskons ADD CONSTRAINT check_tipe_diskon CHECK (tipe_diskon IN ('percentage', 'fixed'))",
 		"ALTER TABLE jurnal_umums ADD CONSTRAINT check_balance CHECK (total_debit = total_kredit)",
-		"ALTER TABLE angsuran_pinjamen ADD CONSTRAINT check_angsuran_positive CHECK (angsuran_pokok >= 0 AND angsuran_bunga >= 0)",
-		"ALTER TABLE produk_simpan_pinjams ADD CONSTRAINT check_suku_bunga CHECK (suku_bunga >= 0 AND suku_bunga <= 100)",
 		"ALTER TABLE produks ADD CONSTRAINT check_harga_positive CHECK (harga_jual > 0)",
 		"ALTER TABLE produks ADD CONSTRAINT check_stok_non_negative CHECK (stok_current >= 0)",
-		"ALTER TABLE ppob_transaksis ADD CONSTRAINT check_status CHECK (status IN ('pending', 'success', 'failed', 'cancelled'))",
-		"ALTER TABLE ppob_transaksis ADD CONSTRAINT check_payment_status CHECK (payment_status IN ('pending', 'paid', 'failed'))",
-		"ALTER TABLE ppob_payment_configs ADD CONSTRAINT check_settlement_schedule CHECK (settlement_schedule IN ('immediate', 'daily', 'weekly', 'monthly'))",
-		"ALTER TABLE ppob_payment_configs ADD CONSTRAINT check_ppob_admin_fee_type CHECK (ppob_admin_fee_type IN ('fixed', 'percentage'))",
-		"ALTER TABLE ppob_settlements ADD CONSTRAINT check_status CHECK (status IN ('draft', 'processed', 'paid'))",
-		"ALTER TABLE payment_providers ADD CONSTRAINT check_jenis CHECK (jenis IN ('bank_transfer', 'e_wallet', 'virtual_account', 'qris', 'credit_card'))",
-		"ALTER TABLE payment_providers ADD CONSTRAINT check_fee_type CHECK (fee_type IN ('fixed', 'percentage', 'both'))",
-		"ALTER TABLE payment_methods ADD CONSTRAINT check_jenis CHECK (jenis IN ('bank_transfer', 'e_wallet', 'virtual_account', 'qris', 'credit_card'))",
-		"ALTER TABLE payment_transactions ADD CONSTRAINT check_status CHECK (status IN ('pending', 'paid', 'expired', 'failed', 'cancelled'))",
+		"ALTER TABLE ppob_transaksis ADD CONSTRAINT check_status_ppob CHECK (status IN ('pending', 'success', 'failed', 'cancelled'))",
+		"ALTER TABLE ppob_transaksis ADD CONSTRAINT check_payment_status_ppob CHECK (payment_status IN ('pending', 'paid', 'failed'))",
+		"ALTER TABLE ppob_settlements ADD CONSTRAINT check_status_settlement CHECK (status IN ('draft', 'processed', 'paid'))",
+		"ALTER TABLE payment_transactions ADD CONSTRAINT check_status_payment CHECK (status IN ('pending', 'paid', 'expired', 'failed', 'cancelled'))",
 		"ALTER TABLE payment_transactions ADD CONSTRAINT check_transaction_type CHECK (transaction_type IN ('simpanan_pokok', 'ppob', 'simpanan', 'pinjaman', 'klinik', 'other'))",
-		"ALTER TABLE payment_callbacks ADD CONSTRAINT check_callback_type CHECK (callback_type IN ('notification', 'return', 'webhook'))",
 		"ALTER TABLE audit_logs ADD CONSTRAINT check_action CHECK (action IN ('create', 'update', 'delete'))",
-		"ALTER TABLE system_settings ADD CONSTRAINT check_data_type CHECK (data_type IN ('string', 'integer', 'decimal', 'boolean', 'json'))",
 		"ALTER TABLE sequence_numbers ADD CONSTRAINT check_reset_period CHECK (reset_period IN ('never', 'daily', 'monthly', 'yearly'))",
-		"ALTER TABLE user_registrations ADD CONSTRAINT check_jenis_kelamin CHECK (jenis_kelamin IN ('L', 'P'))",
-		"ALTER TABLE user_registrations ADD CONSTRAINT check_status CHECK (status IN ('pending_payment', 'payment_verified', 'approved', 'rejected', 'expired'))",
-		"ALTER TABLE user_registration_logs ADD CONSTRAINT check_action CHECK (action IN ('created', 'payment_initiated', 'payment_completed', 'payment_failed', 'approved', 'rejected', 'expired'))",
-		"ALTER TABLE simpanan_pokok_transaksis ADD CONSTRAINT check_status CHECK (status IN ('pending', 'paid', 'cancelled'))",
 	}
 
 	for _, constraint := range constraints {
 		if err := db.Exec(constraint).Error; err != nil {
-			log.Printf("Failed to create constraint: %v", err)
+			// Ignore "already exists" errors (SQLSTATE 42710)
+			if !strings.Contains(err.Error(), "already exists") {
+				log.Printf("Failed to create constraint: %v", err)
+			}
 		}
 	}
 	fmt.Println("✓ Created custom constraints")

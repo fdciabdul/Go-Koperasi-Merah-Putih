@@ -1,0 +1,79 @@
+Kategori,Jenis_Layanan,Deskripsi,Contoh_Produk,Margin_Komisi
+LISTRIK PLN,Token Listrik (Prabayar),Pembelian token listrik untuk meteran prabayar,Token 20rb - 1 juta,2-5%
+LISTRIK PLN,Listrik Pascabayar,Pembayaran tagihan listrik bulanan,Bayar tagihan bulanan,1-3%
+LISTRIK PLN,Non Taglis PLN,Pembayaran non tagihan listrik seperti sambungan baru,Biaya pasang baru,1-2%
+PULSA & PAKET DATA,Pulsa Telkomsel,Isi pulsa Telkomsel semua nominal,5rb - 200rb,1-3%
+PULSA & PAKET DATA,Pulsa Indosat,Isi pulsa Indosat semua nominal,5rb - 200rb,1-3%
+PULSA & PAKET DATA,Pulsa XL/Axis,Isi pulsa XL dan Axis,5rb - 200rb,1-3%
+PULSA & PAKET DATA,Pulsa Tri,Isi pulsa Tri semua nominal,5rb - 200rb,1-3%
+PULSA & PAKET DATA,Pulsa Smartfren,Isi pulsa Smartfren,5rb - 200rb,1-3%
+PULSA & PAKET DATA,Paket Data Telkomsel,Paket internet Telkomsel,1GB - 50GB,2-4%
+PULSA & PAKET DATA,Paket Data Indosat,Paket internet Indosat,1GB - 50GB,2-4%
+PULSA & PAKET DATA,Paket Data XL/Axis,Paket internet XL dan Axis,1GB - 50GB,2-4%
+PULSA & PAKET DATA,Paket Data Tri,Paket internet Tri,1GB - 50GB,2-4%
+PULSA & PAKET DATA,Paket Data Smartfren,Paket internet Smartfren,1GB - 50GB,2-4%
+PDAM,PDAM Seluruh Indonesia,Pembayaran tagihan air lebih dari 100 PDAM,Tagihan bulanan PDAM,1-2.5%
+PDAM,PAM Jakarta (Palyja/Aetra),Pembayaran air Jakarta,Tagihan bulanan,1-2%
+TELKOM & INTERNET,IndiHome,Pembayaran tagihan internet IndiHome,Tagihan bulanan,1-2%
+TELKOM & INTERNET,Telkom Pstn,Pembayaran telepon rumah,Tagihan bulanan,1-2%
+TELKOM & INTERNET,Speedy,Pembayaran internet Speedy,Tagihan bulanan,1-2%
+TV BERLANGGANAN,TV Kabel Indihome,Pembayaran TV kabel,Tagihan bulanan,1-2%
+TV BERLANGGANAN,First Media,Pembayaran TV kabel First Media,Tagihan bulanan,1-2%
+TV BERLANGGANAN,MNC Play,Pembayaran TV kabel MNC,Tagihan bulanan,1-2%
+TV BERLANGGANAN,Transvision,Pembayaran TV satelit,Tagihan bulanan,1-2%
+TV BERLANGGANAN,K-Vision,Pembayaran TV satelit,Tagihan bulanan,1-2%
+STREAMING,Netflix,Bayar langganan Netflix,Paket Premium/Standard,2-3%
+STREAMING,Disney+ Hotstar,Bayar langganan Disney,Paket bulanan/tahunan,2-3%
+STREAMING,Spotify Premium,Bayar langganan Spotify,Paket Premium,2-3%
+STREAMING,YouTube Premium,Bayar langganan YouTube,Paket bulanan,2-3%
+STREAMING,Vidio Premier,Bayar langganan Vidio,Paket bulanan,2-3%
+BPJS,BPJS Kesehatan,Pembayaran iuran BPJS Kesehatan,Kelas 1/2/3,1-2%
+BPJS,BPJS Ketenagakerjaan,Pembayaran iuran BPJS TK,Iuran bulanan,1-2%
+ASURANSI,Asuransi Prudential,Pembayaran premi asuransi,Premi bulanan/tahunan,1-2%
+ASURANSI,Asuransi Jiwasraya,Pembayaran premi asuransi,Premi bulanan/tahunan,1-2%
+ASURANSI,Asuransi AIA,Pembayaran premi asuransi,Premi bulanan/tahunan,1-2%
+ASURANSI,Asuransi Allianz,Pembayaran premi asuransi,Premi bulanan/tahunan,1-2%
+MULTIFINANCE,FIF (Federal International Finance),Bayar cicilan motor/mobil,Angsuran bulanan,1-2%
+MULTIFINANCE,WOM Finance,Bayar cicilan kendaraan,Angsuran bulanan,1-2%
+MULTIFINANCE,BAF (BCA Finance),Bayar cicilan kendaraan,Angsuran bulanan,1-2%
+MULTIFINANCE,Adira Finance,Bayar cicilan kendaraan,Angsuran bulanan,1-2%
+MULTIFINANCE,Mega Finance,Bayar cicilan kendaraan,Angsuran bulanan,1-2%
+MULTIFINANCE,Smart Finance,Bayar cicilan kendaraan,Angsuran bulanan,1-2%
+MULTIFINANCE,Al Ijarah Finance,Bayar cicilan syariah,Angsuran bulanan,1-2%
+MULTIFINANCE,Mega Central Finance,Bayar cicilan kendaraan,Angsuran bulanan,1-2%
+MULTIFINANCE,Mega Auto Finance,Bayar cicilan mobil,Angsuran bulanan,1-2%
+MULTIFINANCE,Bima Finance,Bayar cicilan elektronik,Angsuran bulanan,1-2%
+KARTU KREDIT,Kartu Kredit BCA,Bayar tagihan kartu kredit,Tagihan bulanan,1-2%
+KARTU KREDIT,Kartu Kredit Mandiri,Bayar tagihan kartu kredit,Tagihan bulanan,1-2%
+KARTU KREDIT,Kartu Kredit BNI,Bayar tagihan kartu kredit,Tagihan bulanan,1-2%
+KARTU KREDIT,Kartu Kredit BRI,Bayar tagihan kartu kredit,Tagihan bulanan,1-2%
+KARTU KREDIT,Kartu Kredit CIMB Niaga,Bayar tagihan kartu kredit,Tagihan bulanan,1-2%
+E-WALLET,GoPay,Top up saldo GoPay,Nominal 10rb - 1jt,2-3%
+E-WALLET,OVO,Top up saldo OVO,Nominal 10rb - 1jt,2-3%
+E-WALLET,Dana,Top up saldo Dana,Nominal 10rb - 1jt,2-3%
+E-WALLET,ShopeePay,Top up saldo ShopeePay,Nominal 10rb - 1jt,2-3%
+E-WALLET,LinkAja,Top up saldo LinkAja,Nominal 10rb - 1jt,2-3%
+GAME ONLINE,Mobile Legends,Top up diamond ML,100 - 10000 diamond,3-5%
+GAME ONLINE,Free Fire,Top up diamond FF,50 - 5000 diamond,3-5%
+GAME ONLINE,PUBG Mobile,Top up UC PUBG,60 - 8100 UC,3-5%
+GAME ONLINE,Valorant,Top up VP Valorant,125 - 11000 VP,3-5%
+GAME ONLINE,Genshin Impact,Top up Genesis Crystal,60 - 6480 crystal,3-5%
+GAME ONLINE,Steam Wallet,Top up Steam,IDR 12rb - 600rb,3-5%
+GAME ONLINE,Garena,Top up Garena Shell,33 - 3300 shell,3-5%
+VOUCHER,Voucher Google Play,Kode voucher Google Play,50rb - 500rb,2-4%
+VOUCHER,Voucher Apple iTunes,Kode voucher iTunes,50rb - 500rb,2-4%
+VOUCHER,Voucher Grab,Voucher kredit Grab,50rb - 500rb,2-3%
+VOUCHER,Voucher GoFood,Voucher makanan GoFood,50rb - 500rb,2-3%
+TIKET & TRAVEL,Tiket Pesawat,Pembelian tiket pesawat domestik,Semua maskapai,2-4%
+TIKET & TRAVEL,Tiket Kereta,Pembelian tiket kereta api,KAI semua kelas,2-3%
+TIKET & TRAVEL,Tiket Bus,Pembelian tiket bus antar kota,Semua PO,2-3%
+TIKET & TRAVEL,Hotel & Penginapan,Booking hotel online,Hotel seluruh Indonesia,3-5%
+PAJAK & PEMERINTAH,PBB (Pajak Bumi Bangunan),Bayar pajak tanah dan bangunan,Tagihan tahunan,1-2%
+PAJAK & PEMERINTAH,STNK,Perpanjangan pajak kendaraan,Pajak tahunan/5 tahunan,1-2%
+PAJAK & PEMERINTAH,PNBP (Penerimaan Negara Bukan Pajak),Pembayaran PNBP,Berbagai jenis PNBP,1-2%
+PENDIDIKAN,Uang Sekolah,Bayar SPP dan biaya sekolah,SD - Perguruan Tinggi,1-2%
+PENDIDIKAN,Bimbel Online,Bayar langganan bimbel,Ruangguru dll,2-3%
+ZAKAT & DONASI,Zakat,Transfer zakat fitrah/mal,Lembaga zakat resmi,0-1%
+ZAKAT & DONASI,Donasi Kemanusiaan,Donasi untuk bencana,Berbagai lembaga,0-1%
+INVESTASI,Reksadana,Pembelian unit reksadana,Berbagai produk RD,0.5-1%
+INVESTASI,Emas Digital,Beli emas secara digital,Mulai 0.01 gram,1-2%

@@ -1,0 +1,88 @@
+Jenis_Koperasi,Kategori_Produk,Nama_Produk_Layanan,Deskripsi,Target_Anggota,Contoh_Koperasi
+SIMPAN PINJAM,Simpanan,Simpanan Pokok,Simpanan wajib saat bergabung (tidak bisa ditarik),Semua anggota,KSP Sejahtera
+SIMPAN PINJAM,Simpanan,Simpanan Wajib,Simpanan rutin setiap bulan,Semua anggota,KSP Sejahtera
+SIMPAN PINJAM,Simpanan,Simpanan Sukarela (Tabungan),Tabungan yang dapat ditarik sewaktu-waktu,Semua anggota,KSP Sejahtera
+SIMPAN PINJAM,Simpanan,Simpanan Berjangka (Deposito),Simpanan berjangka dengan bunga lebih tinggi,Anggota dengan dana lebih,KSP Sejahtera
+SIMPAN PINJAM,Simpanan,Tabungan Pendidikan,Tabungan khusus untuk biaya pendidikan anak,Orang tua,KSP Sejahtera
+SIMPAN PINJAM,Simpanan,Tabungan Haji,Tabungan khusus persiapan ibadah haji,Calon jamaah haji,KSP Sejahtera
+SIMPAN PINJAM,Simpanan,Tabungan Qurban,Tabungan khusus untuk qurban,Anggota muslim,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Pinjaman Reguler,Pinjaman dengan bunga kompetitif,Semua anggota,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Pinjaman Konsumtif,Untuk kebutuhan konsumsi pribadi,Anggota perorangan,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Pinjaman Produktif,Untuk modal usaha,Anggota pengusaha,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Pinjaman Pendidikan,Untuk biaya sekolah/kuliah,Orang tua & mahasiswa,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Pinjaman Kesehatan,Untuk biaya berobat darurat,Semua anggota,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Pinjaman Mikro,Pinjaman kecil untuk UMKM,Pedagang kecil,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Kredit Tanpa Agunan (KTA),Pinjaman tanpa jaminan aset,Anggota tetap,KSP Sejahtera
+SIMPAN PINJAM,Pinjaman,Kredit Multiguna,Pinjaman untuk berbagai keperluan,Semua anggota,KSP Sejahtera
+KONSUMSI,Toko Sembako,Beras,Beras berbagai merk dan kualitas,Semua anggota,Koperasi Sekolah
+KONSUMSI,Toko Sembako,Gula Pasir,Gula pasir kemasan,Semua anggota,Koperasi Sekolah
+KONSUMSI,Toko Sembako,Minyak Goreng,Minyak goreng curah dan kemasan,Semua anggota,Koperasi Sekolah
+KONSUMSI,Toko Sembako,Telur,Telur ayam dan bebek,Semua anggota,Koperasi Sekolah
+KONSUMSI,Toko Sembako,Tepung Terigu,Tepung berbagai merk,Semua anggota,Koperasi Sekolah
+KONSUMSI,Toko Sembako,Mi Instan,Mi instan berbagai merk,Semua anggota,Koperasi Sekolah
+KONSUMSI,Toko Sembako,Susu UHT,Susu kemasan berbagai merk,Semua anggota,Koperasi Sekolah
+KONSUMSI,Alat Tulis,Buku Tulis,Buku tulis berbagai ukuran,Siswa/mahasiswa,Koperasi Sekolah
+KONSUMSI,Alat Tulis,Pulpen,Pulpen berbagai merk,Siswa/mahasiswa,Koperasi Sekolah
+KONSUMSI,Alat Tulis,Pensil,Pensil 2B dan warna,Siswa/mahasiswa,Koperasi Sekolah
+KONSUMSI,Alat Tulis,Penghapus & Penggaris,Perlengkapan tulis,Siswa/mahasiswa,Koperasi Sekolah
+KONSUMSI,Seragam,Seragam Sekolah,Seragam putih abu-abu,Siswa,Koperasi Sekolah
+KONSUMSI,Seragam,Atribut Sekolah,Dasi topi badge,Siswa,Koperasi Sekolah
+KONSUMSI,Snack & Minuman,Makanan Ringan,Snack berbagai jenis,Semua anggota,Koperasi Sekolah
+KONSUMSI,Snack & Minuman,Minuman Ringan,Air mineral dan softdrink,Semua anggota,Koperasi Sekolah
+KONSUMSI,Elektronik,Lampu LED,Lampu hemat energi,Rumah tangga,Koperasi Karyawan
+KONSUMSI,Elektronik,Kipas Angin,Elektronik rumah tangga,Rumah tangga,Koperasi Karyawan
+KONSUMSI,Gas & BBM,Gas LPG 3kg,Tabung gas rumah tangga,Rumah tangga,KUD
+KONSUMSI,Gas & BBM,Gas LPG 12kg,Tabung gas besar,Usaha kuliner,KUD
+PRODUKSI,Pertanian,Bibit Unggul,Bibit padi jagung kedelai,Petani,Koperasi Tani
+PRODUKSI,Pertanian,Pupuk Urea,Pupuk untuk tanaman,Petani,Koperasi Tani
+PRODUKSI,Pertanian,Pupuk NPK,Pupuk majemuk,Petani,Koperasi Tani
+PRODUKSI,Pertanian,Pestisida,Obat pembasmi hama,Petani,Koperasi Tani
+PRODUKSI,Pertanian,Alat Tani,Cangkul garu sprayer,Petani,Koperasi Tani
+PRODUKSI,Peternakan,Pakan Ternak,Pakan ayam sapi kambing,Peternak,Koperasi Peternak
+PRODUKSI,Peternakan,Bibit Ternak,DOC sapi kambing,Peternak,Koperasi Peternak
+PRODUKSI,Peternakan,Obat Hewan,Vitamin dan obat ternak,Peternak,Koperasi Peternak
+PRODUKSI,Perikanan,Benih Ikan,Benih lele nila gurame,Pembudidaya ikan,Koperasi Nelayan
+PRODUKSI,Perikanan,Pakan Ikan,Pelet ikan berbagai ukuran,Pembudidaya ikan,Koperasi Nelayan
+PRODUKSI,Perikanan,Jaring & Alat Tangkap,Peralatan melaut,Nelayan,Koperasi Nelayan
+PRODUKSI,Kerajinan,Bahan Baku Kerajinan,Kayu rotan bambu kain,Pengrajin,Koperasi Kerajinan
+PRODUKSI,Kerajinan,Alat Produksi,Mesin bubut pahat,Pengrajin,Koperasi Kerajinan
+PEMASARAN,Hasil Pertanian,Penjualan Padi,Beli dari petani jual ke penggilingan,Petani anggota,KUD
+PEMASARAN,Hasil Pertanian,Penjualan Jagung,Beli dari petani jual ke pabrik,Petani anggota,KUD
+PEMASARAN,Hasil Pertanian,Penjualan Sayuran,Distribusi sayur ke pasar,Petani sayur,Koperasi Tani
+PEMASARAN,Hasil Pertanian,Penjualan Buah,Distribusi buah ke pasar/supermarket,Petani buah,Koperasi Tani
+PEMASARAN,Hasil Peternakan,Penjualan Susu Segar,Susu dari peternak ke IPS,Peternak sapi perah,Koperasi Peternak
+PEMASARAN,Hasil Peternakan,Penjualan Telur,Telur dari peternak ke pasar,Peternak ayam,Koperasi Peternak
+PEMASARAN,Hasil Peternakan,Penjualan Daging,Distribusi daging segar,Peternak,Koperasi Peternak
+PEMASARAN,Hasil Kerajinan,Penjualan Kerajinan Tangan,Produk kerajinan lokal,Pengrajin,Koperasi Kerajinan
+PEMASARAN,Hasil Perikanan,Penjualan Ikan Segar,Ikan hasil tangkapan,Nelayan,Koperasi Nelayan
+PEMASARAN,Hasil Perikanan,Penjualan Ikan Olahan,Ikan asin ikan asap,Nelayan,Koperasi Nelayan
+JASA,Transportasi,Jasa Angkutan Barang,Truk untuk distribusi hasil panen,Petani peternak,KUD
+JASA,Transportasi,Jasa Antar Jemput,Transportasi anggota,Semua anggota,Koperasi Karyawan
+JASA,Kesehatan,Klinik Koperasi,Pemeriksaan kesehatan dasar,Semua anggota,KPRI
+JASA,Kesehatan,Apotek Koperasi,Penjualan obat dengan harga terjangkau,Semua anggota,KPRI
+JASA,Pendidikan,Bimbingan Belajar,Les tambahan untuk siswa,Anak anggota,Koperasi Sekolah
+JASA,Pendidikan,Pelatihan Keterampilan,Training untuk anggota,Semua anggota,Berbagai koperasi
+JASA,Asuransi,Asuransi Jiwa Koperasi,Perlindungan jiwa bagi anggota,Semua anggota,Berbagai koperasi
+JASA,Asuransi,Asuransi Kesehatan,Proteksi kesehatan,Semua anggota,Berbagai koperasi
+JASA,Funeral,Santunan Kematian,Dana duka cita,Keluarga anggota,Berbagai koperasi
+JASA,Acara,Paket Pernikahan,Layanan pesta pernikahan hemat,Anggota,Koperasi Serba Usaha
+JASA,Event,Sewa Tenda & Sound System,Penyewaan peralatan acara,Anggota,Koperasi Serba Usaha
+JASA,Fotocopy & Print,Jasa Percetakan,Fotokopi print laminating,Semua anggota,Koperasi Sekolah
+JASA,Penggilingan,Penggilingan Padi,Jasa giling padi menjadi beras,Petani,KUD
+JASA,Pemrosesan,Pengolahan Hasil Ternak,Olah susu jadi produk turunan,Peternak,Koperasi Peternak
+JASA,Penyewaan,Sewa Alat Pertanian,Traktor pompa air,Petani,Koperasi Tani
+JASA,Penyewaan,Sewa Mobil Pickup,Kendaraan untuk angkut barang,Anggota,Koperasi Serba Usaha
+DIGITAL,PPOB,Layanan PPOB Lengkap,Semua layanan pembayaran online,Semua anggota,Koperasi Modern
+DIGITAL,E-Commerce,Toko Online Koperasi,Marketplace produk anggota,Produsen anggota,Koperasi Modern
+DIGITAL,Fintech,Pinjaman Online,Pinjaman digital cepat,Semua anggota,Koperasi Digital
+DIGITAL,Fintech,Investasi Digital,Reksadana dan emas digital,Anggota investor,Koperasi Digital
+DIGITAL,Payment,E-Wallet Koperasi,Dompet digital koperasi,Semua anggota,Koperasi Modern
+PROPERTI,Perumahan,Kredit Pemilikan Rumah,KPR untuk anggota,Anggota berencana beli rumah,Koperasi Karyawan
+PROPERTI,Perumahan,Perumahan Subsidi,Rumah murah untuk anggota,Anggota berpenghasilan rendah,Koperasi Karyawan
+PROPERTI,Lahan,Kavling Siap Bangun,Tanah untuk membangun rumah,Anggota,Koperasi Karyawan
+PROPERTI,Sewa,Sewa Ruko,Tempat usaha terjangkau,Pengusaha anggota,Koperasi Serba Usaha
+REKREASI,Wisata,Paket Tour Murah,Paket wisata untuk anggota,Semua anggota,Koperasi Karyawan
+REKREASI,Olahraga,Fasilitas Olahraga,Lapangan futsal badminton,Semua anggota,Koperasi Karyawan
+SOSIAL,Santunan,Bantuan Bencana,Santunan saat terkena bencana,Anggota terdampak,Berbagai koperasi
+SOSIAL,Beasiswa,Beasiswa Pendidikan,Bantuan biaya sekolah anak berprestasi,Anak anggota,Berbagai koperasi
+SOSIAL,Dana Sosial,Bantuan untuk Keluarga Tidak Mampu,Subsidi kebutuhan dasar,Anggota kurang mampu,Berbagai koperasi

@@ -1,0 +1,98 @@
+Kode_Akun,Nama_Akun,Kategori,Sub_Kategori,Tipe,Deskripsi
+1-0000,ASET,ASET,Header,Debit,Semua harta yang dimiliki koperasi
+1-1000,ASET LANCAR,ASET,Header,Debit,Aset yang dapat dicairkan dalam waktu kurang dari 1 tahun
+1-1001,Kas,ASET,ASET LANCAR,Debit,Uang tunai di tangan
+1-1002,Bank - Rekening Operasional,ASET,ASET LANCAR,Debit,Saldo rekening bank untuk operasional
+1-1003,Bank - Rekening Simpanan,ASET,ASET LANCAR,Debit,Saldo rekening bank untuk simpanan anggota
+1-1004,Bank - Rekening Pinjaman,ASET,ASET LANCAR,Debit,Saldo rekening bank untuk pinjaman
+1-1101,Piutang Pinjaman Anggota,ASET,ASET LANCAR,Debit,Pinjaman yang diberikan kepada anggota
+1-1102,Piutang Pinjaman Non-Anggota,ASET,ASET LANCAR,Debit,Pinjaman yang diberikan kepada non-anggota
+1-1103,Piutang Bunga,ASET,ASET LANCAR,Debit,Bunga yang belum dibayar
+1-1104,Piutang Lain-lain,ASET,ASET LANCAR,Debit,Piutang selain pinjaman
+1-1105,Cadangan Kerugian Piutang,ASET,ASET LANCAR,Kredit,Cadangan untuk piutang yang tidak tertagih
+1-1201,Persediaan Barang Dagangan,ASET,ASET LANCAR,Debit,Stok barang untuk dijual
+1-1202,Persediaan Perlengkapan,ASET,ASET LANCAR,Debit,Perlengkapan kantor dan operasional
+1-1301,Biaya Dibayar Dimuka,ASET,ASET LANCAR,Debit,Biaya yang dibayar untuk periode mendatang
+1-1302,Sewa Dibayar Dimuka,ASET,ASET LANCAR,Debit,Sewa yang dibayar di muka
+1-2000,ASET TETAP,ASET,Header,Debit,Aset jangka panjang untuk operasional
+1-2001,Tanah,ASET,ASET TETAP,Debit,Tanah milik koperasi
+1-2002,Bangunan,ASET,ASET TETAP,Debit,Gedung dan bangunan
+1-2003,Akumulasi Penyusutan Bangunan,ASET,ASET TETAP,Kredit,Akumulasi penyusutan bangunan
+1-2004,Kendaraan,ASET,ASET TETAP,Debit,Kendaraan operasional
+1-2005,Akumulasi Penyusutan Kendaraan,ASET,ASET TETAP,Kredit,Akumulasi penyusutan kendaraan
+1-2006,Peralatan Kantor,ASET,ASET TETAP,Debit,Komputer dan peralatan kantor
+1-2007,Akumulasi Penyusutan Peralatan,ASET,ASET TETAP,Kredit,Akumulasi penyusutan peralatan
+1-2008,Inventaris,ASET,ASET TETAP,Debit,Perabotan dan inventaris lainnya
+1-2009,Akumulasi Penyusutan Inventaris,ASET,ASET TETAP,Kredit,Akumulasi penyusutan inventaris
+2-0000,KEWAJIBAN,KEWAJIBAN,Header,Kredit,Semua hutang koperasi
+2-1000,KEWAJIBAN JANGKA PENDEK,KEWAJIBAN,Header,Kredit,Kewajiban yang harus dibayar dalam waktu kurang dari 1 tahun
+2-1001,Simpanan Sukarela Anggota,KEWAJIBAN,KEWAJIBAN JANGKA PENDEK,Kredit,Tabungan sukarela anggota yang dapat ditarik sewaktu-waktu
+2-1002,Simpanan Berjangka,KEWAJIBAN,KEWAJIBAN JANGKA PENDEK,Kredit,Deposito berjangka dari anggota
+2-1003,Hutang Usaha,KEWAJIBAN,KEWAJIBAN JANGKA PENDEK,Kredit,Hutang kepada supplier
+2-1004,Hutang Pajak,KEWAJIBAN,KEWAJIBAN JANGKA PENDEK,Kredit,Pajak yang belum dibayar
+2-1005,Biaya Yang Masih Harus Dibayar,KEWAJIBAN,KEWAJIBAN JANGKA PENDEK,Kredit,Biaya yang sudah terjadi namun belum dibayar
+2-1006,Hutang Jangka Pendek Lainnya,KEWAJIBAN,KEWAJIBAN JANGKA PENDEK,Kredit,Hutang jangka pendek lainnya
+2-2000,KEWAJIBAN JANGKA PANJANG,KEWAJIBAN,Header,Kredit,Kewajiban yang jatuh tempo lebih dari 1 tahun
+2-2001,Hutang Bank Jangka Panjang,KEWAJIBAN,KEWAJIBAN JANGKA PANJANG,Kredit,Pinjaman dari bank jangka panjang
+2-2002,Hutang Obligasi,KEWAJIBAN,KEWAJIBAN JANGKA PANJANG,Kredit,Penerbitan obligasi koperasi
+2-2003,Hutang Kepada Koperasi Lain,KEWAJIBAN,KEWAJIBAN JANGKA PANJANG,Kredit,Pinjaman dari koperasi lain
+3-0000,EKUITAS,EKUITAS,Header,Kredit,Modal koperasi
+3-1001,Simpanan Pokok,EKUITAS,EKUITAS,Kredit,Simpanan pokok yang dibayar anggota saat bergabung
+3-1002,Simpanan Wajib,EKUITAS,EKUITAS,Kredit,Simpanan wajib anggota yang dibayar rutin
+3-1003,Modal Penyertaan,EKUITAS,EKUITAS,Kredit,Modal penyertaan dari pemerintah atau pihak lain
+3-1004,Modal Sumbangan,EKUITAS,EKUITAS,Kredit,Hibah atau sumbangan yang diterima
+3-2001,Cadangan Umum,EKUITAS,EKUITAS,Kredit,Cadangan dari SHU untuk pengembangan koperasi
+3-2002,Cadangan Khusus,EKUITAS,EKUITAS,Kredit,Cadangan untuk tujuan tertentu
+3-3001,SHU Belum Dibagi,EKUITAS,EKUITAS,Kredit,Sisa Hasil Usaha tahun berjalan yang belum dibagikan
+3-3002,SHU Tahun Lalu,EKUITAS,EKUITAS,Kredit,SHU dari tahun sebelumnya
+4-0000,PENDAPATAN,PENDAPATAN,Header,Kredit,Semua pendapatan koperasi
+4-1000,PENDAPATAN OPERASIONAL,PENDAPATAN,Header,Kredit,Pendapatan dari kegiatan utama
+4-1001,Pendapatan Jasa Pinjaman Anggota,PENDAPATAN,PENDAPATAN OPERASIONAL,Kredit,Bunga dari pinjaman anggota
+4-1002,Pendapatan Jasa Pinjaman Non-Anggota,PENDAPATAN,PENDAPATAN OPERASIONAL,Kredit,Bunga dari pinjaman non-anggota
+4-1003,Pendapatan Administrasi Pinjaman,PENDAPATAN,PENDAPATAN OPERASIONAL,Kredit,Biaya admin pemrosesan pinjaman
+4-1004,Pendapatan Penjualan Barang,PENDAPATAN,PENDAPATAN OPERASIONAL,Kredit,Hasil penjualan barang dagangan
+4-1005,Pendapatan Partisipasi Bruto,PENDAPATAN,PENDAPATAN OPERASIONAL,Kredit,Pendapatan dari transaksi anggota
+4-1006,Pendapatan Jasa Angkut,PENDAPATAN,PENDAPATAN OPERASIONAL,Kredit,Pendapatan dari jasa pengiriman
+4-2000,PENDAPATAN NON-OPERASIONAL,PENDAPATAN,Header,Kredit,Pendapatan di luar kegiatan utama
+4-2001,Pendapatan Bunga Bank,PENDAPATAN,PENDAPATAN NON-OPERASIONAL,Kredit,Bunga dari simpanan di bank
+4-2002,Pendapatan Sewa,PENDAPATAN,PENDAPATAN NON-OPERASIONAL,Kredit,Pendapatan dari sewa aset
+4-2003,Pendapatan Lain-lain,PENDAPATAN,PENDAPATAN NON-OPERASIONAL,Kredit,Pendapatan lainnya
+4-2004,Keuntungan Penjualan Aset,PENDAPATAN,PENDAPATAN NON-OPERASIONAL,Kredit,Keuntungan dari penjualan aset tetap
+5-0000,HARGA POKOK PENJUALAN,BEBAN,Header,Debit,Harga pokok barang yang dijual
+5-1001,HPP Pembelian Barang,BEBAN,HARGA POKOK PENJUALAN,Debit,Harga beli barang dagangan
+5-1002,Beban Angkut Pembelian,BEBAN,HARGA POKOK PENJUALAN,Debit,Biaya pengiriman pembelian barang
+5-1003,Retur Pembelian,BEBAN,HARGA POKOK PENJUALAN,Kredit,Pengembalian barang pembelian
+5-1004,Potongan Pembelian,BEBAN,HARGA POKOK PENJUALAN,Kredit,Diskon yang diterima dari supplier
+6-0000,BEBAN OPERASIONAL,BEBAN,Header,Debit,Biaya untuk menjalankan operasional koperasi
+6-1000,BEBAN USAHA,BEBAN,Header,Debit,Beban langsung untuk usaha
+6-1001,Beban Bunga Pinjaman,BEBAN,BEBAN USAHA,Debit,Bunga yang dibayar untuk hutang
+6-1002,Beban Bunga Simpanan Sukarela,BEBAN,BEBAN USAHA,Debit,Bunga yang dibayar untuk tabungan anggota
+6-1003,Beban Bunga Simpanan Berjangka,BEBAN,BEBAN USAHA,Debit,Bunga untuk deposito anggota
+6-2000,BEBAN ADMINISTRASI & UMUM,BEBAN,Header,Debit,Biaya administrasi dan umum
+6-2001,Beban Gaji Karyawan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Gaji dan upah karyawan
+6-2002,Beban Gaji Pengurus,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Honorarium pengurus koperasi
+6-2003,Beban Honorarium Pengawas,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Honorarium dewan pengawas
+6-2004,Beban Tunjangan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Tunjangan karyawan dan pengurus
+6-2005,Beban Listrik,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya listrik kantor
+6-2006,Beban Air,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya air
+6-2007,Beban Telepon & Internet,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya komunikasi
+6-2008,Beban Sewa Kantor,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Sewa gedung atau ruangan
+6-2009,Beban Perlengkapan Kantor,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,ATK dan perlengkapan
+6-2010,Beban Rapat,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya rapat anggota dan pengurus
+6-2011,Beban Transportasi,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya perjalanan dinas
+6-2012,Beban Konsumsi,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Makanan dan minuman untuk operasional
+6-2013,Beban Asuransi,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Premi asuransi
+6-2014,Beban Pajak,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Pajak-pajak yang dibayar
+6-2015,Beban Penyusutan Bangunan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Penyusutan gedung
+6-2016,Beban Penyusutan Kendaraan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Penyusutan kendaraan
+6-2017,Beban Penyusutan Peralatan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Penyusutan peralatan kantor
+6-2018,Beban Penyusutan Inventaris,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Penyusutan inventaris
+6-2019,Beban Pemeliharaan & Perbaikan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya maintenance aset
+6-2020,Beban Pelatihan & Pendidikan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya training anggota dan karyawan
+6-2021,Beban Promosi & Iklan,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Biaya marketing dan promosi
+6-2022,Beban Kerugian Piutang,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Piutang tak tertagih
+6-2023,Beban Lain-lain,BEBAN,BEBAN ADMINISTRASI & UMUM,Debit,Beban operasional lainnya
+6-3000,BEBAN NON-OPERASIONAL,BEBAN,Header,Debit,Beban di luar operasional utama
+6-3001,Beban Denda,BEBAN,BEBAN NON-OPERASIONAL,Debit,Denda dan sanksi
+6-3002,Kerugian Penjualan Aset,BEBAN,BEBAN NON-OPERASIONAL,Debit,Rugi dari penjualan aset tetap
+6-3003,Beban Non-Operasional Lainnya,BEBAN,BEBAN NON-OPERASIONAL,Debit,Beban lainnya di luar operasional
